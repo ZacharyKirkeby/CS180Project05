@@ -111,7 +111,7 @@ public class MarketPlace {
             JLabel registerUsernameLabel = new JLabel("Username:");
             JLabel registerPasswordLabel = new JLabel("Password:");
             JLabel registerRoleLabel = new JLabel("Role:");
-            JTextField loginUsernameField = new JTextField();
+            JTextField loginUsernameOrEmailField = new JTextField();
             JTextField loginPasswordField = new JTextField();
             JTextField registerEmailField = new JTextField();
             JTextField registerUsernameField = new JTextField();
@@ -120,7 +120,7 @@ public class MarketPlace {
             JButton loginButton = new JButton("Login");
             JButton registerButton = new JButton("Register");
             loginRegisterPanel.add(loginUsernameLabel);
-            loginRegisterPanel.add(loginUsernameField);
+            loginRegisterPanel.add(loginUsernameOrEmailField);
             loginRegisterPanel.add(registerEmailLabel);
             loginRegisterPanel.add(registerEmailField);
             loginRegisterPanel.add(loginPasswordLabel);
@@ -150,8 +150,9 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     // TODO: MOVE TO SERVER
-                    if (Account.login(loginUsernameField.getText(), loginPasswordField.getText())) {
-                        username[0] = loginUsernameField.getText();
+                    if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) {
+                        // TODO: MOVE TO SERVER
+                        username[0] = Account.getUsername(loginUsernameOrEmailField.getText());
                         loginRegisterFrame.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Login Failed",
@@ -165,7 +166,7 @@ public class MarketPlace {
                     // TODO: MOVE TO SERVER
                     if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(),
                             registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
-                        username[0] = loginUsernameField.getText();
+                        username[0] = registerUsernameField.getText();
                         loginRegisterFrame.setVisible(false);
                     } else {
                         JOptionPane.showMessageDialog(null, "Registration Failed",
