@@ -102,10 +102,15 @@ public class MarketPlace {
         Scanner scanner = new Scanner(System.in); //instantiates a scanner object to read terminal inputs
         do {
             boolean logOrRegistration = false;
+            final String[] USERNAME = new String[1];
+
+            /*
+            LOGIN/REGISTRATION FRAME
+             */
             JFrame loginRegisterFrame = new JFrame();
             JPanel loginRegisterPanel = new JPanel(new GridLayout(0, 4, 4, 16));
             JPanel loginRegisterButtonPanel = new JPanel(new GridLayout(1, 2));
-            JLabel loginUsernameLabel = new JLabel("<html>Username<br>Or Email</html>");
+            JLabel loginUsernameLabel = new JLabel("<html>Username<br>Or Email:</html>");
             JLabel loginPasswordLabel = new JLabel("Password:");
             JLabel registerEmailLabel = new JLabel("Email:");
             JLabel registerUsernameLabel = new JLabel("Username:");
@@ -139,41 +144,66 @@ public class MarketPlace {
             loginRegisterButtonPanel.add(registerButton);
             loginRegisterFrame.add(loginRegisterPanel);
             loginRegisterFrame.add(loginRegisterButtonPanel, BorderLayout.SOUTH);
-            loginRegisterFrame.setTitle("MarketPlace");
+            loginRegisterFrame.setTitle("Marketplace");
             loginRegisterFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             loginRegisterFrame.setPreferredSize(new Dimension(450, 225));
             loginRegisterFrame.pack();
             loginRegisterFrame.setLocationRelativeTo(null);
             loginRegisterFrame.setVisible(true);
-            final String[] username = new String[1];
+
+            /*
+            TODO: SELLER OPTIONS FRAME
+             */
+            JFrame sellerOptionsFrame = new JFrame();
+            sellerOptionsFrame.setTitle("Seller Marketplace");
+            sellerOptionsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerOptionsFrame.pack();
+            sellerOptionsFrame.setLocationRelativeTo(null);
+
+            /*
+            LOGIN/REGISTRATION FRAME ACTION LISTENERS
+             */
             loginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // TODO: MOVE TO SERVER
-                    if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) {
+                    if (loginUsernameOrEmailField.getText().isEmpty() ||
+                        loginPasswordField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) { // TODO: MOVE TO SERVER
                         // TODO: MOVE TO SERVER
-                        username[0] = Account.getUsername(loginUsernameOrEmailField.getText());
+                        USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText());
                         loginRegisterFrame.setVisible(false);
+                        if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
+                            sellerOptionsFrame.setVisible(true);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Login Failed",
-                                "MarketPlace", JOptionPane.ERROR_MESSAGE);
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
             registerButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    // TODO: MOVE TO SERVER
-                    if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(),
-                            registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
-                        username[0] = registerUsernameField.getText();
+                    if (registerEmailField.getText().isEmpty() || registerUsernameField.getText().isEmpty()
+                        || registerPasswordField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(), // TODO: MOVE TO SERVER
+                                    registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
+                        USERNAME[0] = registerUsernameField.getText();
                         loginRegisterFrame.setVisible(false);
+                        if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Seller")) {
+                            sellerOptionsFrame.setVisible(true);
+                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Registration Failed",
-                                "MarketPlace", JOptionPane.ERROR_MESSAGE);
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
+
             while (!logOrRegistration) {
                 System.out.println(welcomePrompt);
                 System.out.println(loginPrompt);
