@@ -1,5 +1,9 @@
 package src;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -98,6 +102,77 @@ public class MarketPlace {
         Scanner scanner = new Scanner(System.in); //instantiates a scanner object to read terminal inputs
         do {
             boolean logOrRegistration = false;
+            JFrame loginRegisterFrame = new JFrame();
+            JPanel loginRegisterPanel = new JPanel(new GridLayout(0, 4, 4, 16));
+            JPanel loginRegisterButtonPanel = new JPanel(new GridLayout(1, 2));
+            JLabel loginUsernameLabel = new JLabel("<html>Username<br>Or Email</html>");
+            JLabel loginPasswordLabel = new JLabel("Password:");
+            JLabel registerEmailLabel = new JLabel("Email:");
+            JLabel registerUsernameLabel = new JLabel("Username:");
+            JLabel registerPasswordLabel = new JLabel("Password:");
+            JLabel registerRoleLabel = new JLabel("Role:");
+            JTextField loginUsernameField = new JTextField();
+            JTextField loginPasswordField = new JTextField();
+            JTextField registerEmailField = new JTextField();
+            JTextField registerUsernameField = new JTextField();
+            JTextField registerPasswordField = new JTextField();
+            JComboBox registerRoleBox = new JComboBox(new String[]{"Buyer", "Seller"});
+            JButton loginButton = new JButton("Login");
+            JButton registerButton = new JButton("Register");
+            loginRegisterPanel.add(loginUsernameLabel);
+            loginRegisterPanel.add(loginUsernameField);
+            loginRegisterPanel.add(registerEmailLabel);
+            loginRegisterPanel.add(registerEmailField);
+            loginRegisterPanel.add(loginPasswordLabel);
+            loginRegisterPanel.add(loginPasswordField);
+            loginRegisterPanel.add(registerUsernameLabel);
+            loginRegisterPanel.add(registerUsernameField);
+            loginRegisterPanel.add(new JLabel());
+            loginRegisterPanel.add(new JLabel());
+            loginRegisterPanel.add(registerPasswordLabel);
+            loginRegisterPanel.add(registerPasswordField);
+            loginRegisterPanel.add(new JLabel());
+            loginRegisterPanel.add(new JLabel());
+            loginRegisterPanel.add(registerRoleLabel);
+            loginRegisterPanel.add(registerRoleBox);
+            loginRegisterButtonPanel.add(loginButton);
+            loginRegisterButtonPanel.add(registerButton);
+            loginRegisterFrame.add(loginRegisterPanel);
+            loginRegisterFrame.add(loginRegisterButtonPanel, BorderLayout.SOUTH);
+            loginRegisterFrame.setTitle("MarketPlace");
+            loginRegisterFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            loginRegisterFrame.setPreferredSize(new Dimension(450, 225));
+            loginRegisterFrame.pack();
+            loginRegisterFrame.setLocationRelativeTo(null);
+            loginRegisterFrame.setVisible(true);
+            final String[] username = new String[1];
+            loginButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO: MOVE TO SERVER
+                    if (Account.login(loginUsernameField.getText(), loginPasswordField.getText())) {
+                        username[0] = loginUsernameField.getText();
+                        loginRegisterFrame.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login Failed",
+                                "MarketPlace", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            registerButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    // TODO: MOVE TO SERVER
+                    if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(),
+                            registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
+                        username[0] = loginUsernameField.getText();
+                        loginRegisterFrame.setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Registration Failed",
+                                "MarketPlace", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
             while (!logOrRegistration) {
                 System.out.println(welcomePrompt);
                 System.out.println(loginPrompt);
