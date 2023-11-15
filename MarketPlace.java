@@ -140,7 +140,7 @@ public class MarketPlace {
             loginRegisterFrame.add(loginRegisterPanel);
             loginRegisterFrame.add(loginRegisterButtonPanel, BorderLayout.SOUTH);
             loginRegisterFrame.setTitle("MarketPlace");
-            loginRegisterFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            loginRegisterFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             loginRegisterFrame.setPreferredSize(new Dimension(450, 225));
             loginRegisterFrame.pack();
             loginRegisterFrame.setLocationRelativeTo(null);
