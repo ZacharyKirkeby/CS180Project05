@@ -566,7 +566,7 @@ public class MarketPlace {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(salePriceField.getText()) <= 0)
-                            || (Integer.parseInt(saleCapField.getText()) < 1)) {
+                                   || (Integer.parseInt(saleCapField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if (store.triggerSale(saleProductName.getText(),
@@ -624,7 +624,7 @@ public class MarketPlace {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else if (store.triggerOrderCap(purchaseLimitProductName.getText(),
-                                Integer.parseInt(purchaseLimitField.getText()))) {
+                                Integer.parseInt(purchaseLimitField.getText()))) { // TODO: MOVE TO SERVER
                             JOptionPane.showMessageDialog(null, "Limit Set",
                                     "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -674,7 +674,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(), // TODO: MOVE TO SERVER
-                                    registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
+                            registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
                         USERNAME[0] = registerUsernameField.getText();
                         loginRegisterFrame.setVisible(false);
                         registerEmailField.setText("");
