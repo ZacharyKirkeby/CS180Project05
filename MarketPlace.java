@@ -150,15 +150,496 @@ public class MarketPlace {
             loginRegisterFrame.pack();
             loginRegisterFrame.setLocationRelativeTo(null);
             loginRegisterFrame.setVisible(true);
+            /*
+            END LOGIN/REGISTRATION FRAME
+             */
 
             /*
-            TODO: SELLER OPTIONS FRAME
+            SELLER OPTIONS FRAME
              */
             JFrame sellerOptionsFrame = new JFrame();
+            JPanel sellerOptionsPanel = new JPanel(new GridLayout(0, 3, 4, 16));
+            JButton createStoreButton = new JButton("Create Store");
+            JButton modifyStoreButton = new JButton("Modify Store");
+            JButton deleteStoreButton = new JButton("Delete Store");
+            JButton sellerStatsButton = new JButton("Seller Stats");
+            JButton customerReviewsButton = new JButton("Customer Reviews");
+            JButton sellerManageAccountButton = new JButton("Manage Account");
+            JButton sellerLogoutButton = new JButton("Logout");
+            sellerOptionsPanel.add(new JLabel());
+            sellerOptionsPanel.add(new JLabel("Welcome to Seller Marketplace!"));
+            sellerOptionsPanel.add(new JLabel());
+            sellerOptionsPanel.add(createStoreButton);
+            sellerOptionsPanel.add(modifyStoreButton);
+            sellerOptionsPanel.add(deleteStoreButton);
+            sellerOptionsPanel.add(sellerStatsButton);
+            sellerOptionsPanel.add(customerReviewsButton);
+            sellerOptionsPanel.add(sellerManageAccountButton);
+            sellerOptionsPanel.add(new JLabel());
+            sellerOptionsPanel.add(sellerLogoutButton);
+            sellerOptionsFrame.add(sellerOptionsPanel);
             sellerOptionsFrame.setTitle("Seller Marketplace");
             sellerOptionsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             sellerOptionsFrame.pack();
             sellerOptionsFrame.setLocationRelativeTo(null);
+            /*
+            END SELLER OPTIONS FRAME
+             */
+
+            /*
+            CREATE STORE FRAME
+             */
+            JFrame createStoreFrame = new JFrame();
+            JPanel createStorePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JTextField createStoreNameField = new JTextField();
+            JTextField createStoreLocationField = new JTextField();
+            JButton createStoreEnterButton = new JButton("Create");
+            createStorePanel.add(new JLabel("Store Name:"));
+            createStorePanel.add(createStoreNameField);
+            createStorePanel.add(new JLabel("Store Location:"));
+            createStorePanel.add(createStoreLocationField);
+            createStorePanel.add(new JLabel());
+            createStorePanel.add(createStoreEnterButton);
+            createStoreFrame.add(createStorePanel);
+            createStoreFrame.setTitle("Create Store");
+            createStoreFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            createStoreFrame.pack();
+            createStoreFrame.setLocationRelativeTo(null);
+            /*
+            END CREATE STORE FRAME
+             */
+
+            /*
+            MODIFY STORE FRAME
+             */
+            JFrame modifyStoreFrame = new JFrame();
+            JPanel modifyStorePanel = new JPanel(new GridLayout(0, 3, 4, 16));
+            JButton createProductButton = new JButton("Create Product");
+            JButton editDescriptionButton = new JButton("Edit Description");
+            JButton editPriceButton = new JButton("Edit Price");
+            JButton editQuantityButton = new JButton("Edit Quantity");
+            JButton deleteProductButton = new JButton("Delete Product");
+            JButton addProductCSVButton = new JButton("Add From CSV");
+            JButton startSaleButton = new JButton("Start Sale");
+            JButton purchaseLimitButton = new JButton("Add Purchase Limit");
+            modifyStorePanel.add(createProductButton);
+            modifyStorePanel.add(editDescriptionButton);
+            modifyStorePanel.add(editPriceButton);
+            modifyStorePanel.add(editQuantityButton);
+            modifyStorePanel.add(deleteProductButton);
+            modifyStorePanel.add(addProductCSVButton);
+            modifyStorePanel.add(startSaleButton);
+            modifyStorePanel.add(purchaseLimitButton);
+            modifyStoreFrame.add(modifyStorePanel);
+            modifyStoreFrame.setTitle("Modify Store");
+            modifyStoreFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            modifyStoreFrame.pack();
+            modifyStoreFrame.setLocationRelativeTo(null);
+            /*
+            END MODIFY STORE FRAME
+             */
+
+            /*
+            CREATE PRODUCT FRAME
+             */
+            JFrame createProductFrame = new JFrame();
+            JPanel createProductPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            createProductPanel.add(new JLabel("Store Name:"));
+            JTextField createProductStoreNameField = new JTextField();
+            createProductPanel.add(createProductStoreNameField);
+            createProductPanel.add(new JLabel("Product Name:"));
+            JTextField createProductNameField = new JTextField();
+            createProductPanel.add(createProductNameField);
+            createProductPanel.add(new JLabel("Product Price:"));
+            JTextField createProductPriceField = new JTextField();
+            createProductPanel.add(createProductPriceField);
+            createProductPanel.add(new JLabel("Product Quantity:"));
+            JTextField createProductQuantityField = new JTextField();
+            createProductPanel.add(createProductQuantityField);
+            createProductPanel.add(new JLabel("Product Description:"));
+            JTextField createProductDescriptionField = new JTextField();
+            createProductPanel.add(createProductDescriptionField);
+            createProductPanel.add(new JLabel());
+            JButton createProduct = new JButton("Create");
+            createProductPanel.add(createProduct);
+            createProductFrame.add(createProductPanel);
+            createProductFrame.setTitle("Create Product");
+            createProductFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            createProductFrame.pack();
+            createProductFrame.setLocationRelativeTo(null);
+            createProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        if (createProductStoreNameField.getText().isEmpty() ||
+                            createProductNameField.getText().isEmpty() ||
+                            createProductPriceField.getText().isEmpty() ||
+                            createProductQuantityField.getText().isEmpty() ||
+                            createProductDescriptionField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                    "Create Product", JOptionPane.ERROR_MESSAGE);
+                        } else if ((Double.parseDouble(createProductPriceField.getText()) <= 0) ||
+                                   (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
+                            JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                    "Create Product", JOptionPane.ERROR_MESSAGE);
+                        } else if (Seller.createProduct(createProductStoreNameField.getText(),
+                                createProductNameField.getText(), createProductDescriptionField.getText(),
+                                Double.parseDouble(createProductPriceField.getText()),
+                                Integer.parseInt(createProductQuantityField.getText()), USERNAME[0])) { // TODO: MOVE TO SERVER
+                            JOptionPane.showMessageDialog(null, "Product Created",
+                                    "Create Product", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Creation Failed",
+                                    "Create Product", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                "Create Product", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END CREATE PRODUCT FRAME
+             */
+
+            /*
+            EDIT DESCRIPTION FRAME
+             */
+            JFrame editProductDescriptionFrame = new JFrame();
+            JPanel editProductDescriptionPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            editProductDescriptionPanel.add(new JLabel("Store Name:"));
+            JTextField editProductDescriptionStoreName = new JTextField();
+            editProductDescriptionPanel.add(editProductDescriptionStoreName);
+            editProductDescriptionPanel.add(new JLabel("Product Name:"));
+            JTextField editProductDescriptionProductName = new JTextField();
+            editProductDescriptionPanel.add(editProductDescriptionProductName);
+            editProductDescriptionPanel.add(new JLabel("New Description:"));
+            JTextField editProductDescriptionField = new JTextField();
+            editProductDescriptionPanel.add(editProductDescriptionField);
+            editProductDescriptionPanel.add(new JLabel());
+            JButton editProductDescriptionButton = new JButton("Edit");
+            editProductDescriptionPanel.add(editProductDescriptionButton);
+            editProductDescriptionFrame.add(editProductDescriptionPanel);
+            editProductDescriptionFrame.setTitle("Edit Product Description");
+            editProductDescriptionFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            editProductDescriptionFrame.pack();
+            editProductDescriptionFrame.setLocationRelativeTo(null);
+            editProductDescriptionButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (editProductDescriptionStoreName.getText().isEmpty() ||
+                        editProductDescriptionProductName.getText().isEmpty() ||
+                        editProductDescriptionField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.editProductDescription(editProductDescriptionStoreName.getText(),
+                            editProductDescriptionProductName.getText(),
+                            editProductDescriptionField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Product Edited",
+                                "Edit Product Description", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Edit Failed",
+                                "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END EDIT DESCRIPTION FRAME
+             */
+
+            /*
+            EDIT PRICE FRAME
+             */
+            JFrame editProductPriceFrame = new JFrame();
+            JPanel editProductPricePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            editProductPricePanel.add(new JLabel("Store Name:"));
+            JTextField editProductPriceStoreName = new JTextField();
+            editProductPricePanel.add(editProductPriceStoreName);
+            editProductPricePanel.add(new JLabel("Product Name:"));
+            JTextField editProductPriceProductName = new JTextField();
+            editProductPricePanel.add(editProductPriceProductName);
+            editProductPricePanel.add(new JLabel("New Price:"));
+            JTextField editProductPriceField = new JTextField();
+            editProductPricePanel.add(editProductPriceField);
+            editProductPricePanel.add(new JLabel());
+            JButton editProductPriceButton = new JButton("Edit");
+            editProductPricePanel.add(editProductPriceButton);
+            editProductPriceFrame.add(editProductPricePanel);
+            editProductPriceFrame.setTitle("Edit Product Price");
+            editProductPriceFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            editProductPriceFrame.pack();
+            editProductPriceFrame.setLocationRelativeTo(null);
+            editProductPriceButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        if (Double.parseDouble(editProductPriceField.getText()) <= 0) {
+                            JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                        } else if (editProductPriceStoreName.getText().isEmpty() ||
+                                   editProductPriceProductName.getText().isEmpty() ||
+                                   editProductPriceField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                        } else if (Seller.editProductPrice(editProductPriceStoreName.getText(),
+                                editProductPriceProductName.getText(),
+                                Double.parseDouble(editProductPriceField.getText()), USERNAME[0])) { // TODO: MOVE TO SERVER
+                            JOptionPane.showMessageDialog(null, "Product Edited",
+                                    "Edit Product Price", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Edit Failed",
+                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END EDIT PRICE FRAME
+             */
+
+            /*
+            EDIT QUANTITY FRAME
+             */
+            JFrame editProductQuantityFrame = new JFrame();
+            JPanel editProductQuantityPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            editProductQuantityPanel.add(new JLabel("Store Name:"));
+            JTextField editProductQuantityStoreName = new JTextField();
+            editProductQuantityPanel.add(editProductQuantityStoreName);
+            editProductQuantityPanel.add(new JLabel("Product Name:"));
+            JTextField editProductQuantityProductName = new JTextField();
+            editProductQuantityPanel.add(editProductQuantityProductName);
+            editProductQuantityPanel.add(new JLabel("New Quantity:"));
+            JTextField editProductQuantityField = new JTextField();
+            editProductQuantityPanel.add(editProductQuantityField);
+            editProductQuantityPanel.add(new JLabel());
+            JButton editProductQuantityButton = new JButton("Edit");
+            editProductQuantityPanel.add(editProductQuantityButton);
+            editProductQuantityFrame.add(editProductQuantityPanel);
+            editProductQuantityFrame.setTitle("Edit Product Quantity");
+            editProductQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            editProductQuantityFrame.pack();
+            editProductQuantityFrame.setLocationRelativeTo(null);
+            editProductQuantityButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        if (editProductQuantityStoreName.getText().isEmpty() ||
+                            editProductQuantityProductName.getText().isEmpty() ||
+                            editProductQuantityField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                        } else if (Integer.parseInt(editProductQuantityField.getText()) < 1) {
+                            JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                        } else if (Seller.editProductQuantity(editProductQuantityStoreName.getText(),
+                                editProductQuantityProductName.getText(),
+                                Integer.parseInt(editProductQuantityField.getText()), USERNAME[0])) {
+                            JOptionPane.showMessageDialog(null, "Product Edited",
+                                    "Edit Product Quantity", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Edit Failed",
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END EDIT QUANTITY FRAME
+             */
+
+            /*
+            DELETE PRODUCT FRAME
+             */
+            JFrame deleteProductFrame = new JFrame();
+            JPanel deleteProductPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            deleteProductPanel.add(new JLabel("Store Name:"));
+            JTextField deleteProductStoreName = new JTextField();
+            deleteProductPanel.add(deleteProductStoreName);
+            deleteProductPanel.add(new JLabel("Product Name:"));
+            JTextField deleteProductNameField = new JTextField();
+            deleteProductPanel.add(deleteProductNameField);
+            deleteProductPanel.add(new JLabel());
+            JButton deleteProduct = new JButton("Delete");
+            deleteProductPanel.add(deleteProduct);
+            deleteProductFrame.add(deleteProductPanel);
+            deleteProductFrame.setTitle("Delete Product");
+            deleteProductFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            deleteProductFrame.pack();
+            deleteProductFrame.setLocationRelativeTo(null);
+            deleteProduct.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (deleteProductStoreName.getText().isEmpty() || deleteProductNameField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Delete Product", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.deleteProduct(deleteProductStoreName.getText(),
+                            deleteProductNameField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Product Deleted",
+                                "Delete Product", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Deletion Failed",
+                                "Delete Product", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END DELETE PRODUCT FRAME
+             */
+
+            /*
+            ADD PRODUCTS FROM CSV FRAME
+             */
+            JFrame addProductCSVFrame = new JFrame();
+            JPanel addProductCSVPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            addProductCSVPanel.add(new JLabel("Store Name:"));
+            JTextField addProductCSVStoreName = new JTextField();
+            addProductCSVPanel.add(addProductCSVStoreName);
+            addProductCSVPanel.add(new JLabel("CSV Path:"));
+            JTextField addProductCSVPath = new JTextField();
+            addProductCSVPanel.add(addProductCSVPath);
+            addProductCSVPanel.add(new JLabel());
+            JButton addProductCSV = new JButton("Add Products");
+            addProductCSVPanel.add(addProductCSV);
+            addProductCSVFrame.add(addProductCSVPanel);
+            addProductCSVFrame.setTitle("Add Products From CSV");
+            addProductCSVFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            addProductCSVFrame.pack();
+            addProductCSVFrame.setLocationRelativeTo(null);
+            addProductCSV.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (addProductCSVStoreName.getText().isEmpty() || addProductCSVPath.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.readProductsFromCSV(addProductCSVStoreName.getText(),
+                            addProductCSVPath.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Products Added",
+                                "Add Products From CSV", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Addition Failed",
+                                "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END ADD PRODUCTS FROM CSV FRAME
+             */
+
+            /*
+            START SALE FRAME
+             */
+            JFrame startSaleFrame = new JFrame();
+            JPanel startSalePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            startSalePanel.add(new JLabel("Store Name:"));
+            JTextField saleStoreName = new JTextField();
+            startSalePanel.add(saleStoreName);
+            startSalePanel.add(new JLabel("Product Name:"));
+            JTextField saleProductName = new JTextField();
+            startSalePanel.add(saleProductName);
+            startSalePanel.add(new JLabel("Sale Price:"));
+            JTextField salePriceField = new JTextField();
+            startSalePanel.add(salePriceField);
+            startSalePanel.add(new JLabel("Sale Cap:"));
+            JTextField saleCapField = new JTextField();
+            startSalePanel.add(saleCapField);
+            startSalePanel.add(new JLabel());
+            JButton startSale = new JButton("Start");
+            startSalePanel.add(startSale);
+            startSaleFrame.add(startSalePanel);
+            startSaleFrame.setTitle("Start Sale");
+            startSaleFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            startSaleFrame.pack();
+            startSaleFrame.setLocationRelativeTo(null);
+            startSale.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Store store = Seller.whichStore(saleStoreName.getText()); // TODO: MOVE TO SERVER
+                        if (saleStoreName.getText().isEmpty() || saleProductName.getText().isEmpty() ||
+                            salePriceField.getText().isEmpty() || saleCapField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
+                        } else if ((Double.parseDouble(salePriceField.getText()) <= 0)
+                            || (Integer.parseInt(saleCapField.getText()) < 1)) {
+                            JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
+                        } else if (store.triggerSale(saleProductName.getText(),
+                                Double.parseDouble(salePriceField.getText()),
+                                Integer.parseInt(saleCapField.getText()))) { // TODO: MOVE TO SERVER
+                            JOptionPane.showMessageDialog(null, "Sale Created",
+                                    "Start Sale", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Sale Creation Failed",
+                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                "Start Sale", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END START SALE FRAME
+             */
+
+            /*
+            PURCHASE LIMIT FRAME
+             */
+            JFrame purchaseLimitFrame = new JFrame();
+            JPanel purchaseLimitPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            purchaseLimitPanel.add(new JLabel("Store Name:"));
+            JTextField purchaseLimitStoreName = new JTextField();
+            purchaseLimitPanel.add(purchaseLimitStoreName);
+            purchaseLimitPanel.add(new JLabel("Product Name:"));
+            JTextField purchaseLimitProductName = new JTextField();
+            purchaseLimitPanel.add(purchaseLimitProductName);
+            purchaseLimitPanel.add(new JLabel("Purchase Limit:"));
+            JTextField purchaseLimitField = new JTextField();
+            purchaseLimitPanel.add(purchaseLimitField);
+            purchaseLimitPanel.add(new JLabel());
+            JButton purchaseLimit = new JButton("Set Limit");
+            purchaseLimitPanel.add(purchaseLimit);
+            purchaseLimitFrame.add(purchaseLimitPanel);
+            purchaseLimitFrame.setTitle("Set Purchase Limit");
+            purchaseLimitFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            purchaseLimitFrame.pack();
+            purchaseLimitFrame.setLocationRelativeTo(null);
+            purchaseLimit.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        Store store = Seller.whichStore(purchaseLimitStoreName.getText()); // TODO: MOVE TO SERVER
+                        if (purchaseLimitStoreName.getText().isEmpty() ||
+                            purchaseLimitProductName.getText().isEmpty() ||
+                            purchaseLimitField.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                        } else if (Integer.parseInt(purchaseLimitField.getText()) < 1) {
+                            JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                        } else if (store.triggerOrderCap(purchaseLimitProductName.getText(),
+                                Integer.parseInt(purchaseLimitField.getText()))) {
+                            JOptionPane.showMessageDialog(null, "Limit Set",
+                                    "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Limit Failed",
+                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (NumberFormatException exception) {
+                        JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
+                                "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END PURCHASE LIMIT FRAME
+             */
 
             /*
             LOGIN/REGISTRATION FRAME ACTION LISTENERS
@@ -174,6 +655,8 @@ public class MarketPlace {
                         // TODO: MOVE TO SERVER
                         USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText());
                         loginRegisterFrame.setVisible(false);
+                        loginUsernameOrEmailField.setText("");
+                        loginPasswordField.setText("");
                         if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
                             sellerOptionsFrame.setVisible(true);
                         }
@@ -194,6 +677,9 @@ public class MarketPlace {
                                     registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
                         USERNAME[0] = registerUsernameField.getText();
                         loginRegisterFrame.setVisible(false);
+                        registerEmailField.setText("");
+                        registerUsernameField.setText("");
+                        registerPasswordField.setText("");
                         if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Seller")) {
                             sellerOptionsFrame.setVisible(true);
                         }
@@ -203,6 +689,113 @@ public class MarketPlace {
                     }
                 }
             });
+            /*
+            END LOGIN/REGISTRATION FRAME ACTION LISTENERS
+             */
+
+            /*
+            SELLER OPTIONS FRAME ACTION LISTENERS
+             */
+            createStoreButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    createStoreFrame.setVisible(true);
+                }
+            });
+            modifyStoreButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    modifyStoreFrame.setVisible(true);
+                }
+            });
+            sellerLogoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerOptionsFrame.setVisible(false);
+                    loginRegisterFrame.setVisible(true);
+                }
+            });
+            /*
+            END SELLER OPTIONS FRAME ACTION LISTENERS
+             */
+
+            /*
+            CREATE STORE FRAME ACTION LISTENERS
+             */
+            createStoreEnterButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (createStoreNameField.getText().isEmpty() || createStoreLocationField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Create Store", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.createStore(createStoreNameField.getText(),
+                            createStoreLocationField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Store Created",
+                                "Create Store", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Creation Failed",
+                                "Create Store", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END CREATE STORE FRAME ACTION LISTENERS
+             */
+
+            /*
+            MODIFY STORE FRAME ACTION LISTENERS
+             */
+            createProductButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    createProductFrame.setVisible(true);
+                }
+            });
+            editDescriptionButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    editProductDescriptionFrame.setVisible(true);
+                }
+            });
+            editPriceButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    editProductPriceFrame.setVisible(true);
+                }
+            });
+            editQuantityButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    editProductQuantityFrame.setVisible(true);
+                }
+            });
+            deleteProductButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteProductFrame.setVisible(true);
+                }
+            });
+            addProductCSVButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    addProductCSVFrame.setVisible(true);
+                }
+            });
+            startSaleButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    startSaleFrame.setVisible(true);
+                }
+            });
+            purchaseLimitButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    purchaseLimitFrame.setVisible(true);
+                }
+            });
+            /*
+            END MODIFY STORE FRAME ACTION LISTENERS
+             */
 
             while (!logOrRegistration) {
                 System.out.println(welcomePrompt);
