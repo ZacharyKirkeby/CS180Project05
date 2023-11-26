@@ -642,6 +642,220 @@ public class MarketPlace {
              */
 
             /*
+            DELETE STORE FRAME
+             */
+            JFrame deleteStoreFrame = new JFrame();
+            JPanel deleteStorePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            deleteStorePanel.add(new JLabel("Store Name:"));
+            JTextField deleteStoreField = new JTextField();
+            deleteStorePanel.add(deleteStoreField);
+            deleteStorePanel.add(new JLabel());
+            JButton deleteStore = new JButton("Delete");
+            deleteStorePanel.add(deleteStore);
+            deleteStoreFrame.add(deleteStorePanel);
+            deleteStoreFrame.setTitle("Delete Store");
+            deleteStoreFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            deleteStoreFrame.pack();
+            deleteStoreFrame.setLocationRelativeTo(null);
+            /*
+            END DELETE STORE FRAME
+             */
+
+            /*
+            SELLER STATS FRAME
+             */
+            JFrame sellerStatsFrame = new JFrame();
+            JPanel sellerStatsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JButton customerPurchasesButton = new JButton("View Customer Purchases");
+            sellerStatsPanel.add(customerPurchasesButton);
+            JButton productSalesButton = new JButton("View Product Sales");
+            sellerStatsPanel.add(productSalesButton);
+            JButton cartProductsButton = new JButton("View Products In Cart");
+            sellerStatsPanel.add(cartProductsButton);
+            JButton getCSVButton = new JButton("Get Product CSV");
+            sellerStatsPanel.add(getCSVButton);
+            sellerStatsFrame.add(sellerStatsPanel);
+            sellerStatsFrame.setTitle("Seller Stats");
+            sellerStatsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerStatsFrame.pack();
+            sellerStatsFrame.setLocationRelativeTo(null);
+
+            JFrame customerPurchasesFrame = new JFrame();
+            JPanel customerPurchasesPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            customerPurchasesPanel.add(new JLabel("Store Name:"));
+            JTextField customerPurchasesStoreName = new JTextField();
+            customerPurchasesPanel.add(customerPurchasesStoreName);
+            customerPurchasesPanel.add(new JLabel("Username:"));
+            JTextField customerPurchasesUsername = new JTextField();
+            customerPurchasesPanel.add(customerPurchasesUsername);
+            customerPurchasesPanel.add(new JLabel("Sort:"));
+            JComboBox customerPurchasesBox = new JComboBox(new String[]{"Yes", "No"});
+            customerPurchasesPanel.add(customerPurchasesBox);
+            customerPurchasesPanel.add(new JLabel());
+            JButton customerPurchases = new JButton("View");
+            customerPurchasesPanel.add(customerPurchases);
+            customerPurchasesFrame.add(customerPurchasesPanel);
+            customerPurchasesFrame.setTitle("View Customer Purchases");
+            customerPurchasesFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            customerPurchasesFrame.pack();
+            customerPurchasesFrame.setLocationRelativeTo(null);
+
+            JFrame productSalesFrame = new JFrame();
+            JPanel productSalesPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            productSalesPanel.add(new JLabel("Store Name:"));
+            JTextField productSalesStoreName = new JTextField();
+            productSalesPanel.add(productSalesStoreName);
+            productSalesPanel.add(new JLabel("Username:"));
+            JTextField productSalesUsername = new JTextField();
+            productSalesPanel.add(productSalesUsername);
+            productSalesPanel.add(new JLabel("Sort:"));
+            JComboBox productSalesBox = new JComboBox(new String[]{"Yes", "No"});
+            productSalesPanel.add(productSalesBox);
+            productSalesPanel.add(new JLabel());
+            JButton productSales = new JButton("View");
+            productSalesPanel.add(productSales);
+            productSalesFrame.add(productSalesPanel);
+            productSalesFrame.setTitle("View Product Sales");
+            productSalesFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            productSalesFrame.pack();
+            productSalesFrame.setLocationRelativeTo(null);
+
+            JFrame cartProductsFrame = new JFrame();
+            JPanel cartProductsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            cartProductsPanel.add(new JLabel("Username:"));
+            JTextField cartProductsUsername = new JTextField();
+            cartProductsPanel.add(cartProductsUsername);
+            cartProductsPanel.add(new JLabel());
+            JButton cartProducts = new JButton("View");
+            cartProductsPanel.add(cartProducts);
+            cartProductsFrame.add(cartProductsPanel);
+            cartProductsFrame.setTitle("View Products In Cart");
+            cartProductsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            cartProductsFrame.pack();
+            cartProductsFrame.setLocationRelativeTo(null);
+
+            JFrame getCSVFrame = new JFrame();
+            JPanel getCSVPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            getCSVPanel.add(new JLabel("Store Name:"));
+            JTextField getCSVStoreName = new JTextField();
+            getCSVPanel.add(getCSVStoreName);
+            getCSVPanel.add(new JLabel("File Path:"));
+            JTextField getCSVPath = new JTextField();
+            getCSVPanel.add(getCSVPath);
+            getCSVPanel.add(new JLabel());
+            JButton getCSV = new JButton("Write");
+            getCSVPanel.add(getCSV);
+            getCSVFrame.add(getCSVPanel);
+            getCSVFrame.setTitle("Get Product CSV");
+            getCSVFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            getCSVFrame.pack();
+            getCSVFrame.setLocationRelativeTo(null);
+            /*
+            END SELLER STATS FRAME
+             */
+
+            /*
+            CUSTOMER REVIEWS FRAME
+             */
+            JFrame customerReviewsFrame = new JFrame();
+            JPanel customerReviewsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            customerReviewsPanel.add(new JLabel("Product Name (Leave Empty To View All):"));
+            JTextField customerReviewsName = new JTextField();
+            customerReviewsPanel.add(customerReviewsName);
+            customerReviewsPanel.add(new JLabel());
+            JButton customerReviews = new JButton("View");
+            customerReviewsPanel.add(customerReviews);
+            customerReviewsFrame.add(customerReviewsPanel);
+            customerReviewsFrame.setTitle("View Customer Reviews");
+            customerReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            customerReviewsFrame.pack();
+            customerReviewsFrame.setLocationRelativeTo(null);
+            /*
+            END CUSTOMER REVIEWS FRAME
+             */
+
+            /*
+            SELLER MANAGE ACCOUNT FRAME
+             */
+            JFrame sellerManageAccountFrame = new JFrame();
+            JPanel sellerManageAccountPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JButton sellerChangeUsernameButton = new JButton("Change Username");
+            sellerManageAccountPanel.add(sellerChangeUsernameButton);
+            JButton sellerChangePasswordButton = new JButton("Change Password");
+            sellerManageAccountPanel.add(sellerChangePasswordButton);
+            JButton sellerChangeRoleButton = new JButton("Change Role");
+            sellerManageAccountPanel.add(sellerChangeRoleButton);
+            JButton sellerDeleteAccountButton = new JButton("Delete Account");
+            sellerManageAccountPanel.add(sellerDeleteAccountButton);
+            sellerManageAccountFrame.add(sellerManageAccountPanel);
+            sellerManageAccountFrame.setTitle("Manage Account");
+            sellerManageAccountFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerManageAccountFrame.pack();
+            sellerManageAccountFrame.setLocationRelativeTo(null);
+
+            JFrame sellerChangeUsernameFrame = new JFrame();
+            JPanel sellerChangeUsernamePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            sellerChangeUsernamePanel.add(new JLabel("New Username:"));
+            JTextField sellerNewUsername = new JTextField();
+            sellerChangeUsernamePanel.add(sellerNewUsername);
+            sellerChangeUsernamePanel.add(new JLabel());
+            JButton sellerChangeUsername = new JButton("Change");
+            sellerChangeUsernamePanel.add(sellerChangeUsername);
+            sellerChangeUsernameFrame.add(sellerChangeUsernamePanel);
+            sellerChangeUsernameFrame.setTitle("Change Username");
+            sellerChangeUsernameFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerChangeUsernameFrame.pack();
+            sellerChangeUsernameFrame.setLocationRelativeTo(null);
+
+            JFrame sellerChangePasswordFrame = new JFrame();
+            JPanel sellerChangePasswordPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            sellerChangePasswordPanel.add(new JLabel("Old Password:"));
+            JTextField sellerChangeOldPassword = new JTextField();
+            sellerChangePasswordPanel.add(sellerChangeOldPassword);
+            sellerChangePasswordPanel.add(new JLabel("New Password:"));
+            JTextField sellerChangeNewPassword = new JTextField();
+            sellerChangePasswordPanel.add(sellerChangeNewPassword);
+            sellerChangePasswordPanel.add(new JLabel());
+            JButton sellerChangePassword = new JButton("Change");
+            sellerChangePasswordPanel.add(sellerChangePassword);
+            sellerChangePasswordFrame.add(sellerChangePasswordPanel);
+            sellerChangePasswordFrame.setTitle("Change Password");
+            sellerChangePasswordFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerChangePasswordFrame.pack();
+            sellerChangePasswordFrame.setLocationRelativeTo(null);
+
+            JFrame sellerChangeRoleFrame = new JFrame();
+            JPanel sellerChangeRolePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            sellerChangeRolePanel.add(new JLabel("Password:"));
+            JTextField sellerChangeRolePassword = new JTextField();
+            sellerChangeRolePanel.add(sellerChangeRolePassword);
+            sellerChangeRolePanel.add(new JLabel());
+            JButton sellerChangeRole = new JButton("Change To Buyer");
+            sellerChangeRolePanel.add(sellerChangeRole);
+            sellerChangeRoleFrame.add(sellerChangeRolePanel);
+            sellerChangeRoleFrame.setTitle("Change Role");
+            sellerChangeRoleFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerChangeRoleFrame.pack();
+            sellerChangeRoleFrame.setLocationRelativeTo(null);
+
+            JFrame sellerDeleteAccountFrame = new JFrame();
+            JPanel sellerDeleteAccountPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            sellerDeleteAccountPanel.add(new JLabel("Password:"));
+            JTextField sellerDeleteAccountField = new JTextField();
+            sellerDeleteAccountPanel.add(sellerDeleteAccountField);
+            sellerDeleteAccountPanel.add(new JLabel());
+            JButton sellerDeleteAccount = new JButton("Delete");
+            sellerDeleteAccountPanel.add(sellerDeleteAccount);
+            sellerDeleteAccountFrame.add(sellerDeleteAccountPanel);
+            sellerDeleteAccountFrame.setTitle("Delete Account");
+            sellerDeleteAccountFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            sellerDeleteAccountFrame.pack();
+            sellerDeleteAccountFrame.setLocationRelativeTo(null);
+            /*
+            END SELLER MANAGE ACCOUNT FRAME
+             */
+
+            /*
             LOGIN/REGISTRATION FRAME ACTION LISTENERS
              */
             loginButton.addActionListener(new ActionListener() {
@@ -706,6 +920,30 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     modifyStoreFrame.setVisible(true);
+                }
+            });
+            deleteStoreButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    deleteStoreFrame.setVisible(true);
+                }
+            });
+            sellerStatsButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerStatsFrame.setVisible(true);
+                }
+            });
+            customerReviewsButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    customerReviewsFrame.setVisible(true);
+                }
+            });
+            sellerManageAccountButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerManageAccountFrame.setVisible(true);
                 }
             });
             sellerLogoutButton.addActionListener(new ActionListener() {
@@ -795,6 +1033,245 @@ public class MarketPlace {
             });
             /*
             END MODIFY STORE FRAME ACTION LISTENERS
+             */
+
+            /*
+            DELETE STORE FRAME ACTION LISTENERS
+             */
+            deleteStore.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (deleteStoreField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Delete Store", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.deleteStore(deleteStoreField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Store Deleted",
+                                "Delete Store", JOptionPane.INFORMATION_MESSAGE);
+                    }  else {
+                        JOptionPane.showMessageDialog(null, "Deletion Failed",
+                                "Delete Store", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END DELETE STORE FRAME ACTION LISTENERS
+             */
+
+            /*
+            SELLER STATS FRAME ACTION LISTENERS
+             */
+            customerPurchasesButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    customerPurchasesFrame.setVisible(true);
+                }
+            });
+            customerPurchases.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (customerPurchasesStoreName.getText().isEmpty()
+                        || customerPurchasesUsername.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
+                    } else if (customerPurchasesBox.getSelectedItem().toString().equals("Yes")) {
+                        JOptionPane.showMessageDialog(null,
+                                Seller.getCustomersAndPurchases(customerPurchasesStoreName.getText(),
+                                        customerPurchasesUsername.getText(), true), // TODO: MOVE TO SERVER
+                                "View Customer Purchases", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                Seller.getCustomersAndPurchases(customerPurchasesStoreName.getText(),
+                                        customerPurchasesUsername.getText(), false), // TODO: MOVE TO SERVER
+                                "View Customer Purchases", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            });
+            productSalesButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    productSalesFrame.setVisible(true);
+                }
+            });
+            productSales.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (productSalesStoreName.getText().isEmpty() || productSalesUsername.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "View Product Sales", JOptionPane.ERROR_MESSAGE);
+                    } else if (productSalesBox.getSelectedItem().toString().equals("Yes")) {
+                        JOptionPane.showMessageDialog(null,
+                                Seller.getProductSales(productSalesStoreName.getText(),
+                                        productSalesUsername.getText(), true), // TODO: MOVE TO SERVER
+                                "View Product Sales", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                Seller.getProductSales(productSalesStoreName.getText(),
+                                        productSalesUsername.getText(), false), // TODO: MOVE TO SERVER
+                                "View Product Sales", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            });
+            cartProductsButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    cartProductsFrame.setVisible(true);
+                }
+            });
+            cartProducts.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (cartProductsUsername.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "View Products In Cart", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                Seller.getShoppingCartProducts(cartProductsUsername.getText()), // TODO: MOVE TO SERVER
+                                "View Products In Cart", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            });
+            getCSVButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    getCSVFrame.setVisible(true);
+                }
+            });
+            getCSV.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (getCSVStoreName.getText().isEmpty() || getCSVPath.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Get Product CSV", JOptionPane.ERROR_MESSAGE);
+                    } else if (Seller.writeProductsToCSV(getCSVStoreName.getText(), getCSVPath.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Successfully Written",
+                                "Get Product CSV", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Write Failed",
+                                "Get Product CSV", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END SELLER STATS FRAME ACTION LISTENERS
+             */
+
+            /*
+            CUSTOMER REVIEWS FRAME ACTION LISTENERS
+             */
+            customerReviews.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JOptionPane.showMessageDialog(null,
+                            Seller.viewCustomerReviews(customerReviewsName.getText(), USERNAME[0]), // TODO: MOVE TO SERVER
+                            "View Customer Reviews", JOptionPane.PLAIN_MESSAGE);
+                }
+            });
+            /*
+            END CUSTOMER REVIEWS FRAME ACTION LISTENERS
+             */
+
+            /*
+            SELLER MANAGE ACCOUNT FRAME ACTION LISTENERS
+             */
+            sellerChangeUsernameButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerChangeUsernameFrame.setVisible(true);
+                }
+            });
+            sellerChangeUsername.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (sellerNewUsername.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changeUsername(sellerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Username Changed",
+                                "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            sellerChangePasswordButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerChangePasswordFrame.setVisible(true);
+                }
+            });
+            sellerChangePassword.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (sellerChangeNewPassword.getText().isEmpty() || sellerChangeOldPassword.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changePassword(USERNAME[0], sellerChangeOldPassword.getText(),
+                            sellerChangeNewPassword.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Password Changed",
+                                "Change Password", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            sellerChangeRoleButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerChangeRoleFrame.setVisible(true);
+                }
+            });
+            sellerChangeRole.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (sellerChangeRolePassword.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changeRole(USERNAME[0], sellerChangePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Role Changed",
+                                "Change Role", JOptionPane.INFORMATION_MESSAGE);
+                        for (Frame frame : Frame.getFrames()) {
+                            if (frame instanceof JFrame) {
+                                ((JFrame)frame).setVisible(false);
+                            }
+                        }
+                        loginRegisterFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            sellerDeleteAccountButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerDeleteAccountFrame.setVisible(true);
+                }
+            });
+            sellerDeleteAccount.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (sellerDeleteAccountField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.deleteAccount(USERNAME[0], sellerDeleteAccountField.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Account Deleted",
+                                "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                        for (Frame frame : Frame.getFrames()) {
+                            if (frame instanceof JFrame) {
+                                ((JFrame)frame).setVisible(false);
+                            }
+                        }
+                        loginRegisterFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Deletion Failed",
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END SELLER MANAGE ACCOUNT FRAME ACTION LISTENERS
              */
 
             while (!logOrRegistration) {
