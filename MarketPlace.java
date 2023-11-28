@@ -373,7 +373,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        if (Double.parseDouble(editProductPriceField.getText()) <= 0) {
+                        if (Double.parseDouble(editProductPriceField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                         } else if (editProductPriceStoreName.getText().isEmpty() ||
@@ -431,7 +431,7 @@ public class MarketPlace {
                             editProductQuantityField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
-                        } else if (Integer.parseInt(editProductQuantityField.getText()) < 1) {
+                        } else if (Integer.parseInt(editProductQuantityField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                         } else if (Seller.editProductQuantity(editProductQuantityStoreName.getText(),
