@@ -773,7 +773,7 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
         return result;
 
     }
