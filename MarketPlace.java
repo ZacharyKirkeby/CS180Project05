@@ -906,13 +906,11 @@ public class MarketPlace {
             JFrame buyerSortCheapestFrame = new JFrame();
             JPanel buyerSortCheapestPanel = new JPanel();
             String[] coloumn = Seller.sortCheapest().split("\n");
-            System.out.println(coloumn.length);
             String[][] temp = new String[coloumn.length][4];
             String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
             JTable tableModelSortCheapest = new JTable(temp, columnNames);
             for(int i = 0; i < coloumn.length; i++){
                 String[] row = coloumn[i].split(";");
-                System.out.println(row.length);
                 for(int j = 0; j < row.length; j++){
                     tableModelSortCheapest.setValueAt(row[j], i, j);
                 }
@@ -925,21 +923,18 @@ public class MarketPlace {
             /*
             END BUYER SORT CHEAPEST FRAME
              */
-            
+
             /*
             BUYER SORT EXPENSIVE FRAME
              */
             JFrame buyerSortExpensiveFrame = new JFrame();
             JPanel buyerSortExpensivePanel = new JPanel();
             coloumn = Seller.sortExpensive().split("\n");
-            System.out.println(coloumn);
-            System.out.println(coloumn.length);
             temp = new String[coloumn.length][4];
             columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
             JTable tableModelSortExpensive = new JTable(temp, columnNames);
             for(int i = 0; i < coloumn.length; i++){
                 String[] row = coloumn[i].split(";");
-                System.out.println(row.length);
                 for(int j = 0; j < row.length; j++){
                     tableModelSortExpensive.setValueAt(row[j], i, j);
                 }
@@ -952,6 +947,36 @@ public class MarketPlace {
             /*
             END BUYER SORT EXPENSIVE FRAME
              */
+            /*
+            BUYER VIEW ALL PRODUCTS FRAME
+             */
+            JFrame buyerViewAllProductsFrame = new JFrame();
+            JPanel buyerViewAllProductsPanel = new JPanel();
+            JButton buyerSearchForProductButton = new JButton("Search for a Product");
+            buyerViewAllProductsPanel.setLayout(new BorderLayout());
+            buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.AFTER_LAST_LINE);
+            //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
+            String[] coloumnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
+            temp = new String[coloumnViewAllProductsAndStores.length][4];
+            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+            JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
+            for(int i = 0; i < coloumnViewAllProductsAndStores.length; i++){
+                String[] row = coloumnViewAllProductsAndStores[i].split(";");
+                for(int j = 0; j < row.length; j++){
+                    viewAllProductsAndStoresTable.setValueAt(row[j], i, j);
+                }
+            }
+            buyerViewAllProductsPanel.add(new JScrollPane(viewAllProductsAndStoresTable));
+            buyerViewAllProductsFrame.add(buyerViewAllProductsPanel);
+            buyerViewAllProductsFrame.pack();
+            buyerViewAllProductsFrame.setLocationRelativeTo(null);
+
+            /*
+            END BUYER VIEW ALL PRODUCTS FRAME
+             */
+            /*
+
+
         /*
         BUYER MANAGE ACCOUNT FRAME
              */
@@ -1062,7 +1087,15 @@ public class MarketPlace {
             END BUYER LEAVE REVIEW FRAME
              */
 
+            /*
+            BUYER SEARCH FOR STORE FRAMES INITIALIZATION
+             */
+            JFrame buyerSearchByStoreFrame = new JFrame();
+            JPanel buyerSearchByStorePanel = new JPanel(new GridLayout(0, 2, 4, 16));
 
+            /*
+            END BUYER SEARCH FOR STORE FRAMES INITIALIZATION
+             */
             /*
             LOGIN/REGISTRATION FRAME ACTION LISTENERS
              */
@@ -1511,6 +1544,16 @@ public class MarketPlace {
                     }
                 }
             });
+            searchForStoreButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedStore = JOptionPane.showInputDialog(null, "Search For Product",
+                            "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                    searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
+                            buyerSearchByStorePanel);
+                }
+            });
+
             buyerLogoutButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1537,10 +1580,12 @@ public class MarketPlace {
                     buyerSortExpensiveFrame.setVisible(true);
                 }
             });
-
-            /*
-            End of Buyer Option Frames Action Listeners
-            */
+            viewAllProductsButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerViewAllProductsFrame.setVisible(true);
+                }
+            });
 
             /*
             BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
@@ -2516,6 +2561,41 @@ public class MarketPlace {
                 }
             }
         } while (true);
+    }
+    public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
+                                     JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel){
+        /*
+            BUYER SEARCH BY STORE FRAME
+             */
+        buyerSearchByStorePanel.removeAll();
+        buyerSearchByStorePanel.repaint();
+        buyerSearchByStorePanel.revalidate();
+
+        String[] coloumnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
+        String[][] temp = new String[coloumnSearchStores.length][2];
+        String[] columnNames = new String[]{"Store Name", "Product Name"};
+        JTable searchedStoreTable = new JTable(temp, columnNames);
+        for (int i = 0; i < coloumnSearchStores.length; i++) {
+            String[] row = coloumnSearchStores[i].split(";");
+            for (int j = 0; j < row.length; j++) {
+                searchedStoreTable.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSearchByStorePanel.add(new JScrollPane(searchedStoreTable));
+        JButton searchForStoreButtonCopy = new JButton("Search for Product");
+        buyerSearchByStorePanel.add(searchForStoreButton, BorderLayout.SOUTH);
+        buyerSearchByStoreFrame.add(buyerSearchByStorePanel);
+        buyerSearchByStoreFrame.pack();
+        buyerSearchByStoreFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerSearchByStoreFrame.setVisible(true);
+        } else{
+            buyerSearchByStoreFrame.setVisible(false);
+        }
+
+            /*
+            END BUYER SEARCH BY STORE FRAME
+             */
     }
 
 
