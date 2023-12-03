@@ -711,7 +711,6 @@ public abstract class Seller {
      */
     public static String sortCheapest() {
         readFromFile();
-        printProductAndStores();
         ArrayList<String> combined = new ArrayList<>();
         String result = "";
         for (int i = 0; i < stores.size(); i++) {
@@ -739,7 +738,6 @@ public abstract class Seller {
             result += combined.get(a) + "\n";
         }
         //result = result.replace(";", " | ");
-        System.out.println(result);
         return result;
     }
 
