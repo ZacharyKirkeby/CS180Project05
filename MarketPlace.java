@@ -1,6 +1,7 @@
 package src;
-
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,53 +22,53 @@ import java.util.Scanner;
 public class MarketPlace {
     private static String welcomePrompt = "Welcome to the Fruit Market!"; //
     private static String loginPrompt = "Would you like to Login or Register an Account? (Login / Register / " +
-                                        "Exit)"; //
+            "Exit)"; //
     private static String sellerChoices = " 1. Create Store \n" +
-                                          " 2. Modify Store \n" +
-                                          " 3. View Store Statistics \n" +
-                                          " 4. Delete Store \n" +
-                                          " 5. View Customer Reviews \n" +
-                                          " 6. Manage Account \n" +
-                                          " 7. Logout \n"; //
+            " 2. Modify Store \n" +
+            " 3. View Store Statistics \n" +
+            " 4. Delete Store \n" +
+            " 5. View Customer Reviews \n" +
+            " 6. Manage Account \n" +
+            " 7. Logout \n"; //
     private static String sellerModificationChoices = " 1. Create Product \n" +
-                                                      " 2. Change Product Price \n" +
-                                                      " 3. Change Product Quantity \n" +
-                                                      " 4. Delete Product \n" +
-                                                      " 5. Add products to Store from CSV \n" +
-                                                      " 6. Start Sale \n" +
-                                                      " 7. Add Purchase Limit \n" +
-                                                      " 8. Back \n"; //
+            " 2. Change Product Price \n" +
+            " 3. Change Product Quantity \n" +
+            " 4. Delete Product \n" +
+            " 5. Add products to Store from CSV \n" +
+            " 6. Start Sale \n" +
+            " 7. Add Purchase Limit \n" +
+            " 8. Back \n"; //
     private static String accountChoices = " 1. Change Username \n" +
-                                           " 2. Change Password \n" +
-                                           " 3. Change Role \n" +
-                                           " 4. Delete Account \n" +
-                                           " 5. Back \n"; //
+            " 2. Change Password \n" +
+            " 3. Change Role \n" +
+            " 4. Delete Account \n" +
+            " 5. Back \n"; //
     private static String sellerStatisticsChoices = " 1. View Customer Purchases \n" +
-                                                    " 2. View Product Sales \n" +
-                                                    " 3. View Products in Shopping Cart \n" +
-                                                    " 4. View Products in Store as CSV file \n" +
-                                                    " 5. Back \n"; //
+            " 2. View Product Sales \n" +
+            " 3. View Products in Shopping Cart \n" +
+            " 4. View Products in Store as CSV file \n" +
+            " 5. Back \n"; //
     private static String buyerprompt = " 1.  Search for a store \n" +
-                                        " 2.  Search for a product \n" +
-                                        " 3.  Search Product by Description \n" +
-                                        " 4.  View All Products \n" +
-                                        " 5.  Sort Products By Cheapest \n" +
-                                        " 6.  Sort  Products By Most Expensive \n" +
-                                        " 7.  Sort by Availability \n" +
-                                        " 8.  Shopping Cart \n" +
-                                        " 9.  Export Purchase History as file \n" +
-                                        " 10. Leave Review \n" +
-                                        " 11. View Product Reviews \n" +
-                                        " 12. Manage Account \n" +
-                                        " 13. Logout \n"; //
+            " 2.  Search for a product \n" +
+            " 3.  Search Product by Description \n" +
+            " 4.  View All Products \n" +
+            " 5.  Sort Products By Cheapest \n" +
+            " 6.  Sort  Products By Most Expensive \n" +
+            " 7.  Sort by Availability \n" +
+            " 8.  Shopping Cart \n" +
+            " 9.  Export Purchase History as file \n" +
+            " 10. Leave Review \n" +
+            " 11. View Product Reviews \n" +
+            " 12. Manage Account \n" +
+            " 13. Logout \n"; //
     private static String customerShoppingCartChoices = " 1. Add product(s) to cart \n" +
-                                                        " 2. Change Quantity of Product in Cart \n" +
-                                                        " 3. Remove product(s) from cart \n" +
-                                                        " 4. Buy products in cart \n" +
-                                                        " 5. View shopping cart \n" +
-                                                        " 6. Back\n"; //
+            " 2. Change Quantity of Product in Cart \n" +
+            " 3. Remove product(s) from cart \n" +
+            " 4. Buy products in cart \n" +
+            " 5. View shopping cart \n" +
+            " 6. Back\n"; //
     private static String availability = "1. Sort By Highest Stock \n" +
-                                         "2. Sort By Low On Stock \n"; //
+            "2. Sort By Low On Stock \n"; //
     private static String searchPrompt = "Enter search term: "; //
     private static ArrayList<Store> stores = new ArrayList<>(); //
     private static boolean isLoggedIn; //
@@ -163,7 +164,7 @@ public class MarketPlace {
             JButton modifyStoreButton = new JButton("Modify Store");
             JButton deleteStoreButton = new JButton("Delete Store");
             JButton sellerStatsButton = new JButton("Seller Stats");
-            JButton customerReviewsButton = new JButton("Customer Reviews");
+            JButton customerReviewsButton = new JButton("View Customer Reviews");
             JButton sellerManageAccountButton = new JButton("Manage Account");
             JButton sellerLogoutButton = new JButton("Logout");
             sellerOptionsPanel.add(new JLabel());
@@ -272,14 +273,14 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         if (createProductStoreNameField.getText().isEmpty() ||
-                            createProductNameField.getText().isEmpty() ||
-                            createProductPriceField.getText().isEmpty() ||
-                            createProductQuantityField.getText().isEmpty() ||
-                            createProductDescriptionField.getText().isEmpty()) {
+                                createProductNameField.getText().isEmpty() ||
+                                createProductPriceField.getText().isEmpty() ||
+                                createProductQuantityField.getText().isEmpty() ||
+                                createProductDescriptionField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Create Product", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(createProductPriceField.getText()) <= 0) ||
-                                   (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
+                                (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Create Product", JOptionPane.ERROR_MESSAGE);
                         } else if (Seller.createProduct(createProductStoreNameField.getText(),
@@ -328,8 +329,8 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (editProductDescriptionStoreName.getText().isEmpty() ||
-                        editProductDescriptionProductName.getText().isEmpty() ||
-                        editProductDescriptionField.getText().isEmpty()) {
+                            editProductDescriptionProductName.getText().isEmpty() ||
+                            editProductDescriptionField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                     } else if (Seller.editProductDescription(editProductDescriptionStoreName.getText(),
@@ -377,8 +378,8 @@ public class MarketPlace {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                         } else if (editProductPriceStoreName.getText().isEmpty() ||
-                                   editProductPriceProductName.getText().isEmpty() ||
-                                   editProductPriceField.getText().isEmpty()) {
+                                editProductPriceProductName.getText().isEmpty() ||
+                                editProductPriceField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                         } else if (Seller.editProductPrice(editProductPriceStoreName.getText(),
@@ -427,8 +428,8 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         if (editProductQuantityStoreName.getText().isEmpty() ||
-                            editProductQuantityProductName.getText().isEmpty() ||
-                            editProductQuantityField.getText().isEmpty()) {
+                                editProductQuantityProductName.getText().isEmpty() ||
+                                editProductQuantityField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                         } else if (Integer.parseInt(editProductQuantityField.getText()) < 0) {
@@ -562,11 +563,11 @@ public class MarketPlace {
                     try {
                         Store store = Seller.whichStore(saleStoreName.getText()); // TODO: MOVE TO SERVER
                         if (saleStoreName.getText().isEmpty() || saleProductName.getText().isEmpty() ||
-                            salePriceField.getText().isEmpty() || saleCapField.getText().isEmpty()) {
+                                salePriceField.getText().isEmpty() || saleCapField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(salePriceField.getText()) <= 0)
-                                   || (Integer.parseInt(saleCapField.getText()) < 1)) {
+                                || (Integer.parseInt(saleCapField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if (store.triggerSale(saleProductName.getText(),
@@ -616,8 +617,8 @@ public class MarketPlace {
                     try {
                         Store store = Seller.whichStore(purchaseLimitStoreName.getText()); // TODO: MOVE TO SERVER
                         if (purchaseLimitStoreName.getText().isEmpty() ||
-                            purchaseLimitProductName.getText().isEmpty() ||
-                            purchaseLimitField.getText().isEmpty()) {
+                                purchaseLimitProductName.getText().isEmpty() ||
+                                purchaseLimitField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else if (Integer.parseInt(purchaseLimitField.getText()) < 1) {
@@ -755,7 +756,7 @@ public class MarketPlace {
              */
 
             /*
-            CUSTOMER REVIEWS FRAME
+            CUSTOMER REVIEW FRAME
              */
             JFrame customerReviewsFrame = new JFrame();
             JPanel customerReviewsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
@@ -773,6 +774,7 @@ public class MarketPlace {
             /*
             END CUSTOMER REVIEWS FRAME
              */
+
 
             /*
             SELLER MANAGE ACCOUNT FRAME
@@ -855,6 +857,185 @@ public class MarketPlace {
             END SELLER MANAGE ACCOUNT FRAME
              */
 
+
+             /*
+        BUYER OPTIONS FRAME
+        */
+            JFrame buyerOptionsFrame = new JFrame();
+            JPanel buyerOptionsPanel = new JPanel(new GridLayout(0, 3, 4, 16));
+            JButton searchForStoreButton = new JButton("Search for a Store");
+            JButton searchForProductButton = new JButton("Search for a Product");
+            JButton searchProductByDescriptionButton = new JButton("Search for a Product by Description");
+            JButton viewAllProductsButton = new JButton("View all Products");
+            JButton sortProductsByCheapestButton = new JButton("Sort Products by Cheapest");
+            JButton sortProductsByMostExpensiveButton = new JButton("Sort Products by Most Expensive");
+            JButton sortByAvailabilityButton = new JButton("Sort Products by Availability");
+            JButton shoppingCartButton = new JButton("Shopping Cart");
+            JButton exportPurchaseHistoryAsFileButton = new JButton("Export Purchase History as file");
+            JButton buyerLeaveReviewButton = new JButton("Leave Review");
+            JButton buyerManageAccountButton = new JButton("Manage Account");
+            JButton buyerLogoutButton = new JButton("Logout");
+            buyerOptionsPanel.add(new JLabel());
+            buyerOptionsPanel.add(new JLabel("Welcome to Buyer Marketplace!"));
+            buyerOptionsPanel.add(new JLabel());
+            buyerOptionsPanel.add(searchForStoreButton);
+            buyerOptionsPanel.add(searchForProductButton);
+            buyerOptionsPanel.add(searchProductByDescriptionButton);
+            buyerOptionsPanel.add(viewAllProductsButton);
+            buyerOptionsPanel.add(sortProductsByCheapestButton);
+            buyerOptionsPanel.add(sortProductsByMostExpensiveButton);
+            buyerOptionsPanel.add(sortByAvailabilityButton);
+            buyerOptionsPanel.add(shoppingCartButton);
+            buyerOptionsPanel.add(exportPurchaseHistoryAsFileButton);
+            buyerOptionsPanel.add(buyerLeaveReviewButton);
+            buyerOptionsPanel.add(customerReviewsButton);
+            buyerOptionsPanel.add(buyerManageAccountButton);
+            buyerOptionsPanel.add(new JLabel());
+            buyerOptionsPanel.add(buyerLogoutButton);
+            buyerOptionsFrame.add(buyerOptionsPanel);
+            buyerOptionsFrame.setTitle("Buyer Marketplace");
+            buyerOptionsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerOptionsFrame.pack();
+            buyerOptionsFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER OPTIONS FRAME
+             */
+            /*
+            BUYER SORT CHEAPEST FRAME
+             */
+            JFrame buyerSortCheapestFrame = new JFrame();
+            JPanel buyerSortCheapestPanel = new JPanel();
+            String[] coloumn = Seller.sortCheapest().split("\n");
+            System.out.println(coloumn.length);
+            String[][] temp = new String[coloumn.length][4];
+            String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+            JTable tableModel = new JTable(temp, columnNames);
+            for(int i = 0; i < coloumn.length; i++){
+                String[] row = coloumn[i].split(";");
+                System.out.println(row.length);
+                for(int j = 0; j < row.length; j++){
+                    tableModel.setValueAt(row[j], i, j);
+                }
+            }
+            buyerSortCheapestPanel.add(new JScrollPane(tableModel));
+            buyerSortCheapestFrame.add(buyerSortCheapestPanel);
+            buyerSortCheapestFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerSortCheapestFrame.pack();
+            buyerSortCheapestFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER SORT CHEAPEST FRAME
+             */
+        /*
+        BUYER MANAGE ACCOUNT FRAME
+             */
+            JFrame buyerManageAccountFrame = new JFrame();
+            JPanel buyerManageAccountPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JButton buyerChangeUsernameButton = new JButton("Change Username");
+            buyerManageAccountPanel.add(buyerChangeUsernameButton);
+            JButton buyerChangePasswordButton = new JButton("Change Password");
+            buyerManageAccountPanel.add(buyerChangePasswordButton);
+            JButton buyerChangeRoleButton = new JButton("Change Role");
+            buyerManageAccountPanel.add(buyerChangeRoleButton);
+            JButton buyerDeleteAccountButton = new JButton("Delete Account");
+            buyerManageAccountPanel.add(buyerDeleteAccountButton);
+            buyerManageAccountFrame.add(buyerManageAccountPanel);
+            buyerManageAccountFrame.setTitle("Manage Account");
+            buyerManageAccountFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerManageAccountFrame.pack();
+            buyerManageAccountFrame.setLocationRelativeTo(null);
+
+            JFrame buyerChangeUsernameFrame = new JFrame();
+            JPanel buyerChangeUsernamePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            buyerChangeUsernamePanel.add(new JLabel("New Username:"));
+            JTextField buyerNewUsername = new JTextField();
+            buyerChangeUsernamePanel.add(buyerNewUsername);
+            buyerChangeUsernamePanel.add(new JLabel());
+            JButton buyerChangeUsername = new JButton("Change");
+            buyerChangeUsernamePanel.add(buyerChangeUsername);
+            buyerChangeUsernameFrame.add(buyerChangeUsernamePanel);
+            buyerChangeUsernameFrame.setTitle("Change Username");
+            buyerChangeUsernameFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerChangeUsernameFrame.pack();
+            buyerChangeUsernameFrame.setLocationRelativeTo(null);
+
+            JFrame buyerChangePasswordFrame = new JFrame();
+            JPanel buyerChangePasswordPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            buyerChangePasswordPanel.add(new JLabel("Old Password:"));
+            JTextField buyerChangeOldPassword = new JTextField();
+            buyerChangePasswordPanel.add(buyerChangeOldPassword);
+            buyerChangePasswordPanel.add(new JLabel("New Password:"));
+            JTextField buyerChangeNewPassword = new JTextField();
+            buyerChangePasswordPanel.add(buyerChangeNewPassword);
+            buyerChangePasswordPanel.add(new JLabel());
+            JButton buyerChangePassword = new JButton("Change");
+            buyerChangePasswordPanel.add(buyerChangePassword);
+            buyerChangePasswordFrame.add(buyerChangePasswordPanel);
+            buyerChangePasswordFrame.setTitle("Change Password");
+            buyerChangePasswordFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerChangePasswordFrame.pack();
+            buyerChangePasswordFrame.setLocationRelativeTo(null);
+
+            JFrame buyerChangeRoleFrame = new JFrame();
+            JPanel buyerChangeRolePanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            buyerChangeRolePanel.add(new JLabel("Password:"));
+            JTextField buyerChangeRolePassword = new JTextField();
+            buyerChangeRolePanel.add(buyerChangeRolePassword);
+            buyerChangeRolePanel.add(new JLabel());
+            JButton buyerChangeRole = new JButton("Change To Buyer");
+            buyerChangeRolePanel.add(buyerChangeRole);
+            buyerChangeRoleFrame.add(buyerChangeRolePanel);
+            buyerChangeRoleFrame.setTitle("Change Role");
+            buyerChangeRoleFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerChangeRoleFrame.pack();
+            buyerChangeRoleFrame.setLocationRelativeTo(null);
+
+            JFrame buyerDeleteAccountFrame = new JFrame();
+            JPanel buyerDeleteAccountPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            buyerDeleteAccountPanel.add(new JLabel("Password:"));
+            JTextField buyerDeleteAccountField = new JTextField();
+            buyerDeleteAccountPanel.add(buyerDeleteAccountField);
+            buyerDeleteAccountPanel.add(new JLabel());
+            JButton buyerDeleteAccount = new JButton("Delete");
+            buyerDeleteAccountPanel.add(buyerDeleteAccount);
+            buyerDeleteAccountFrame.add(buyerDeleteAccountPanel);
+            buyerDeleteAccountFrame.setTitle("Delete Account");
+            buyerDeleteAccountFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerDeleteAccountFrame.pack();
+            buyerDeleteAccountFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER MANAGE ACCOUNT FRAME
+             */
+
+            /*
+            BUYER LEAVE REVIEW FRAME
+             */
+            JFrame leaveReviewFrame = new JFrame();
+            JPanel leaveReviewPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            leaveReviewPanel.add(new JLabel("Product Name:"));
+            JTextField leaveReviewProductName = new JTextField();
+            leaveReviewPanel.add(leaveReviewProductName);
+            leaveReviewPanel.add(new JLabel("Store Name:"));
+            JTextField leaveReviewStoreName = new JTextField();
+            leaveReviewPanel.add(leaveReviewStoreName);
+            String[] choices = { "1", "2", "3", "4", "5"};
+            leaveReviewPanel.add(new JLabel("Rating (1-5):"));
+            JComboBox<String> leaveReviewRating = new JComboBox<String>(choices);
+            leaveReviewPanel.add(leaveReviewRating);
+            leaveReviewPanel.add(new JLabel("Review Description: "));
+            JTextField leaveReviewDescription = new JTextField();
+            leaveReviewPanel.add(leaveReviewDescription);
+            JButton leaveR = new JButton("Leave Review");
+            leaveReviewPanel.add(leaveR);
+            leaveReviewFrame.add(leaveReviewPanel);
+            leaveReviewFrame.setTitle("Buyer Leave Review");
+            leaveReviewFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            leaveReviewFrame.pack();
+            leaveReviewFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER LEAVE REVIEW FRAME
+             */
+
+
             /*
             LOGIN/REGISTRATION FRAME ACTION LISTENERS
              */
@@ -862,7 +1043,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (loginUsernameOrEmailField.getText().isEmpty() ||
-                        loginPasswordField.getText().isEmpty()) {
+                            loginPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) { // TODO: MOVE TO SERVER
@@ -873,6 +1054,8 @@ public class MarketPlace {
                         loginPasswordField.setText("");
                         if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
                             sellerOptionsFrame.setVisible(true);
+                        } else if(Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")){
+                            buyerOptionsFrame.setVisible(true);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Login Failed",
@@ -884,7 +1067,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (registerEmailField.getText().isEmpty() || registerUsernameField.getText().isEmpty()
-                        || registerPasswordField.getText().isEmpty()) {
+                            || registerPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(), // TODO: MOVE TO SERVER
@@ -896,6 +1079,8 @@ public class MarketPlace {
                         registerPasswordField.setText("");
                         if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Seller")) {
                             sellerOptionsFrame.setVisible(true);
+                        } else if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Buyer")) {
+                            buyerOptionsFrame.setVisible(true);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Registration Failed",
@@ -1070,7 +1255,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (customerPurchasesStoreName.getText().isEmpty()
-                        || customerPurchasesUsername.getText().isEmpty()) {
+                            || customerPurchasesUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
                     } else if (customerPurchasesBox.getSelectedItem().toString().equals("Yes")) {
@@ -1274,6 +1459,161 @@ public class MarketPlace {
             END SELLER MANAGE ACCOUNT FRAME ACTION LISTENERS
              */
 
+            /*
+            Buyer Option Frames Action Listeners
+             */
+            buyerLeaveReviewButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    leaveReviewFrame.setVisible(true);
+                }
+            });
+            leaveR.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(leaveReviewProductName.getText().isEmpty() || leaveReviewStoreName.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Do not leave Store and Product" +
+                                        " Fields Empty!",
+                                "Leave Review", JOptionPane.ERROR_MESSAGE);
+                    } else{
+                        Customer.leaveReview(leaveReviewStoreName.getText(), leaveReviewProductName.getText(),
+                                USERNAME[0], Integer.parseInt((String)leaveReviewRating.getSelectedItem()),
+                                leaveReviewDescription.getText());
+                        JOptionPane.showMessageDialog(null, "Review Left Successfully!",
+                                "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            });
+            buyerLogoutButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerOptionsFrame.setVisible(false);
+                    loginRegisterFrame.setVisible(true);
+                }
+            });
+            buyerManageAccountButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    sellerManageAccountFrame.setVisible(true);
+                }
+            });
+
+            sortProductsByCheapestButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerSortCheapestFrame.setVisible(true);
+                }
+            });
+
+            /*
+            End of Buyer Option Frames Action Listeners
+            */
+
+            /*
+            BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
+            */
+            buyerChangeUsernameButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerChangeUsernameFrame.setVisible(true);
+                }
+            });
+            buyerChangeUsername.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (buyerNewUsername.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changeUsername(buyerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Username Changed",
+                                "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            buyerChangePasswordButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerChangePasswordFrame.setVisible(true);
+                }
+            });
+            buyerChangePassword.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (buyerChangeNewPassword.getText().isEmpty() || buyerChangeOldPassword.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changePassword(USERNAME[0], buyerChangeOldPassword.getText(),
+                            buyerChangeNewPassword.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Password Changed",
+                                "Change Password", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            buyerChangeRoleButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerChangeRoleFrame.setVisible(true);
+                }
+            });
+            buyerChangeRole.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (buyerChangeRolePassword.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.changeRole(USERNAME[0], buyerChangePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Role Changed",
+                                "Change Role", JOptionPane.INFORMATION_MESSAGE);
+                        for (Frame frame : Frame.getFrames()) {
+                            if (frame instanceof JFrame) {
+                                ((JFrame)frame).setVisible(false);
+                            }
+                        }
+                        loginRegisterFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Change Failed",
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            buyerDeleteAccountButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerDeleteAccountFrame.setVisible(true);
+                }
+            });
+            buyerDeleteAccount.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (buyerDeleteAccountField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                    } else if (Account.deleteAccount(USERNAME[0], buyerDeleteAccountField.getText())) { // TODO: MOVE TO SERVER
+                        JOptionPane.showMessageDialog(null, "Account Deleted",
+                                "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                        for (Frame frame : Frame.getFrames()) {
+                            if (frame instanceof JFrame) {
+                                ((JFrame)frame).setVisible(false);
+                            }
+                        }
+                        loginRegisterFrame.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Deletion Failed",
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+            /*
+            END BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
+            */
+
+
             while (!logOrRegistration) {
                 System.out.println(welcomePrompt);
                 System.out.println(loginPrompt);
@@ -1310,7 +1650,7 @@ public class MarketPlace {
                         while (isLoggedIn) {
                             //Seller Experience
                             if (Account.getRole(user) != null
-                                && Account.getRole(user).equalsIgnoreCase("seller")) {
+                                    && Account.getRole(user).equalsIgnoreCase("seller")) {
                                 System.out.print(sellerChoices);
                                 input = scanner.nextLine();
                                 switch (input) {
@@ -1455,7 +1795,7 @@ public class MarketPlace {
                                                 System.out.println("Enter Store Name: ");
                                                 storeName = scanner.nextLine();
                                                 System.out.println("Enter file path to be written from " +
-                                                                   "(include .csv)");
+                                                        "(include .csv)");
                                                 String filePath = scanner.nextLine();
                                                 Seller.readProductsFromCSV(storeName, filePath);
                                                 break;
@@ -1520,7 +1860,7 @@ public class MarketPlace {
                                                     System.out.println("Order Cap created successfully!");
                                                 } else {
                                                     System.out.println("There was a problem " +
-                                                                       "implementing an order cap");
+                                                            "implementing an order cap");
                                                 }
                                                 break;
                                             // back
@@ -1574,9 +1914,9 @@ public class MarketPlace {
                                                 }
                                                 if (Seller.getProductSales(storeName, user, sorted).equals(
                                                         "Customer " +
-                                                        "Email | Customer Username | " +
-                                                        "Store Name | Product Name | " +
-                                                        "Quantity Purchased ")) {
+                                                                "Email | Customer Username | " +
+                                                                "Store Name | Product Name | " +
+                                                                "Quantity Purchased ")) {
                                                     System.out.println("No Product Sales Found!");
                                                 } else {
                                                     System.out.println(Seller.getProductSales(storeName,
@@ -1631,12 +1971,12 @@ public class MarketPlace {
                                     //View Customer Reviews
                                     case "5":
                                         System.out.println("Enter Product Name (Leave empty if you want to " +
-                                                           "view reviews of all products)");
+                                                "view reviews of all products)");
                                         productName = scanner.nextLine();
                                         if (Seller.viewCustomerReviews(productName, user).equals("Store Name | " +
-                                                                                                 "Product Name | " +
-                                                                                                 "Customer Name | " +
-                                                                                                 "Rating ")) {
+                                                "Product Name | " +
+                                                "Customer Name | " +
+                                                "Rating ")) {
                                             System.out.println("Could not find any reviews!");
                                         } else {
                                             System.out.print(Seller.viewCustomerReviews(productName, user));
@@ -1756,7 +2096,7 @@ public class MarketPlace {
                                 }
                                 // Customer Experience
                             } else if (Account.getRole(user) != null
-                                       && Account.getRole(user).equalsIgnoreCase("customer")) {
+                                    && Account.getRole(user).equalsIgnoreCase("customer")) {
                                 System.out.print(buyerprompt);
                                 input = scanner.nextLine();
                                 switch (input) {
@@ -1791,8 +2131,8 @@ public class MarketPlace {
                                         }
                                         break;
                                     //Sort Products by Cheapest
-                                    case "5":
-                                        System.out.println(Seller.sortCheapest());
+                                        case "5":
+                                            System.out.println(Seller.sortCheapest());
                                         break;
                                     //Sort Products by Most Expensive
                                     case "6":
@@ -1820,17 +2160,17 @@ public class MarketPlace {
                                         switch (input) {
                                             case "1": // add product to cart
                                                 System.out.println("Enter the store name of the product " +
-                                                                   "you want to add to cart: ");
+                                                        "you want to add to cart: ");
                                                 storeName = scanner.nextLine();
                                                 if (Customer.searchedStoreExists(storeName, stores)) {
                                                     bool = false;
                                                     System.out.println("Enter the name of the product " +
-                                                                       "you want to add to cart: ");
+                                                            "you want to add to cart: ");
                                                     productName = scanner.nextLine();
                                                     if (Customer.searchedProductExists(productName, stores)) {
                                                         quantity = -1;
                                                         System.out.printf("Enter how many %s would you " +
-                                                                          "like to buy: \n"
+                                                                        "like to buy: \n"
                                                                 , productName);
                                                         isInt = false;
                                                         while (!isInt) {
@@ -1840,7 +2180,7 @@ public class MarketPlace {
                                                             } catch (NumberFormatException e) {
                                                                 System.out.println("Error, Invalid Input");
                                                                 System.out.printf("Enter how many %s would " +
-                                                                                  "you like to buy: \n", productName);
+                                                                        "you like to buy: \n", productName);
                                                             }
                                                         }
                                                         bool = Customer.addToCart(Account.getEmail(user),
@@ -1859,13 +2199,13 @@ public class MarketPlace {
                                                 break;
                                             case "2":
                                                 System.out.println("Enter store of the product whose checkout " +
-                                                                   "quantity you want to change");
+                                                        "quantity you want to change");
                                                 storeName = scanner.nextLine();
                                                 System.out.println("Enter name of the product whose " +
-                                                                   "quantity you want to change");
+                                                        "quantity you want to change");
                                                 productName = scanner.nextLine();
                                                 System.out.println("Enter amount you want to change by (include " +
-                                                                   "- if you want to reduce)");
+                                                        "- if you want to reduce)");
                                                 quantity = Integer.parseInt(scanner.nextLine());
                                                 bool = Customer.addToCartChangeCheckoutQuantity(
                                                         storeName, productName, quantity);
@@ -1877,18 +2217,18 @@ public class MarketPlace {
                                                 break;
                                             case "3": // remove product from cart
                                                 System.out.println("Enter the store name of " +
-                                                                   "the product you want to " +
-                                                                   "remove from cart: ");
+                                                        "the product you want to " +
+                                                        "remove from cart: ");
                                                 storeName = scanner.nextLine();
                                                 if (Customer.searchedStoreExists(storeName, stores)) {
                                                     System.out.println("Enter the name of the product " +
-                                                                       "you want to " +
-                                                                       "remove from cart: ");
+                                                            "you want to " +
+                                                            "remove from cart: ");
                                                     productName = scanner.nextLine();
                                                     if (Customer.searchedProductExists(productName, stores)) {
                                                         System.out.printf("Enter how many %s would " +
-                                                                          "you like to " +
-                                                                          "remove: \n", productName);
+                                                                "you like to " +
+                                                                "remove: \n", productName);
                                                         quantity = -1;
                                                         isInt = false;
                                                         while (!isInt) {
@@ -1898,8 +2238,8 @@ public class MarketPlace {
                                                             } catch (NumberFormatException e) {
                                                                 System.out.println("Error, Invalid Input");
                                                                 System.out.printf("Enter how many %s " +
-                                                                                  "would you like " +
-                                                                                  "to remove: \n"
+                                                                                "would you like " +
+                                                                                "to remove: \n"
                                                                         , productName);
                                                             }
                                                         }
@@ -1933,10 +2273,10 @@ public class MarketPlace {
                                                 for (String s : Customer.getShoppingCartofCustomer(user)) {
                                                     String[] view = s.split(";");
                                                     System.out.println("Customer Name | Store Name " +
-                                                                       "| Product Name | Qty");
+                                                            "| Product Name | Qty");
                                                     String output =
                                                             view[1] + " | " + view[2] +
-                                                            " | " + view[3] + " | " + view[4];
+                                                                    " | " + view[3] + " | " + view[4];
                                                     System.out.println(output);
                                                 }
                                                 break;
@@ -1990,8 +2330,8 @@ public class MarketPlace {
                                         System.out.println("Enter Products Name to view Review");
                                         productName = scanner.nextLine();
                                         System.out.println("Enter Store Name (Leave Blank " +
-                                                           "to view all stores selling " +
-                                                           "that product)");
+                                                "to view all stores selling " +
+                                                "that product)");
                                         storeName = scanner.nextLine();
                                         System.out.print(Customer.viewReviews(storeName, productName));
                                         break;
@@ -2122,7 +2462,7 @@ public class MarketPlace {
                         System.out.println("Enter your role (customer / seller)");
                         String role = scanner.nextLine();
                         while (!(role.equalsIgnoreCase("customer") ||
-                                 role.equalsIgnoreCase("seller"))) {
+                                role.equalsIgnoreCase("seller"))) {
                             System.out.println("Invalid Input!");
                             System.out.println("Enter your role (customer / seller)");
                             role = scanner.nextLine();
