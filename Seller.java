@@ -1,5 +1,4 @@
 package src;
-
 import java.io.*;
 import java.util.*;
 
@@ -712,6 +711,7 @@ public abstract class Seller {
      */
     public static String sortCheapest() {
         readFromFile();
+        printProductAndStores();
         ArrayList<String> combined = new ArrayList<>();
         String result = "";
         for (int i = 0; i < stores.size(); i++) {
@@ -738,7 +738,8 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
+        System.out.println(result);
         return result;
     }
 
