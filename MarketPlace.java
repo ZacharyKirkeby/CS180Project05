@@ -909,21 +909,48 @@ public class MarketPlace {
             System.out.println(coloumn.length);
             String[][] temp = new String[coloumn.length][4];
             String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable tableModel = new JTable(temp, columnNames);
+            JTable tableModelSortCheapest = new JTable(temp, columnNames);
             for(int i = 0; i < coloumn.length; i++){
                 String[] row = coloumn[i].split(";");
                 System.out.println(row.length);
                 for(int j = 0; j < row.length; j++){
-                    tableModel.setValueAt(row[j], i, j);
+                    tableModelSortCheapest.setValueAt(row[j], i, j);
                 }
             }
-            buyerSortCheapestPanel.add(new JScrollPane(tableModel));
+            buyerSortCheapestPanel.add(new JScrollPane(tableModelSortCheapest));
             buyerSortCheapestFrame.add(buyerSortCheapestPanel);
             buyerSortCheapestFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             buyerSortCheapestFrame.pack();
             buyerSortCheapestFrame.setLocationRelativeTo(null);
             /*
             END BUYER SORT CHEAPEST FRAME
+             */
+            
+            /*
+            BUYER SORT EXPENSIVE FRAME
+             */
+            JFrame buyerSortExpensiveFrame = new JFrame();
+            JPanel buyerSortExpensivePanel = new JPanel();
+            coloumn = Seller.sortExpensive().split("\n");
+            System.out.println(coloumn);
+            System.out.println(coloumn.length);
+            temp = new String[coloumn.length][4];
+            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+            JTable tableModelSortExpensive = new JTable(temp, columnNames);
+            for(int i = 0; i < coloumn.length; i++){
+                String[] row = coloumn[i].split(";");
+                System.out.println(row.length);
+                for(int j = 0; j < row.length; j++){
+                    tableModelSortExpensive.setValueAt(row[j], i, j);
+                }
+            }
+            buyerSortExpensivePanel.add(new JScrollPane(tableModelSortExpensive));
+            buyerSortExpensiveFrame.add(buyerSortExpensivePanel);
+            buyerSortExpensiveFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerSortExpensiveFrame.pack();
+            buyerSortExpensiveFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER SORT EXPENSIVE FRAME
              */
         /*
         BUYER MANAGE ACCOUNT FRAME
@@ -1502,6 +1529,12 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     buyerSortCheapestFrame.setVisible(true);
+                }
+            });
+            sortProductsByMostExpensiveButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerSortExpensiveFrame.setVisible(true);
                 }
             });
 
