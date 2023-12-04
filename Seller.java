@@ -82,7 +82,6 @@ public abstract class Seller {
                 }
             }
         }
-        result.substring(result.length()-2);
         System.out.println(result);
         return result;
     }
@@ -653,6 +652,7 @@ public abstract class Seller {
                         Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
+        searchedStore = searchedStore.substring(4);
         if (searchedStore.equals("")) {
             searchedStore = "No Store Found ";
         }
@@ -678,6 +678,7 @@ public abstract class Seller {
                 }
             }
         }
+        searched = searched.substring(4);
         if (searched.equals("")) {
             searched = "No locations found selling this product ";
         }
