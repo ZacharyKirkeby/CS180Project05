@@ -1,3 +1,4 @@
+package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -1167,6 +1168,49 @@ public class MarketPlace {
             /*
             END BUYER VIEW REVIEW FRAME
              */
+            /*
+            BUYER SHOPPING CART FRAMES
+             */
+            JFrame buyerShoppingCartFrame = new JFrame();
+            JPanel buyerShoppingCartPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JButton addToShoppingCart = new JButton("Add Products to Cart");
+            buyerShoppingCartPanel.add(addToShoppingCart);
+            JButton editShoppingCartQty = new JButton("Modify Quantity in Shopping Cart");
+            buyerShoppingCartPanel.add(editShoppingCartQty);
+            JButton removeFromShoppingCart = new JButton("Remove Products From Cart");
+            buyerShoppingCartPanel.add(removeFromShoppingCart);
+            JButton viewShoppingCart = new JButton("View Shopping Cart");
+            buyerShoppingCartPanel.add(viewShoppingCart);
+            buyerShoppingCartFrame.add(buyerShoppingCartPanel);
+            buyerShoppingCartFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerShoppingCartFrame.pack();
+            buyerShoppingCartFrame.setLocationRelativeTo(null);
+
+
+            JFrame buyerAddToShoppingCartFrame = new JFrame();
+            JPanel buyerAddToShoppingCartPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JTextField buyerShoppingCartStoreName = new JTextField();
+            buyerAddToShoppingCartPanel.add(new JLabel("Enter Store Name: "));
+            buyerAddToShoppingCartPanel.add(buyerShoppingCartStoreName);
+            JTextField buyerShoppingCartProductName = new JTextField();
+            buyerAddToShoppingCartPanel.add(new JLabel("Enter Product Name: "));
+            buyerAddToShoppingCartPanel.add(buyerShoppingCartProductName);
+            JTextField buyerShoppingCartQuantity= new JTextField();
+            buyerAddToShoppingCartPanel.add(new JLabel("Enter Quantity"));
+            buyerAddToShoppingCartPanel.add(buyerShoppingCartQuantity);
+            buyerAddToShoppingCartPanel.add(new JLabel());
+            JButton addToCart = new JButton("Add");
+            buyerAddToShoppingCartPanel.add(addToCart, BorderLayout.SOUTH);
+            buyerAddToShoppingCartFrame.add(buyerAddToShoppingCartPanel);
+            buyerAddToShoppingCartFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerAddToShoppingCartFrame.pack();
+            buyerAddToShoppingCartFrame.setLocationRelativeTo(null);
+
+
+
+            /*
+            END BUYER SHOPPING CART FRAME
+             */
 
             /*
             BUYER SEARCH FOR STORE FRAMES INITIALIZATION
@@ -1798,6 +1842,20 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     }
+                }
+            });
+
+            shoppingCartButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerShoppingCartFrame.setVisible(true);
+                }
+            });
+
+            addToShoppingCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerAddToShoppingCartFrame.setVisible(true);
                 }
             });
 
