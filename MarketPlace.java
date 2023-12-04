@@ -1617,7 +1617,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null, "Enter Store " +
-                                    "Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                                    "Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
                             buyerSearchByStorePanel);
                 }
@@ -1626,7 +1626,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedDescription = JOptionPane.showInputDialog(null,
-                            "Enter Description", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                            "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
 
                     searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButton,
                             buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel );
@@ -1637,7 +1637,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
-                            "Enter Product Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
                     , buyerSearchByProductPanel);
 
@@ -1647,7 +1647,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
-                            "Enter Product Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     buyerViewAllProductsFrame.setVisible(false);
                     searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton, buyerSearchByProductFrame
                             , buyerSearchByProductPanel);
@@ -1701,6 +1701,23 @@ public class MarketPlace {
                     } else if(input.equals("Sort by Highest Quantity")){
                         buyerSortByHighestQuantityFrame.setVisible(true);
                         buyerSortByLowestQuantityFrame.setVisible(false);
+                    }
+                }
+            });
+
+            exportPurchaseHistoryAsFileButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String filename = JOptionPane.showInputDialog(null,
+                            "Enter Filename to be Exported to", "Marketplace",
+                            JOptionPane.QUESTION_MESSAGE);
+                    boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename);
+                    if(bool){
+                        JOptionPane.showMessageDialog(null, "Purchase History Exported " +
+                                        "Successfully!", "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                    } else if(!bool){
+                        JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
+                                "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             });
