@@ -1096,6 +1096,25 @@ public class MarketPlace {
             /*
             END BUYER SEARCH FOR STORE FRAMES INITIALIZATION
              */
+
+            /*
+            BUYER SEARCH BY DESCRIPTION
+             */
+            JFrame buyerSearchByDescriptionFrame = new JFrame();
+            JPanel buyerSearchByDescriptionPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            /*
+            END BUYER SEARCH BY DESCRIPTION
+             */
+
+            /*
+            BUYER SEARCH BY PRODUCT BUTTON
+             */
+            JFrame buyerSearchByProductFrame = new JFrame();
+            JPanel buyerSearchByProductPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            /*
+            END BUYER SEARCH BY PRODUCT
+             */
+
             /*
             LOGIN/REGISTRATION FRAME ACTION LISTENERS
              */
@@ -1547,10 +1566,41 @@ public class MarketPlace {
             searchForStoreButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    String buyerSearchedStore = JOptionPane.showInputDialog(null, "Search For Product",
-                            "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                    String buyerSearchedStore = JOptionPane.showInputDialog(null, "Enter Store " +
+                                    "Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
                     searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
                             buyerSearchByStorePanel);
+                }
+            });
+            searchProductByDescriptionButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedDescription = JOptionPane.showInputDialog(null,
+                            "Enter Description", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+
+                    searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButton,
+                            buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel );
+                }
+            });
+
+            searchForProductButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedProduct = JOptionPane.showInputDialog(null,
+                            "Enter Product Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                    searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
+                    , buyerSearchByProductPanel);
+
+                }
+            });
+            buyerSearchForProductButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedProduct = JOptionPane.showInputDialog(null,
+                            "Enter Product Name", "Marketplace", JOptionPane.INFORMATION_MESSAGE);
+                    buyerViewAllProductsFrame.setVisible(false);
+                    searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton, buyerSearchByProductFrame
+                            , buyerSearchByProductPanel);
                 }
             });
 
@@ -2570,7 +2620,7 @@ public class MarketPlace {
         buyerSearchByStorePanel.removeAll();
         buyerSearchByStorePanel.repaint();
         buyerSearchByStorePanel.revalidate();
-
+        buyerSearchByStorePanel.setLayout(new BorderLayout());
         String[] coloumnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
         String[][] temp = new String[coloumnSearchStores.length][2];
         String[] columnNames = new String[]{"Store Name", "Product Name"};
@@ -2582,7 +2632,7 @@ public class MarketPlace {
             }
         }
         buyerSearchByStorePanel.add(new JScrollPane(searchedStoreTable));
-        JButton searchForStoreButtonCopy = new JButton("Search for Product");
+        JButton searchForStoreButtonCopy = new JButton("Search for Store");
         buyerSearchByStorePanel.add(searchForStoreButton, BorderLayout.SOUTH);
         buyerSearchByStoreFrame.add(buyerSearchByStorePanel);
         buyerSearchByStoreFrame.pack();
@@ -2596,6 +2646,66 @@ public class MarketPlace {
             /*
             END BUYER SEARCH BY STORE FRAME
              */
+    }
+
+    public static void searchByDescription(boolean visible, String buyerSearchedDescription,
+                                           JButton searchProductByDescriptionButton,
+                                           JFrame buyerSearchByDescriptionFrame, JPanel buyerSearchByDescriptionPanel){
+        buyerSearchByDescriptionPanel.removeAll();
+        buyerSearchByDescriptionPanel.repaint();
+        buyerSearchByDescriptionPanel.revalidate();
+        buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
+        String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
+        String[][] temp = new String[coloumnSearchDescription.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable searchedDescriptionTable = new JTable(temp, columnNames);
+        for (int i = 0; i < coloumnSearchDescription.length; i++) {
+            String[] row = coloumnSearchDescription[i].split(";");
+            for (int j = 0; j < row.length; j++) {
+                searchedDescriptionTable.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSearchByDescriptionPanel.add(new JScrollPane(searchedDescriptionTable));
+        JButton searchForStoreButtonCopy = new JButton("Search for Product");
+        buyerSearchByDescriptionPanel.add(searchProductByDescriptionButton, BorderLayout.SOUTH);
+        buyerSearchByDescriptionFrame.add(buyerSearchByDescriptionPanel);
+        buyerSearchByDescriptionFrame.pack();
+        buyerSearchByDescriptionFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerSearchByDescriptionFrame.setVisible(true);
+        } else{
+            buyerSearchByDescriptionFrame.setVisible(false);
+        }
+    }
+
+    public static void searchByProduct(boolean visible, String buyerSearchedProduct,
+                                       JButton searchForProductButton,
+                                       JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel){
+        buyerSearchByProductPanel.removeAll();
+        buyerSearchByProductPanel.repaint();
+        buyerSearchByProductPanel.revalidate();
+        buyerSearchByProductPanel.setLayout(new BorderLayout());
+        String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
+        String[][] temp = new String[coloumnSearchProduct.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable searchedProductTable = new JTable(temp, columnNames);
+        for (int i = 0; i < coloumnSearchProduct.length; i++) {
+            String[] row = coloumnSearchProduct[i].split(";");
+            for (int j = 0; j < row.length; j++) {
+                searchedProductTable.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSearchByProductPanel.add(new JScrollPane(searchedProductTable));
+        buyerSearchByProductPanel.add(searchForProductButton, BorderLayout.SOUTH);
+        buyerSearchByProductFrame.add(buyerSearchByProductPanel);
+        buyerSearchByProductFrame.pack();
+        buyerSearchByProductFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerSearchByProductFrame.setVisible(true);
+        } else{
+            buyerSearchByProductFrame.setVisible(false);
+        }
+
     }
 
 
