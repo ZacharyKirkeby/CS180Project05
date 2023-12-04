@@ -1,4 +1,3 @@
-package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -872,6 +871,7 @@ public class MarketPlace {
             JButton sortByAvailabilityButton = new JButton("Sort Products by Availability");
             JButton shoppingCartButton = new JButton("Shopping Cart");
             JButton exportPurchaseHistoryAsFileButton = new JButton("Export Purchase History as file");
+            JButton buyerViewReviewsButton = new JButton("View Customer Reviews");
             JButton buyerLeaveReviewButton = new JButton("Leave Review");
             JButton buyerManageAccountButton = new JButton("Manage Account");
             JButton buyerLogoutButton = new JButton("Logout");
@@ -888,7 +888,7 @@ public class MarketPlace {
             buyerOptionsPanel.add(shoppingCartButton);
             buyerOptionsPanel.add(exportPurchaseHistoryAsFileButton);
             buyerOptionsPanel.add(buyerLeaveReviewButton);
-            buyerOptionsPanel.add(customerReviewsButton);
+            buyerOptionsPanel.add(buyerViewReviewsButton);
             buyerOptionsPanel.add(buyerManageAccountButton);
             buyerOptionsPanel.add(new JLabel());
             buyerOptionsPanel.add(buyerLogoutButton);
@@ -1617,7 +1617,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null, "Enter Store " +
-                                    "Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
                             buyerSearchByStorePanel);
                 }
@@ -1639,7 +1639,7 @@ public class MarketPlace {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
                             "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
-                    , buyerSearchByProductPanel);
+                            , buyerSearchByProductPanel);
 
                 }
             });
@@ -1714,7 +1714,7 @@ public class MarketPlace {
                     boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename);
                     if(bool){
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
-                                        "Successfully!", "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                                "Successfully!", "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     } else if(!bool){
                         JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
@@ -2344,8 +2344,8 @@ public class MarketPlace {
                                         }
                                         break;
                                     //Sort Products by Cheapest
-                                        case "5":
-                                            System.out.println(Seller.sortCheapest());
+                                    case "5":
+                                        System.out.println(Seller.sortCheapest());
                                         break;
                                     //Sort Products by Most Expensive
                                     case "6":
