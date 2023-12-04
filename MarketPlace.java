@@ -2037,6 +2037,35 @@ public class MarketPlace {
                     }
                 }
             });
+
+            addToCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean bool = true;
+                    try{
+                        Integer.parseInt(buyerShoppingCartQuantity.getText());
+                    } catch(NumberFormatException f){
+                        bool = false;
+                    }
+                    if(Customer.searchedStoreExists(buyerShoppingCartStoreName.getText(), stores) &&
+                            Customer.searchedProductExists(buyerShoppingCartProductName.getText(), stores) && bool){
+                        bool = Customer.addToCart(Account.getEmail(USERNAME[0]),
+                                Account.getUsername(USERNAME[0]),
+                                buyerShoppingCartStoreName.getText(), buyerShoppingCartProductName.getText(),
+                                Integer.parseInt(buyerShoppingCartQuantity.getText()));
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Product Added to Cart!",
+                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                         } else if (!bool) {
+                            JOptionPane.showMessageDialog(null, "Something went wrong, " +
+                                            "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Input",
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
             /*
             END BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
             */
@@ -3040,7 +3069,7 @@ public class MarketPlace {
     }
 
     public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
-                                           JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel){
+                                            JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel){
         sellerDisplayReviewsPanel.removeAll();
         sellerDisplayReviewsPanel.repaint();
         sellerDisplayReviewsPanel.revalidate();
