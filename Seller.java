@@ -800,7 +800,7 @@ public abstract class Seller {
     public static String highestQuant() {
         readFromFile();
         ArrayList<String> combined = new ArrayList<>();
-        String result = "";
+        String result = null;
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 String element = stores.get(i).getStoreName() + ";"
@@ -824,7 +824,8 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
+        System.out.println(result);
         return result;
     }
 
@@ -861,7 +862,8 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
+        //System.out.println(result);
         return result;
     }
 
