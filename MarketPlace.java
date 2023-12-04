@@ -947,6 +947,56 @@ public class MarketPlace {
             /*
             END BUYER SORT EXPENSIVE FRAME
              */
+
+
+            /*
+            SORT AVAILIBILITY , LOWEST IN STOCK
+             */
+            JFrame buyerSortByLowestQuantityFrame = new JFrame();
+            JPanel buyerSortByLowestQuantityPanel = new JPanel();
+            coloumn = Seller.lowestQuant().split("\n");
+            temp = new String[coloumn.length][4];
+            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+            JTable tableModelSortLowestQuant = new JTable(temp, columnNames);
+            for(int i = 0; i < coloumn.length; i++){
+                String[] row = coloumn[i].split(";");
+                for(int j = 0; j < row.length; j++){
+                    tableModelSortLowestQuant.setValueAt(row[j], i, j);
+                }
+            }
+            buyerSortByLowestQuantityPanel.add(new JScrollPane(tableModelSortLowestQuant));
+            buyerSortByLowestQuantityFrame.add(buyerSortByLowestQuantityPanel);
+            buyerSortByLowestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerSortByLowestQuantityFrame.pack();
+            buyerSortByLowestQuantityFrame.setLocationRelativeTo(null);
+            /*
+            END SORT AVAILIBILITY , LOWEST IN STOCK
+             */
+
+            /*
+            SORT AVAILABILITY, HIGHEST IN STOCK
+             */
+            JFrame buyerSortByHighestQuantityFrame = new JFrame();
+            JPanel buyerSortByHighestQuantityPanel = new JPanel();
+            coloumn = Seller.highestQuant().split("\n");
+            temp = new String[coloumn.length][4];
+            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+            JTable tableModelSortHighestQuant = new JTable(temp, columnNames);
+            for(int i = 0; i < coloumn.length; i++){
+                String[] row = coloumn[i].split(";");
+                for(int j = 0; j < row.length; j++){
+                    tableModelSortHighestQuant.setValueAt(row[j], i, j);
+                }
+            }
+            buyerSortByHighestQuantityPanel.add(new JScrollPane(tableModelSortHighestQuant));
+            buyerSortByHighestQuantityFrame.add(buyerSortByHighestQuantityPanel);
+            buyerSortByHighestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerSortByHighestQuantityFrame.pack();
+            buyerSortByHighestQuantityFrame.setLocationRelativeTo(null);
+            /*
+            END SORT AVAILABILITY, HIGHEST IN STOCK
+             */
+
             /*
             BUYER VIEW ALL PRODUCTS FRAME
              */
@@ -1634,6 +1684,24 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     buyerViewAllProductsFrame.setVisible(true);
+                }
+            });
+
+            sortByAvailabilityButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String[] options = {"Sort by Lowest Quantity", "Sort by Highest Quantity"};
+                    String input = (String) JOptionPane.showInputDialog(null, "",
+                            "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE,
+                            null,options, options[0]);
+                    System.out.println(input);
+                    if(input.equals("Sort by Lowest Quantity")){
+                        buyerSortByLowestQuantityFrame.setVisible(true);
+                        buyerSortByHighestQuantityFrame.setVisible(false);
+                    } else if(input.equals("Sort by Highest Quantity")){
+                        buyerSortByHighestQuantityFrame.setVisible(true);
+                        buyerSortByLowestQuantityFrame.setVisible(false);
+                    }
                 }
             });
 
