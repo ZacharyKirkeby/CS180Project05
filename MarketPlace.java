@@ -1,4 +1,3 @@
-package src;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -774,7 +773,14 @@ public class MarketPlace {
             /*
             END CUSTOMER REVIEWS FRAME
              */
-
+            /*
+            CUSTOMER REVIEWS DISPLAY FRAME
+             */
+            JFrame sellerDisplayReviewsFrame = new JFrame();
+            JPanel sellerDisplayReviewsPanel = new JPanel();
+            /*
+            END CUSTOMER REVIEWS DISPLAY FRAME
+             */
 
             /*
             SELLER MANAGE ACCOUNT FRAME
@@ -1019,6 +1025,7 @@ public class MarketPlace {
             }
             buyerViewAllProductsPanel.add(new JScrollPane(viewAllProductsAndStoresTable));
             buyerViewAllProductsFrame.add(buyerViewAllProductsPanel);
+            buyerViewAllProductsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             buyerViewAllProductsFrame.pack();
             buyerViewAllProductsFrame.setLocationRelativeTo(null);
 
@@ -1139,6 +1146,29 @@ public class MarketPlace {
              */
 
             /*
+            BUYER VIEW REVIEW FRAME
+             */
+            JFrame buyerViewReviewsFrame = new JFrame();
+            JPanel buyerViewReviewsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            buyerViewReviewsPanel.add(new JLabel("Enter Store Name: "));
+            JTextField buyerViewReviewsStoreName = new JTextField();
+            buyerViewReviewsPanel.add(buyerViewReviewsStoreName);
+            buyerViewReviewsPanel.add(new JLabel("Product Name (Leave Empty To View All):"));
+            JTextField buyerViewReviewsProductName = new JTextField();
+            buyerViewReviewsPanel.add(buyerViewReviewsProductName);
+            buyerViewReviewsPanel.add(new JLabel());
+            JButton buyerViewReviewsButtonCopy = new JButton("View");
+            buyerViewReviewsPanel.add(buyerViewReviewsButtonCopy);
+            buyerViewReviewsFrame.add(buyerViewReviewsPanel);
+            buyerViewReviewsFrame.setTitle("View Customer Reviews");
+            buyerViewReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerViewReviewsFrame.pack();
+            buyerViewReviewsFrame.setLocationRelativeTo(null);
+            /*
+            END BUYER VIEW REVIEW FRAME
+             */
+
+            /*
             BUYER SEARCH FOR STORE FRAMES INITIALIZATION
              */
             JFrame buyerSearchByStoreFrame = new JFrame();
@@ -1164,6 +1194,15 @@ public class MarketPlace {
             JPanel buyerSearchByProductPanel = new JPanel(new GridLayout(0, 2, 4, 16));
             /*
             END BUYER SEARCH BY PRODUCT
+             */
+
+            /*
+            BUYER VIEW REVIEWS FINAL DISPLAY FRAME
+             */
+            JFrame buyerDisplayReviewsFrame = new JFrame();
+            JPanel buyerDisplayReviewsPanel = new JPanel();
+            /*
+            END BUYER VIEW REVIEWS FINAL DISPLAY FRAME
              */
 
             /*
@@ -1476,9 +1515,8 @@ public class MarketPlace {
             customerReviews.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null,
-                            Seller.viewCustomerReviews(customerReviewsName.getText(), USERNAME[0]), // TODO: MOVE TO SERVER
-                            "View Customer Reviews", JOptionPane.PLAIN_MESSAGE);
+                    sellerDisplayReviews(true, customerReviewsName, USERNAME[0], sellerDisplayReviewsFrame,
+                            sellerDisplayReviewsPanel);
                 }
             });
             /*
@@ -1614,13 +1652,33 @@ public class MarketPlace {
                     }
                 }
             });
+
+            buyerViewReviewsButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerViewReviewsFrame.setVisible(true);
+                }
+            });
+            buyerViewReviewsButtonCopy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
+                            buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
+
+                }
+            });
             searchForStoreButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null, "Enter Store " +
                             "Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
-                            buyerSearchByStorePanel);
+                    if(buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Store", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
+                                buyerSearchByStorePanel);
+                    }
                 }
             });
             searchProductByDescriptionButton.addActionListener(new ActionListener() {
@@ -1629,8 +1687,14 @@ public class MarketPlace {
                     String buyerSearchedDescription = JOptionPane.showInputDialog(null,
                             "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
 
-                    searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButton,
-                            buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel );
+                    if(buyerSearchedDescription == null || buyerSearchedDescription.equals(null) || buyerSearchedDescription.equals(
+                            "")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Description", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButton,
+                                buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                    }
                 }
             });
 
@@ -1639,8 +1703,14 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
                             "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
-                            , buyerSearchByProductPanel);
+                    if(buyerSearchedProduct == null || buyerSearchedProduct.equals(null) || buyerSearchedProduct.equals(
+                            "")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
+                                , buyerSearchByProductPanel);
+                    }
 
                 }
             });
@@ -1649,9 +1719,15 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
                             "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    buyerViewAllProductsFrame.setVisible(false);
-                    searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton, buyerSearchByProductFrame
-                            , buyerSearchByProductPanel);
+                    if(buyerSearchedProduct == null || buyerSearchedProduct.equals(null) || buyerSearchedProduct.equals(
+                            "")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        buyerViewAllProductsFrame.setVisible(false);
+                        searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton, buyerSearchByProductFrame
+                                , buyerSearchByProductPanel);
+                    }
                 }
             });
 
@@ -1696,12 +1772,14 @@ public class MarketPlace {
                             "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE,
                             null,options, options[0]);
                     System.out.println(input);
-                    if(input.equals("Sort by Lowest Quantity")){
-                        buyerSortByLowestQuantityFrame.setVisible(true);
-                        buyerSortByHighestQuantityFrame.setVisible(false);
-                    } else if(input.equals("Sort by Highest Quantity")){
-                        buyerSortByHighestQuantityFrame.setVisible(true);
-                        buyerSortByLowestQuantityFrame.setVisible(false);
+                    if(input != null) {
+                        if (input.equals("Sort by Lowest Quantity")) {
+                            buyerSortByLowestQuantityFrame.setVisible(true);
+                            buyerSortByHighestQuantityFrame.setVisible(false);
+                        } else if (input.equals("Sort by Highest Quantity")) {
+                            buyerSortByHighestQuantityFrame.setVisible(true);
+                            buyerSortByLowestQuantityFrame.setVisible(false);
+                        }
                     }
                 }
             });
@@ -2794,5 +2872,66 @@ public class MarketPlace {
 
     }
 
+    public static void buyerDisplayReviews(boolean visible, JTextField buyerViewReviewsStoreName,
+                                           JTextField buyerViewReviewsProductName,
+                                           JFrame buyerDisplayReviewsFrame, JPanel buyerDisplayReviewsPanel){
+        buyerDisplayReviewsPanel.removeAll();
+        buyerDisplayReviewsPanel.repaint();
+        buyerDisplayReviewsPanel.revalidate();
+        buyerDisplayReviewsPanel.setLayout(new BorderLayout());
+        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
+                buyerViewReviewsProductName.getText()).split("\n");
+        String[][] temp = new String[buyerViewReviewsColoumn.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
+        JTable buyerViewReviewsTable = new JTable(temp, columnNames);
+        for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
+            String[] row = buyerViewReviewsColoumn[i].split(";");
+            System.out.println(buyerViewReviewsColoumn.length);
+            System.out.println(row.length);
+            for (int j = 0; j < row.length; j++) {
+                buyerViewReviewsTable.setValueAt(row[j], i, j);
+            }
+        }
+        buyerDisplayReviewsPanel.add(new JScrollPane(buyerViewReviewsTable));
+        buyerDisplayReviewsFrame.add(buyerDisplayReviewsPanel);
+        buyerDisplayReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerDisplayReviewsFrame.pack();
+        buyerDisplayReviewsFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerDisplayReviewsFrame.setVisible(true);
+        } else{
+            buyerDisplayReviewsFrame.setVisible(false);
+        }
+    }
 
+    public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
+                                           JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel){
+        sellerDisplayReviewsPanel.removeAll();
+        sellerDisplayReviewsPanel.repaint();
+        sellerDisplayReviewsPanel.revalidate();
+        sellerDisplayReviewsPanel.setLayout(new BorderLayout());
+        String[] sellerViewReviewsColoumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
+                username).split("\n");
+        String[][] temp = new String[sellerViewReviewsColoumn.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
+        JTable buyerViewReviewsTable = new JTable(temp, columnNames);
+        for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
+            String[] row = sellerViewReviewsColoumn[i].split(";");
+            System.out.println(sellerViewReviewsColoumn.length);
+            System.out.println(row.length);
+            for (int j = 0; j < row.length; j++) {
+                buyerViewReviewsTable.setValueAt(row[j], i, j);
+            }
+        }
+        sellerDisplayReviewsPanel.add(new JScrollPane(buyerViewReviewsTable));
+        sellerDisplayReviewsFrame.add(sellerDisplayReviewsPanel);
+        sellerDisplayReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        sellerDisplayReviewsFrame.pack();
+        sellerDisplayReviewsFrame.setLocationRelativeTo(null);
+        if(visible){
+            sellerDisplayReviewsFrame.setVisible(true);
+        } else{
+            sellerDisplayReviewsFrame.setVisible(false);
+        }
+    }
 }
