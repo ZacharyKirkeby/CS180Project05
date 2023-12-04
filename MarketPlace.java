@@ -871,8 +871,11 @@ public class MarketPlace {
             JFrame buyerOptionsFrame = new JFrame();
             JPanel buyerOptionsPanel = new JPanel(new GridLayout(0, 3, 4, 16));
             JButton searchForStoreButton = new JButton("Search for a Store");
+            JButton searchForStoreButtonCopy = new JButton("Search for a Store");
             JButton searchForProductButton = new JButton("Search for a Product");
+            JButton searchForProductButtonCopy = new JButton("Search for a Product");
             JButton searchProductByDescriptionButton = new JButton("Search for a Product by Description");
+            JButton searchProductByDescriptionButtonCopy = new JButton("Search for a Product by Description");
             JButton viewAllProductsButton = new JButton("View all Products");
             JButton sortProductsByCheapestButton = new JButton("Sort Products by Cheapest");
             JButton sortProductsByMostExpensiveButton = new JButton("Sort Products by Most Expensive");
@@ -1711,6 +1714,20 @@ public class MarketPlace {
 
                 }
             });
+            searchForStoreButtonCopy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedStore = JOptionPane.showInputDialog(null, "Enter Store " +
+                            "Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                    if(buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Store", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
+                                buyerSearchByStorePanel);
+                    }
+                }
+            });
             searchForStoreButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -1720,7 +1737,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByStore(true, buyerSearchedStore, searchForStoreButton, buyerSearchByStoreFrame,
+                        searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
                                 buyerSearchByStorePanel);
                     }
                 }
@@ -1736,7 +1753,23 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Description", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButton,
+                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
+                                buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                    }
+                }
+            });
+            searchProductByDescriptionButtonCopy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedDescription = JOptionPane.showInputDialog(null,
+                            "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+
+                    if(buyerSearchedDescription == null || buyerSearchedDescription.equals(null) || buyerSearchedDescription.equals(
+                            "")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Description", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
                                 buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
                     }
                 }
@@ -1752,8 +1785,25 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByProduct(true, buyerSearchedProduct, searchForProductButton, buyerSearchByProductFrame
+                        searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerSearchByProductFrame
                                 , buyerSearchByProductPanel);
+                    }
+
+                }
+            });
+            searchForProductButtonCopy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String buyerSearchedProduct = JOptionPane.showInputDialog(null,
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                    if(buyerSearchedProduct == null || buyerSearchedProduct.equals(null) || buyerSearchedProduct.equals(
+                            "")){
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerSearchByProductFrame, buyerSearchByProductPanel);
                     }
 
                 }
@@ -2854,7 +2904,6 @@ public class MarketPlace {
             }
         }
         buyerSearchByStorePanel.add(new JScrollPane(searchedStoreTable));
-        JButton searchForStoreButtonCopy = new JButton("Search for Store");
         buyerSearchByStorePanel.add(searchForStoreButton, BorderLayout.SOUTH);
         buyerSearchByStoreFrame.add(buyerSearchByStorePanel);
         buyerSearchByStoreFrame.pack();
