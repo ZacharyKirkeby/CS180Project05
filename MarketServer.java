@@ -1,4 +1,4 @@
-package src;
+package CS180Project05;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -35,21 +35,85 @@ public class MarketServer {
                 try {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     PrintWriter writer = new PrintWriter(socket.getOutputStream());
-                    String message = reader.readLine();
-                    switch(message) {
-                        case "login":
-                            String username = reader.readLine();
-                            String password = reader.readLine();
-                            logOrRegistration = Account.login(username, password);
-                            if (!logOrRegistration) {
-                                System.out.println("Login Failed");
-                                System.out.println("Try Again!");
-                            } else if (logOrRegistration) {
-                                isLoggedIn = true;
-                                System.out.println("Login Successful!");
-                            }
-                        case "register":
+                    String username;
+                    String password;
+                    while(socket.isConnected()) {
+                        String message = reader.readLine();
+                        String[] temp = message.split(",");
+                        message = temp[0];
+                        boolean bool = false;
+                        // format of method,parameter1,parameter2
+                        switch (message) {
+                            case "login":
+                                boolean loggedIn = Account.login(temp[1], temp[2]);
+                                writer.println(loggedIn);
+                                writer.flush();
+                                break;
+                            case "register":
+                                boolean success = Account.createAccount(temp[1], temp[2], temp[3], temp[4]);
+                                writer.println(success);
+                                writer.flush();
+                                break;
+                            case "createStore":
+                                bool = Seller.createStore(temp[1], temp[2], temp[3]);
+                                writer.println(bool);
+                                writer.flush();
+                                break;
+                            case "sellermodificationchoices":
+                                switch(temp[1]) {
+                                    case "createProduct":
+                                        bool = Seller.createProduct(temp[2], temp[3], temp[4],
+                                                Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "editProductPrice":
+                                        bool = Seller.editProductPrice(temp[2],
+                                                temp[3], Double.parseDouble(temp[4]), temp[5]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "editProductQuantity":
+                                        bool = Seller.editProductQuantity(temp[2], temp[3],
+                                                Integer.parseInt(temp[4]), temp[5]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "deleteProduct":
+                                        bool = Seller.deleteProduct(temp[2], temp[3], temp[4]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "readProductsFromCSV":
+                                        Seller.readProductsFromCSV(temp[2], temp[3]);
+                                        break;
+                                    case "triggerSale":
+                                        Store store = Seller.whichStore(temp[2]);
+                                        bool = store.triggerSale(temp[3], Double.parseDouble(temp[4]), Integer.parseInt(temp[5]));
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "triggerOrderCap":
+                                        store = Seller.whichStore(temp[2]);
+                                        bool = store.triggerOrderCap(temp[3], Integer.parseInt(temp[4]));
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    default:
+                                        writer.println(false);
+                                        writer.flush();
+                                }
+                                break;
+                            case "sellerStatistics":
+                                switch(temp[2]) {
+                                    case "getCustomersAndPurchases":
+                                        Seller.getCustomersAndPurchases(temp[3],
+                                                temp[4], Boolean.parseBoolean(temp[5]));
+                                        
+                                }
+                                break;
 
+                        }
                     }
 
 
