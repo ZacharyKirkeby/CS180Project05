@@ -645,14 +645,13 @@ public abstract class Seller {
      */
     public static String searchByStore(String storeName) {
         readFromFile();
-        String searchedStore = null;
+        String searchedStore = "";
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
                 searchedStore += stores.get(i).getStoreName() + ";" +
                         Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
-        searchedStore = searchedStore.substring(4);
         if (searchedStore.equals("")) {
             searchedStore = "No Store Found ";
         }
@@ -668,7 +667,7 @@ public abstract class Seller {
      */
     public static String searchByProduct(String productName) {
         readFromFile();
-        String searched = null;
+        String searched = "";
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getName().equalsIgnoreCase(productName)) {
@@ -678,7 +677,6 @@ public abstract class Seller {
                 }
             }
         }
-        searched = searched.substring(4);
         if (searched.equals("")) {
             searched = "No locations found selling this product ";
         }
