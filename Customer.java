@@ -370,6 +370,9 @@ public abstract class Customer {
      */
     public static boolean getPurchaseHistoryofCustomer(String username, String fileName) {
         boolean success = false;
+        if (fileName == null || fileName.equals("")) {
+            return false;
+        }
         readFromPurchaseHistoryDatabaseFile();
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
             for (int i = 0; i < usernames.size(); i++) {
