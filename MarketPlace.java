@@ -2208,8 +2208,9 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
         String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
-        String[][] temp = new String[coloumnSearchDescription.length][4];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        String[][] temp = new String[coloumnSearchDescription.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+                "Description"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchDescription.length; i++) {
             String[] row = coloumnSearchDescription[i].split(";");
@@ -2238,8 +2239,9 @@ public class MarketPlace {
         buyerSearchByProductPanel.revalidate();
         buyerSearchByProductPanel.setLayout(new BorderLayout());
         String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
-        String[][] temp = new String[coloumnSearchProduct.length][4];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        String[][] temp = new String[coloumnSearchProduct.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+                "Description"};
         JTable searchedProductTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchProduct.length; i++) {
             String[] row = coloumnSearchProduct[i].split(";");
