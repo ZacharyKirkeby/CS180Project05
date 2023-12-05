@@ -1,7 +1,5 @@
 package src;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -1031,12 +1029,12 @@ public class MarketPlace {
             buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.SOUTH);
             buyerViewAllProductsPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
             //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
-            String[] coloumnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
-            temp = new String[coloumnViewAllProductsAndStores.length][4];
+            String[] columnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
+            temp = new String[columnViewAllProductsAndStores.length][4];
             columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
             JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
-            for(int i = 0; i < coloumnViewAllProductsAndStores.length; i++){
-                String[] row = coloumnViewAllProductsAndStores[i].split(";");
+            for(int i = 0; i < columnViewAllProductsAndStores.length; i++){
+                String[] row = columnViewAllProductsAndStores[i].split(";");
                 for(int j = 0; j < row.length; j++){
                     viewAllProductsAndStoresTable.setValueAt(row[j], i, j);
                 }
@@ -2246,12 +2244,12 @@ public class MarketPlace {
         buyerSearchByStorePanel.repaint();
         buyerSearchByStorePanel.revalidate();
         buyerSearchByStorePanel.setLayout(new BorderLayout());
-        String[] coloumnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
-        String[][] temp = new String[coloumnSearchStores.length][2];
+        String[] columnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
+        String[][] temp = new String[columnSearchStores.length][2];
         String[] columnNames = new String[]{"Store Name", "Product Name"};
         JTable searchedStoreTable = new JTable(temp, columnNames);
-        for (int i = 0; i < coloumnSearchStores.length; i++) {
-            String[] row = coloumnSearchStores[i].split(";");
+        for (int i = 0; i < columnSearchStores.length; i++) {
+            String[] row = columnSearchStores[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedStoreTable.setValueAt(row[j], i, j);
             }
@@ -2279,12 +2277,12 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.repaint();
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
-        String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
-        String[][] temp = new String[coloumnSearchDescription.length][4];
+        String[] columnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
+        String[][] temp = new String[columnSearchDescription.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
-        for (int i = 0; i < coloumnSearchDescription.length; i++) {
-            String[] row = coloumnSearchDescription[i].split(";");
+        for (int i = 0; i < columnSearchDescription.length; i++) {
+            String[] row = columnSearchDescription[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedDescriptionTable.setValueAt(row[j], i, j);
             }
@@ -2309,12 +2307,12 @@ public class MarketPlace {
         buyerSearchByProductPanel.repaint();
         buyerSearchByProductPanel.revalidate();
         buyerSearchByProductPanel.setLayout(new BorderLayout());
-        String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
-        String[][] temp = new String[coloumnSearchProduct.length][4];
+        String[] columnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
+        String[][] temp = new String[columnSearchProduct.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable searchedProductTable = new JTable(temp, columnNames);
-        for (int i = 0; i < coloumnSearchProduct.length; i++) {
-            String[] row = coloumnSearchProduct[i].split(";");
+        for (int i = 0; i < columnSearchProduct.length; i++) {
+            String[] row = columnSearchProduct[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedProductTable.setValueAt(row[j], i, j);
             }
@@ -2339,14 +2337,14 @@ public class MarketPlace {
         buyerDisplayReviewsPanel.repaint();
         buyerDisplayReviewsPanel.revalidate();
         buyerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
+        String[] buyerViewReviewsColumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
                 buyerViewReviewsProductName.getText()).split("\n");
-        String[][] temp = new String[buyerViewReviewsColoumn.length][5];
+        String[][] temp = new String[buyerViewReviewsColumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
-        for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
-            String[] row = buyerViewReviewsColoumn[i].split(";");
-            System.out.println(buyerViewReviewsColoumn.length);
+        for (int i = 0; i < buyerViewReviewsColumn.length; i++) {
+            String[] row = buyerViewReviewsColumn[i].split(";");
+            System.out.println(buyerViewReviewsColumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
@@ -2370,14 +2368,14 @@ public class MarketPlace {
         sellerDisplayReviewsPanel.repaint();
         sellerDisplayReviewsPanel.revalidate();
         sellerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] sellerViewReviewsColoumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
+        String[] sellerViewReviewsColumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
                 username).split("\n");
-        String[][] temp = new String[sellerViewReviewsColoumn.length][5];
+        String[][] temp = new String[sellerViewReviewsColumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
-        for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
-            String[] row = sellerViewReviewsColoumn[i].split(";");
-            System.out.println(sellerViewReviewsColoumn.length);
+        for (int i = 0; i < sellerViewReviewsColumn.length; i++) {
+            String[] row = sellerViewReviewsColumn[i].split(";");
+            System.out.println(sellerViewReviewsColumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
@@ -2401,13 +2399,13 @@ public class MarketPlace {
         buyerViewShoppingCartPanel.repaint();
         buyerViewShoppingCartPanel.revalidate();
         buyerViewShoppingCartPanel.setLayout(new BorderLayout());
-        String[] buyerViewShoppingCartColoumn = Customer.getShoppingCartofCustomer(username).split("\n");
-        String[][] temp = new String[buyerViewShoppingCartColoumn.length][5];
+        String[] buyerViewShoppingCartColumn = Customer.getShoppingCartofCustomer(username).toArray(new String[0]);
+        String[][] temp = new String[buyerViewShoppingCartColumn.length][5];
         String[] columnNames = new String[]{"Customer Username", "Email", "Store Name", "Product Name", "Quantity"};
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
-        for (int i = 0; i < buyerViewShoppingCartColoumn.length; i++) {
-            String[] row = buyerViewShoppingCartColoumn[i].split(";");
-            System.out.println(buyerViewShoppingCartColoumn.length);
+        for (int i = 0; i < buyerViewShoppingCartColumn.length; i++) {
+            String[] row = buyerViewShoppingCartColumn[i].split(";");
+            System.out.println(buyerViewShoppingCartColumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewShoppingCartTable.setValueAt(row[j], i, j);
