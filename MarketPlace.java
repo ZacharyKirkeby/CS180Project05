@@ -1778,6 +1778,7 @@ public class MarketPlace {
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerViewAllAddToShoppingCart,
                                 buyerSearchByProductFrame
                                 , buyerSearchByProductPanel);
                     }
@@ -1795,6 +1796,7 @@ public class MarketPlace {
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerViewAllAddToShoppingCart,
                                 buyerSearchByProductFrame, buyerSearchByProductPanel);
                     }
 
@@ -1813,7 +1815,7 @@ public class MarketPlace {
                         buyerViewAllProducts(false, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
                                 buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
                         searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
-                                buyerSearchByProductFrame, buyerSearchByProductPanel);
+                                buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
                     }
                 }
             });
@@ -2229,7 +2231,7 @@ public class MarketPlace {
     }
 
     public static void searchByProduct(boolean visible, String buyerSearchedProduct,
-                                       JButton searchForProductButton,
+                                       JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
                                        JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel){
         buyerSearchByProductPanel.removeAll();
         buyerSearchByProductPanel.repaint();
@@ -2247,6 +2249,7 @@ public class MarketPlace {
         }
         buyerSearchByProductPanel.add(new JScrollPane(searchedProductTable));
         buyerSearchByProductPanel.add(searchForProductButton, BorderLayout.SOUTH);
+        buyerSearchByProductPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
         buyerSearchByProductFrame.add(buyerSearchByProductPanel);
         buyerSearchByProductFrame.pack();
         buyerSearchByProductFrame.setLocationRelativeTo(null);
