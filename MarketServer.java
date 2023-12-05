@@ -1,4 +1,4 @@
-package src;
+package CS180Project05;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -107,12 +107,67 @@ public class MarketServer {
                             case "sellerStatistics":
                                 switch(temp[2]) {
                                     case "getCustomersAndPurchases":
-                                        Seller.getCustomersAndPurchases(temp[3],
-                                                temp[4], Boolean.parseBoolean(temp[5]));
-                                        
+                                        writer.println(Seller.getCustomersAndPurchases(temp[3],
+                                                temp[4], Boolean.parseBoolean(temp[5])));
+                                        writer.flush();
+                                        break;
+                                    case "getProductSales":
+                                        writer.println(Seller.getProductSales(temp[3],
+                                                temp[4], Boolean.parseBoolean(temp[5])));
+                                        writer.flush();
+                                        break;
+                                    case "getShoppingCart":
+                                        writer.println(Seller.getShoppingCartProducts(temp[3]));
+                                        writer.flush();
+                                        break;
+                                    case "writeProductsToCSV":
+                                        bool = Seller.writeProductsToCSV(temp[3], temp[4]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    default:
+                                        writer.println(false);
+                                        writer.flush();
+                                        break;
                                 }
                                 break;
-
+                            case "deleteStore":
+                                bool = Seller.deleteStore(temp[2], temp[3]);
+                                writer.println(bool);
+                                writer.flush();
+                                break;
+                            case "viewCustomerReviews":
+                                writer.println(Seller.viewCustomerReviews(temp[2], temp[3]));
+                                writer.flush();
+                                break;
+                            case "manageAccount":
+                                switch(temp[2]) {
+                                    case "changeUsername":
+                                        bool = Account.changeUsername(temp[3], temp[4]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "changePassword":
+                                        bool = Account.changePassword(temp[3], temp[4], temp[5]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "changeRole":
+                                        bool = Account.changeRole(temp[3], temp[4], temp[5]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "deleteAccount":
+                                        bool = Account.deleteAccount(temp[3], temp[4]);
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                }
+                                break;
+                            case "logout":
+                                isLoggedIn = false;
+                                break;
+                            // and now for the customer experience    
                         }
                     }
 
