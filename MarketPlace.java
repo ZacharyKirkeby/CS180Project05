@@ -1026,8 +1026,10 @@ public class MarketPlace {
             JFrame buyerViewAllProductsFrame = new JFrame();
             JPanel buyerViewAllProductsPanel = new JPanel();
             JButton buyerSearchForProductButton = new JButton("Search for a Product");
+            JButton buyerViewAllAddToShoppingCart = new JButton("ADD TO CART");
             buyerViewAllProductsPanel.setLayout(new BorderLayout());
-            buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.AFTER_LAST_LINE);
+            buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.SOUTH);
+            buyerViewAllProductsPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
             //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
             String[] coloumnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
             temp = new String[coloumnViewAllProductsAndStores.length][4];
@@ -1221,8 +1223,43 @@ public class MarketPlace {
             buyerAddToShoppingCartFrame.pack();
             buyerAddToShoppingCartFrame.setLocationRelativeTo(null);
 
+            JFrame buyerRemoveFromShoppingCartFrame = new JFrame();
+            JPanel buyerRemoveFromShoppingCartPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JTextField buyerRemoveFromShoppingCartStoreName = new JTextField();
+            buyerRemoveFromShoppingCartPanel.add(new JLabel("Enter Store Name: "));
+            buyerRemoveFromShoppingCartPanel.add(buyerRemoveFromShoppingCartStoreName);
+            JTextField buyerRemoveFromShoppingCartProductName = new JTextField();
+            buyerRemoveFromShoppingCartPanel.add(new JLabel("Enter Product Name: "));
+            buyerRemoveFromShoppingCartPanel.add(buyerRemoveFromShoppingCartProductName);
+            JTextField buyerRemoveFromShoppingCartQuantity= new JTextField();
+            buyerRemoveFromShoppingCartPanel.add(new JLabel("Enter Quantity"));
+            buyerRemoveFromShoppingCartPanel.add(buyerRemoveFromShoppingCartQuantity);
+            buyerRemoveFromShoppingCartPanel.add(new JLabel());
+            JButton removeFromCart = new JButton("REMOVE");
+            buyerRemoveFromShoppingCartPanel.add(removeFromCart, BorderLayout.SOUTH);
+            buyerRemoveFromShoppingCartFrame.add(buyerRemoveFromShoppingCartPanel);
+            buyerRemoveFromShoppingCartFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerRemoveFromShoppingCartFrame.pack();
+            buyerRemoveFromShoppingCartFrame.setLocationRelativeTo(null);
 
-
+            JFrame buyerChangeQtyInShoppingCartFrame = new JFrame();
+            JPanel buyerChangeQtyInShoppingCartPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            JTextField buyerChangeQtyInShoppingCartStoreName = new JTextField();
+            buyerChangeQtyInShoppingCartPanel.add(new JLabel("Enter Store Name: "));
+            buyerChangeQtyInShoppingCartPanel.add(buyerChangeQtyInShoppingCartStoreName);
+            JTextField buyerChangeQtyInShoppingCartProductName = new JTextField();
+            buyerChangeQtyInShoppingCartPanel.add(new JLabel("Enter Product Name: "));
+            buyerChangeQtyInShoppingCartPanel.add(buyerChangeQtyInShoppingCartProductName);
+            JTextField buyerChangeQtyInShoppingCart= new JTextField();
+            buyerChangeQtyInShoppingCartPanel.add(new JLabel("Enter Quantity"));
+            buyerChangeQtyInShoppingCartPanel.add(buyerChangeQtyInShoppingCart);
+            buyerChangeQtyInShoppingCartPanel.add(new JLabel());
+            JButton changeQtyInCart = new JButton("CHANGE");
+            buyerChangeQtyInShoppingCartPanel.add(changeQtyInCart, BorderLayout.SOUTH);
+            buyerChangeQtyInShoppingCartFrame.add(buyerChangeQtyInShoppingCartPanel);
+            buyerChangeQtyInShoppingCartFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            buyerChangeQtyInShoppingCartFrame.pack();
+            buyerChangeQtyInShoppingCartFrame.setLocationRelativeTo(null);
             /*
             END BUYER SHOPPING CART FRAME
              */
@@ -1923,20 +1960,6 @@ public class MarketPlace {
                 }
             });
 
-            shoppingCartButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    buyerShoppingCartFrame.setVisible(true);
-                }
-            });
-
-            addToShoppingCart.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    buyerAddToShoppingCartFrame.setVisible(true);
-                }
-            });
-
             /*
             BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
             */
@@ -2037,6 +2060,28 @@ public class MarketPlace {
                     }
                 }
             });
+            /*
+            END BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
+            */
+
+            /*
+            BUYER SHOPPING CART ACTION LISTENERS
+             */
+
+            shoppingCartButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerShoppingCartFrame.setVisible(true);
+                }
+            });
+
+            addToShoppingCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerAddToShoppingCartFrame.setVisible(true);
+                }
+            });
+
 
             addToCart.addActionListener(new ActionListener() {
                 @Override
@@ -2066,11 +2111,92 @@ public class MarketPlace {
                     }
                 }
             });
+
+            buyerViewAllAddToShoppingCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerAddToShoppingCartFrame.setVisible(true);
+                }
+            });
+
+            removeFromShoppingCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerRemoveFromShoppingCartFrame.setVisible(true);
+                }
+            });
+
+            removeFromCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean bool = true;
+                    try{
+                        Integer.parseInt(buyerRemoveFromShoppingCartQuantity.getText());
+                    } catch(NumberFormatException f){
+                        bool = false;
+                    }
+                    if(Customer.searchedStoreExists(buyerRemoveFromShoppingCartStoreName.getText(), stores) &&
+                            Customer.searchedProductExists(buyerRemoveFromShoppingCartProductName.getText(), stores)
+                            && bool){
+                        bool = Customer.removeFromCart(Account.getEmail(USERNAME[0]),
+                                Account.getUsername(USERNAME[0]),
+                                buyerRemoveFromShoppingCartStoreName.getText(),
+                                buyerRemoveFromShoppingCartProductName.getText(),
+                                Integer.parseInt(buyerRemoveFromShoppingCartQuantity.getText()));
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Product Removed From Cart!",
+                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                        } else if (!bool) {
+                            JOptionPane.showMessageDialog(null, "Something went wrong, " +
+                                    "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Input",
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
+
+            editShoppingCartQty.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    buyerChangeQtyInShoppingCartFrame.setVisible(true);
+                }
+            });
+
+            changeQtyInCart.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    boolean bool = true;
+                    try{
+                        Integer.parseInt(buyerChangeQtyInShoppingCart.getText());
+                    } catch(NumberFormatException f){
+                        bool = false;
+                        System.out.println("integer parsing error");
+                    }
+                    if(Customer.searchedStoreExists(buyerChangeQtyInShoppingCartStoreName.getText(), stores) &&
+                            Customer.searchedProductExists(buyerChangeQtyInShoppingCartProductName.getText(), stores)
+                            && bool){
+                        bool = Customer.addToCartChangeCheckoutQuantity(
+                                buyerChangeQtyInShoppingCartStoreName.getText(),
+                                buyerChangeQtyInShoppingCartProductName.getText(),
+                                Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Product Removed From Cart!",
+                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                        } else if (!bool) {
+                            JOptionPane.showMessageDialog(null, "Something went wrong, " +
+                                    "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid Input",
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            });
             /*
-            END BUYER MANAGE ACCOUNT FRAME ACTION LISTENERS
-            */
-
-
+            END BUYER SHOPPING CART ACTION LISTENERS
+             */
             while (!logOrRegistration) {
                 System.out.println(welcomePrompt);
                 System.out.println(loginPrompt);
