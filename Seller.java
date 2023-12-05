@@ -1,5 +1,4 @@
 package src;
-
 import java.io.*;
 import java.util.*;
 
@@ -56,24 +55,35 @@ public abstract class Seller {
     /**
      * Prints all products and stores
      */
-    public static void printProductAndStores() {
+    public static String printProductAndStores() {
         readFromFile();
-        System.out.println("Store Name | Product Name | Product Price | Qty Left in Stock");
+        String result = "";
+        //System.out.println("Store Name | Product Name | Product Price | Qty Left in Stock");
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getStockQuantity() <= 0) {
-                    System.out.println(stores.get(i).getStoreName() + " | " +
-                            stores.get(i).getProductList().get(j).getName() + " | " +
-                            stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
-                            "Out of Stock");
+                    //System.out.println(stores.get(i).getStoreName() + " | " +
+                       //     stores.get(i).getProductList().get(j).getName() + " | " +
+                        //    stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
+                          //  "Out of Stock");
+                    result += stores.get(i).getStoreName() + ";" +
+                            stores.get(i).getProductList().get(j).getName() + ";" +
+                            stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
+                            "Out of Stock" + "\n";
                 } else {
-                    System.out.println(stores.get(i).getStoreName() + " | " +
-                            stores.get(i).getProductList().get(j).getName() + " | " +
-                            stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
-                            stores.get(i).getProductList().get(j).getStockQuantity());
+                    //System.out.println(stores.get(i).getStoreName() + " | " +
+                        //  stores.get(i).getProductList().get(j).getName() + " | " +
+                          //  stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
+                         // stores.get(i).getProductList().get(j).getStockQuantity());
+                    result += stores.get(i).getStoreName() + ";" +
+                            stores.get(i).getProductList().get(j).getName() + ";" +
+                            stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
+                            stores.get(i).getProductList().get(j).getStockQuantity() + "\n";
                 }
             }
         }
+        System.out.println(result);
+        return result;
     }
 
     /**
@@ -635,16 +645,18 @@ public abstract class Seller {
      */
     public static String searchByStore(String storeName) {
         readFromFile();
-        String searchedStore = "Store Name | Product Name \n";
+        String searchedStore = null;
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
-                searchedStore += stores.get(i).getStoreName() + " | " +
+                searchedStore += stores.get(i).getStoreName() + ";" +
                         Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
-        if (searchedStore.equals("Store Name | Product Name \n")) {
+        searchedStore = searchedStore.substring(4);
+        if (searchedStore.equals("")) {
             searchedStore = "No Store Found ";
         }
+        System.out.println(searchedStore);
         return (searchedStore);
     }
 
@@ -656,19 +668,21 @@ public abstract class Seller {
      */
     public static String searchByProduct(String productName) {
         readFromFile();
-        String searched = "Store Name | Product Name | Quantity Available | Description\n";
+        String searched = null;
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getName().equalsIgnoreCase(productName)) {
-                    searched += stores.get(i).getStoreName() + " | " + stores.get(i).getProductList().get(j).getName()
-                            + " | " + stores.get(i).getProductList().get(j).getStockQuantity()
-                            + " | " + stores.get(i).getProductList().get(j).getDescription();
+                    searched += stores.get(i).getStoreName() + ";" + stores.get(i).getProductList().get(j).getName()
+                            + ";" + stores.get(i).getProductList().get(j).getStockQuantity()
+                            + ";" + stores.get(i).getProductList().get(j).getDescription() + "\n";
                 }
             }
         }
-        if (searched.equals("Store Name | Product Name \n")) {
+        searched = searched.substring(4);
+        if (searched.equals("")) {
             searched = "No locations found selling this product ";
         }
+        System.out.println(searched);
         return (searched);
     }
 
@@ -682,16 +696,16 @@ public abstract class Seller {
         readFromFile();
         String searchedProduct = null;
         String searchedStore = null;
-        String searched = "Store Name | Product Name | Quantity Available | Description\n";
+        String searched = "";
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getDescription().contains(productDescription)) {
                     searchedStore += stores.get(i).getStoreName();
                     searchedProduct += stores.get(i).getProductList().get(j).getName();
                     searched +=
-                            stores.get(i).getStoreName() + " | " +
-                                    stores.get(i).getProductList().get(j).getName() + " | " +
-                                    stores.get(i).getProductList().get(j).getStockQuantity() + " | " +
+                            stores.get(i).getStoreName() + ";" +
+                                    stores.get(i).getProductList().get(j).getName() + ";" +
+                                    stores.get(i).getProductList().get(j).getStockQuantity() + ";" +
                                     stores.get(i).getProductList().get(j).getDescription() + "\n";
                 }
             }
@@ -699,7 +713,7 @@ public abstract class Seller {
         if (searchedProduct == null) {
             searched = "No Product found ";
         }
-        if (searched.equals("Store Name | Product Name \n")) {
+        if (searched.equals("")) {
             searched = "No product with that description found";
         }
         return (searched.substring(0, (searched.length() - 1)));
@@ -738,7 +752,7 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
         return result;
     }
 
@@ -774,7 +788,7 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
         return result;
 
     }
@@ -811,7 +825,7 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
         return result;
     }
 
@@ -848,7 +862,8 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
+        //result = result.replace(";", " | ");
+        //System.out.println(result);
         return result;
     }
 
