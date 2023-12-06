@@ -1258,15 +1258,15 @@ public class MarketPlace {
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) { // TODO: MOVE TO SERVER
                         // TODO: MOVE TO SERVER
-                        USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText());
+                        USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
                         loginRegisterFrame.setVisible(false);
                         registerFrame.setVisible(false);
                         loginFrame.setVisible(false);
                         loginUsernameOrEmailField.setText("");
                         loginPasswordField.setText("");
-                        if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
+                        if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) { // TODO: MOVE TO SERVER
                             sellerOptionsFrame.setVisible(true);
-                        } else if(Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")){
+                        } else if(Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")){ // TODO: MOVE TO SERVER
                             buyerOptionsFrame.setVisible(true);
                         }
                     } else {

@@ -238,6 +238,12 @@ These test to ensure the menus behave correctly, primarily by utilizing differen
 ensure there is a consistent flow within Marketplace logic. Manual testing primarily has involved running Marketplace
 multiple times, checking each menu and sub menu to ensure that MarketPlace and it's calls all work appropriately. 
 
+### [MarketServer](<MarketServer.java>)
+*** 
+Needs to be described
+
+
+
 ***
 
 ## Project Selection Requirements
