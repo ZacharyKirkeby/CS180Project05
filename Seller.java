@@ -693,8 +693,8 @@ public abstract class Seller {
      */
     public static String searchByDescription(String productDescription) {
         readFromFile();
-        String searchedProduct = null;
-        String searchedStore = null;
+        String searchedProduct = "";
+        String searchedStore = "";
         String searched = "";
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
@@ -710,7 +710,7 @@ public abstract class Seller {
                 }
             }
         }
-        if (searchedProduct == null) {
+        if (searchedProduct.equals("")) {
             searched = "No Product found ";
         }
         if (searched.equals("")) {

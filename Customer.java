@@ -432,7 +432,7 @@ public abstract class Customer {
      * @return the reviews of the specified product passed in
      */
     public static String viewReviews(String storeName, String productName) {
-        String result = null;
+        String result = "";
         try (BufferedReader br = new BufferedReader(new FileReader("Reviews.txt"))) {
             String line = br.readLine();
             while (line != null) {
@@ -453,11 +453,10 @@ public abstract class Customer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(result == null){
+        if(result.equals("")){
             result = "No Results Found;\n";
         }
         result = result.replace(" , ", ";");
-        System.out.println(result);
         return result;
     }
 }
