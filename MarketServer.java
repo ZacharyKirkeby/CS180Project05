@@ -1,4 +1,4 @@
-package src;
+package CS180Project05;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ public class MarketServer {
                                 writer.flush();
                                 break;
                             case "sellermodificationchoices":
-                                switch(temp[1]) {
+                                switch (temp[1]) {
                                     case "createProduct":
                                         bool = Seller.createProduct(temp[2], temp[3], temp[4],
                                                 Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
@@ -105,23 +105,23 @@ public class MarketServer {
                                 }
                                 break;
                             case "sellerStatistics":
-                                switch(temp[2]) {
+                                switch (temp[1]) {
                                     case "getCustomersAndPurchases":
-                                        writer.println(Seller.getCustomersAndPurchases(temp[3],
-                                                temp[4], Boolean.parseBoolean(temp[5])));
+                                        writer.println(Seller.getCustomersAndPurchases(temp[2],
+                                                temp[3], Boolean.parseBoolean(temp[4])));
                                         writer.flush();
                                         break;
                                     case "getProductSales":
-                                        writer.println(Seller.getProductSales(temp[3],
-                                                temp[4], Boolean.parseBoolean(temp[5])));
+                                        writer.println(Seller.getProductSales(temp[2],
+                                                temp[3], Boolean.parseBoolean(temp[4])));
                                         writer.flush();
                                         break;
                                     case "getShoppingCart":
-                                        writer.println(Seller.getShoppingCartProducts(temp[3]));
+                                        writer.println(Seller.getShoppingCartProducts(temp[2]));
                                         writer.flush();
                                         break;
                                     case "writeProductsToCSV":
-                                        bool = Seller.writeProductsToCSV(temp[3], temp[4]);
+                                        bool = Seller.writeProductsToCSV(temp[2], temp[3]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
@@ -132,33 +132,33 @@ public class MarketServer {
                                 }
                                 break;
                             case "deleteStore":
-                                bool = Seller.deleteStore(temp[2], temp[3]);
+                                bool = Seller.deleteStore(temp[1], temp[2]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "viewCustomerReviews":
-                                writer.println(Seller.viewCustomerReviews(temp[2], temp[3]));
+                                writer.println(Seller.viewCustomerReviews(temp[1], temp[2]));
                                 writer.flush();
                                 break;
                             case "manageAccount":
-                                switch(temp[2]) {
+                                switch (temp[1]) {
                                     case "changeUsername":
-                                        bool = Account.changeUsername(temp[3], temp[4]);
+                                        bool = Account.changeUsername(temp[2], temp[3]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
                                     case "changePassword":
-                                        bool = Account.changePassword(temp[3], temp[4], temp[5]);
+                                        bool = Account.changePassword(temp[2], temp[3], temp[4]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
                                     case "changeRole":
-                                        bool = Account.changeRole(temp[3], temp[4], temp[5]);
+                                        bool = Account.changeRole(temp[2], temp[3], temp[4]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
                                     case "deleteAccount":
-                                        bool = Account.deleteAccount(temp[3], temp[4]);
+                                        bool = Account.deleteAccount(temp[2], temp[3]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
@@ -167,25 +167,120 @@ public class MarketServer {
                             case "logout":
                                 isLoggedIn = false;
                                 break;
-                            // and now for the customer experience    
+                            // and now for the customer experience
+                            case "searchByStore":
+                                writer.println(Seller.searchByStore(temp[1]));
+                                writer.flush();
+                                break;
+                            case "searchByProduct":
+                                writer.println(Seller.searchByProduct(temp[1]));
+                                writer.flush();
+                                break;
+                            case "searchByDescription":
+                                writer.println(Seller.searchByDescription(temp[1]));
+                                writer.flush();
+                                break;
+                            case "searchAll":
+                                String result = Seller.searchByProduct(temp[1]);
+                                writer.println(Seller.printProductAndStores() + result);
+                                break;
+                            case "sortCheapest":
+                                writer.println(Seller.sortCheapest());
+                                writer.flush();
+                                break;
+                            case "sortExpensive":
+                                writer.println(Seller.sortExpensive());
+                                writer.flush();
+                                break;
+                            case "availability":
+                                switch (temp[1]) {
+                                    case "highestQuant":
+                                        writer.println(Seller.highestQuant());
+                                        writer.flush();
+                                        break;
+                                    case "lowestQuant":
+                                        writer.println(Seller.lowestQuant());
+                                        writer.flush();
+                                        break;
+                                }
+                                break;
+                            case "shoppingCart":
+                                switch (temp[1]) {
+                                    case "addToCart":
+                                        bool = Customer.addToCart(Account.getEmail(temp[2]),
+                                                Account.getUsername(temp[3]),
+                                                temp[4], temp[5], Integer.parseInt(temp[6]));
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "changeCheckoutQuantity":
+                                        bool = Customer.addToCartChangeCheckoutQuantity(
+                                                temp[2], temp[3], Integer.parseInt(temp[4]));
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "removeFromCart":
+                                        bool = Customer.removeFromCart(
+                                                Account.getEmail(temp[2]),
+                                                Account.getUsername(temp[3]),
+                                                temp[4], temp[5], Integer.parseInt(temp[6]));
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "buyProducts":
+                                        bool = Customer.buyProductsInShoppingCart(Account.getUsername(temp[2]));
+                                        ArrayList<String> check = Customer.getShoppingCartofCustomer(temp[2]);
+                                        while (!check.isEmpty()) {
+                                            bool = Customer.buyProductsInShoppingCart(
+                                                    Account.getUsername(temp[2]));
+                                            writer.println(bool);
+                                            writer.flush();
+                                            check = Customer.getShoppingCartofCustomer(temp[2]);
+                                        }
+                                        writer.println(bool);
+                                        writer.flush();
+                                        break;
+                                    case "getShoppingCart":
+                                        String print = "";
+                                        for (String s : Customer.getShoppingCartofCustomer(temp[2])) {
+                                            String[] view = s.split(";");
+                                            print += ("Customer Name | Store Name " +
+                                                    "| Product Name | Qty\n");
+                                            String output =
+                                                    view[1] + " | " + view[2] +
+                                                            " | " + view[3] + " | " + view[4] + "\n";
+                                            print += output;
+                                        }
+                                        writer.println(print);
+                                        writer.flush();
+                                        break;
+                                }
+                                break;
+                            case "getPurchaseHistory":
+                                bool = Customer.getPurchaseHistoryofCustomer(temp[1], temp[2]);
+                                writer.println(bool);
+                                writer.flush();
+                                break;
+                            case "leaveReview":
+                                bool = Customer.leaveReview(temp[1],
+                                        temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
+                                writer.println(bool);
+                                writer.flush();
+                                break;
+                            case "viewReviews":
+                                writer.print(Customer.viewReviews(temp[1], temp[2]));
+                                writer.flush();
+                                break;
+                            default:
+                                writer.println(false);
+                                writer.flush();
+                                break;
                         }
                     }
-
-
-
-
-
-
-
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
-
-
             } while (!(socket == null) && socket.isConnected());
-
-
         }
-
     }
 }

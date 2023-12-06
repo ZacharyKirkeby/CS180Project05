@@ -1,1 +1,5 @@
-Store1 , Product1 , username1 , 1 , Description
+apple store , fuji , yang , 5 , really juicy!!
+apple store , grandma , yang , 5 , really green!!
+apple store , fuji , yang , 5 , really juicy!!
+apple store , red , yang , 5 , really red!!
+
