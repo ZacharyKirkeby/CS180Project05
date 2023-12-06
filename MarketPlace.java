@@ -1836,7 +1836,7 @@ public class MarketPlace {
             buyerManageAccountButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    sellerManageAccountFrame.setVisible(true);
+                    buyerManageAccountFrame.setVisible(true);
                 }
             });
 
