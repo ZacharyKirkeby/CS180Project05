@@ -796,6 +796,7 @@ public class MarketPlace {
              */
             JFrame sellerDisplayReviewsFrame = new JFrame();
             JPanel sellerDisplayReviewsPanel = new JPanel();
+            sellerDisplayReviewsPanel.setPreferredSize(new Dimension(900, 300));
             /*
             END CUSTOMER REVIEWS DISPLAY FRAME
              */
