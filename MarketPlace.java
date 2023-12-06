@@ -713,6 +713,11 @@ public class MarketPlace {
             customerPurchasesFrame.pack();
             customerPurchasesFrame.setLocationRelativeTo(null);
 
+            JFrame sellerViewCustomerPurchasesFrame = new JFrame();
+            JPanel sellerViewCustomerPurchasesPanel = new JPanel();
+            sellerViewCustomerPurchasesPanel.setPreferredSize(new Dimension(700,400));
+           // JButton sellerViewCustomerPurchasesButton = new JButton("View");
+
             JFrame productSalesFrame = new JFrame();
             JPanel productSalesPanel = new JPanel(new GridLayout(0, 2, 4, 16));
             productSalesPanel.add(new JLabel("Store Name:"));
@@ -1467,15 +1472,13 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
                     } else if (customerPurchasesBox.getSelectedItem().toString().equals("Yes")) {
-                        JOptionPane.showMessageDialog(null,
-                                Seller.getCustomersAndPurchases(customerPurchasesStoreName.getText(),
-                                        customerPurchasesUsername.getText(), true), // TODO: MOVE TO SERVER
-                                "View Customer Purchases", JOptionPane.PLAIN_MESSAGE);
+                        sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
+                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                customerPurchasesUsername.getText(), true);
                     } else {
-                        JOptionPane.showMessageDialog(null,
-                                Seller.getCustomersAndPurchases(customerPurchasesStoreName.getText(),
-                                        customerPurchasesUsername.getText(), false), // TODO: MOVE TO SERVER
-                                "View Customer Purchases", JOptionPane.PLAIN_MESSAGE);
+                        sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
+                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                customerPurchasesUsername.getText(), false);
                     }
                 }
             });
@@ -1621,7 +1624,8 @@ public class MarketPlace {
                     if (sellerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], sellerChangeRolePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                    } else if (Account.changeRole(USERNAME[0], sellerChangeRolePassword.getText(), "Buyer")) { // TODO:
+                        // MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -1955,7 +1959,8 @@ public class MarketPlace {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Buyer")) { // TODO:
+                        // MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -2211,7 +2216,7 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
         String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
         String[][] temp = new String[coloumnSearchDescription.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
                 "Description"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchDescription.length; i++) {
@@ -2242,7 +2247,7 @@ public class MarketPlace {
         buyerSearchByProductPanel.setLayout(new BorderLayout());
         String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
         String[][] temp = new String[coloumnSearchProduct.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
                 "Description"};
         JTable searchedProductTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchProduct.length; i++) {
@@ -2496,6 +2501,38 @@ public class MarketPlace {
             buyerViewAllProductsFrame.setVisible(true);
         } else{
             buyerViewAllProductsFrame.setVisible(false);
+        }
+    }
+
+    public static void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
+                                                   JFrame sellerViewCustomerPurchasesFrame, String storeName,
+                                                   String username, boolean sorted){
+        sellerViewCustomerPurchasesPanel.removeAll();
+        sellerViewCustomerPurchasesPanel.repaint();
+        sellerViewCustomerPurchasesPanel.revalidate();
+        sellerViewCustomerPurchasesPanel.setLayout(new BorderLayout());
+
+        String[] coloumnSellerViewCustomerPurchases =
+                Seller.getCustomersAndPurchases(storeName, username, sorted).split("\n");
+        String[][] temp = new String[coloumnSellerViewCustomerPurchases.length][6];
+        String[] columnNames = new String[]{"Customer Email", "Customer Username", "Store", "Product Bought ",
+                "Quantity Bought", "Price"};
+        JTable sellerViewCustomerPurchasesTable = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumnSellerViewCustomerPurchases.length; i++){
+            String[] row = coloumnSellerViewCustomerPurchases[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                sellerViewCustomerPurchasesTable.setValueAt(row[j], i, j);
+            }
+        }
+        sellerViewCustomerPurchasesPanel.add(new JScrollPane(sellerViewCustomerPurchasesTable));
+        sellerViewCustomerPurchasesFrame.add(sellerViewCustomerPurchasesPanel);
+        sellerViewCustomerPurchasesFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        sellerViewCustomerPurchasesFrame.pack();
+        sellerViewCustomerPurchasesFrame.setLocationRelativeTo(null);
+        if(visible){
+            sellerViewCustomerPurchasesFrame.setVisible(true);
+        } else{
+            sellerViewCustomerPurchasesFrame.setVisible(false);
         }
     }
 }
