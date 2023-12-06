@@ -1893,10 +1893,10 @@ public class MarketPlace {
                     boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename);
                     if(bool){
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
-                                "Successfully!", "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                                "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     } else if(!bool){
                         JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
-                                "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                                "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             });
@@ -2125,7 +2125,7 @@ public class MarketPlace {
                                 buyerChangeQtyInShoppingCartProductName.getText(),
                                 Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
                         if (bool) {
-                            JOptionPane.showMessageDialog(null, "Product Removed From Cart!",
+                            JOptionPane.showMessageDialog(null, "Added Product Quantity",
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                         } else if (!bool) {
                             JOptionPane.showMessageDialog(null, "Something went wrong, " +
