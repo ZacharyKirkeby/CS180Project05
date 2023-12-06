@@ -37,8 +37,10 @@ public class MarketServer {
                     PrintWriter writer = new PrintWriter(socket.getOutputStream());
                     String username;
                     String password;
-                    while(socket.isConnected()) {
+                    System.out.println("do while reached");
+//                    while(socket.isConnected()) {
                         String message = reader.readLine();
+                        System.out.println("readline reached");
                         String[] temp = message.split(",");
                         message = temp[0];
                         boolean bool = false;
@@ -278,7 +280,7 @@ public class MarketServer {
                                 writer.flush();
                                 break;
                         }
-                    }
+//                    }
                 } catch(Exception e) {
                     e.printStackTrace();
                 }
