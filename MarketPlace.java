@@ -369,6 +369,7 @@ public class MarketPlace {
                                        editProductDescriptionStoreName.getText() + "," +
                                        editProductDescriptionProductName.getText() +
                                        "," + editProductDescriptionField.getText() + "," + USERNAME[0]);
+                        writer.flush();
                         boolean bool = false;
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
@@ -428,6 +429,7 @@ public class MarketPlace {
                                            editProductPriceStoreName.getText() + "," +
                                            editProductPriceProductName.getText() + "," +
                                            editProductPriceField.getText() + "," + USERNAME[0]);
+                            writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Product Edited",
@@ -540,7 +542,7 @@ public class MarketPlace {
                         writer.flush();
                         bool = Boolean.parseBoolean(reader.readLine());
 
-                    } if (bool) { // TODO: MOVE TO SERVER
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Product Deleted",
                                 "Delete Product", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -584,7 +586,7 @@ public class MarketPlace {
                         writer.flush();
                         bool = Boolean.parseBoolean(reader.readLine());
 
-                    } if (bool)  { // TODO: MOVE TO SERVER
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Products Added",
                                 "Add Products From CSV", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -640,7 +642,7 @@ public class MarketPlace {
                                     "," + salePriceField.getText() + "," + saleCapField.getText());
                             writer.flush();
                             bool = Boolean.parseBoolean(reader.readLine());
-                        } if (bool)  { // TODO: MOVE TO SERVER
+                        } if (bool)  {
                             JOptionPane.showMessageDialog(null, "Sale Created",
                                     "Start Sale", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -697,7 +699,7 @@ public class MarketPlace {
                                             purchaseLimitProductName.getText() + "," + purchaseLimitField.getText());
                             writer.flush();
                             bool = Boolean.parseBoolean(reader.readLine());
-                        } if (bool) { // TODO: MOVE TO SERVER
+                        } if (bool) {
                             JOptionPane.showMessageDialog(null, "Limit Set",
                                     "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -1316,8 +1318,12 @@ public class MarketPlace {
                         loginPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) { // TODO: MOVE TO SERVER
-                        // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("login," + loginUsernameOrEmailField.getText() + "," +
+                                loginPasswordField.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
                         loginRegisterFrame.setVisible(false);
                         registerFrame.setVisible(false);
@@ -1325,7 +1331,7 @@ public class MarketPlace {
                         loginUsernameOrEmailField.setText("");
                         loginPasswordField.setText("");
                         if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) { // TODO: MOVE TO SERVER
-                            sellerOptionsFrame.setVisible(true);
+                            sellerOptionsFrame.setVisible(true); //server doesnt distinguish atm
                         } else if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")) { // TODO: MOVE TO SERVER
                             buyerOptionsFrame.setVisible(true);
                         }
@@ -1342,8 +1348,13 @@ public class MarketPlace {
                         || registerPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.createAccount(registerEmailField.getText(), registerUsernameField.getText(), // TODO: MOVE TO SERVER
-                            registerPasswordField.getText(), registerRoleBox.getSelectedItem().toString())) {
+                    } else {
+                        writer.println("register," + registerEmailField.getText() + "," +
+                                        registerUsernameField.getText() + "," + registerPasswordField.getText() + ","
+                                + registerRoleBox.getSelectedItem().toString());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         USERNAME[0] = registerUsernameField.getText();
                         loginRegisterFrame.setVisible(false);
                         registerFrame.setVisible(false);
@@ -1425,8 +1436,12 @@ public class MarketPlace {
                     if (createStoreNameField.getText().isEmpty() || createStoreLocationField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Create Store", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.createStore(createStoreNameField.getText(),
-                            createStoreLocationField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("createStore," + createStoreNameField.getText() + "," +
+                                createStoreLocationField.getText() + "," + USERNAME[0]);
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Store Created",
                                 "Create Store", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1503,7 +1518,11 @@ public class MarketPlace {
                     if (deleteStoreField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Delete Store", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.deleteStore(deleteStoreField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("deleteStore," + deleteStoreField.getText() + "," + USERNAME[0]);
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Store Deleted",
                                 "Delete Store", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1581,9 +1600,10 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Products In Cart", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null,
-                                Seller.getShoppingCartProducts(cartProductsUsername.getText()), // TODO: MOVE TO SERVER
-                                "View Products In Cart", JOptionPane.PLAIN_MESSAGE);
+                        writer.println("sellerStatistics,getShoppingCart," + cartProductsUsername.getText());
+                        writer.flush();
+                        String stock = reader.readLine();
+                        JOptionPane.showMessageDialog(null, stock, "View Products In Cart", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
             });
