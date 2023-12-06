@@ -1621,7 +1621,7 @@ public class MarketPlace {
                     if (sellerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], sellerChangePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                    } else if (Account.changeRole(USERNAME[0], sellerChangeRolePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -1955,7 +1955,7 @@ public class MarketPlace {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], buyerChangePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
+                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Buyer")) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
