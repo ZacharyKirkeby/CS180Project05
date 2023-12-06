@@ -1035,7 +1035,7 @@ public class MarketPlace {
             JTextField buyerChangeRolePassword = new JTextField();
             buyerChangeRolePanel.add(buyerChangeRolePassword);
             buyerChangeRolePanel.add(new JLabel());
-            JButton buyerChangeRole = new JButton("Change To Buyer");
+            JButton buyerChangeRole = new JButton("Change To Seller");
             buyerChangeRolePanel.add(buyerChangeRole);
             buyerChangeRoleFrame.add(buyerChangeRolePanel);
             buyerChangeRoleFrame.setTitle("Change Role");
@@ -1960,7 +1960,7 @@ public class MarketPlace {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Buyer")) { // TODO:
+                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Seller")) { // TODO:
                         // MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
