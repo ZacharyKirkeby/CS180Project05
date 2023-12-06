@@ -1,5 +1,4 @@
 package src;
-
 import java.io.*;
 import java.util.*;
 
@@ -95,7 +94,7 @@ public abstract class Customer {
                                 System.out.println("Error out of Stock");
                                 return false;
                             } else if (Seller.getStores().get(i).getProductList().get(j).getStockQuantity()
-                                       < quantity) {
+                                    < quantity) {
                                 quantity = Seller.getStores().get(i).getProductList().get(j).getStockQuantity();
                                 System.out.println("Quantity Exceeded Maximum in Stock, added as many as available");
                             }
@@ -204,7 +203,7 @@ public abstract class Customer {
                 quantities.remove(i);
                 break;
             } else if (emails.get(i).equals(email) && usernames.get(i).equals(username)
-                       && storeNames.get(i).equals(storeName)
+                    && storeNames.get(i).equals(storeName)
                     && productNames.get(i).equals(productName) && quantities.get(i) > quantity) {
                 quantities.set(i, quantities.get(i) - quantity);
                 Seller.changeQuantity(storeName, productName, quantity);
@@ -350,12 +349,12 @@ public abstract class Customer {
      * @param username
      * @return arraylist of the products currently in the shopping cart of the customer identified by the username
      */
-    public static ArrayList<String> getShoppingCartofCustomer(String username) {
+    public static String getShoppingCartofCustomer(String username) {
         readFromShoppingCartDatabaseFile();
-        ArrayList<String> customerProducts = new ArrayList<>();
+        String customerProducts = "";
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equals(username)) { // check if username matches
-                customerProducts.add(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i),
+                customerProducts += (String.format("%s;%s;%s;%s;%d\n", emails.get(i), usernames.get(i),
                         storeNames.get(i), productNames.get(i), quantities.get(i)));
             }
         }
@@ -374,16 +373,18 @@ public abstract class Customer {
             return false;
         }
         readFromPurchaseHistoryDatabaseFile();
-        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
-            for (int i = 0; i < usernames.size(); i++) {
-                if (usernames.get(i).equals(username)) { // check if username and email match
-                    pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
-                            productNames.get(i), quantities.get(i)));
+        if(fileName != null && !fileName.equals("")) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
+                for (int i = 0; i < usernames.size(); i++) {
+                    if (usernames.get(i).equals(username)) { // check if username and email match
+                        pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
+                                productNames.get(i), quantities.get(i)));
+                    }
                 }
+                success = true;
+            } catch (IOException e) {
+                success = false;
             }
-            success = true;
-        } catch (IOException e) {
-            success = false;
         }
         return success;
     }
@@ -431,18 +432,20 @@ public abstract class Customer {
      * @return the reviews of the specified product passed in
      */
     public static String viewReviews(String storeName, String productName) {
-        String result = "Store Name | Product Name | Customer Name | Rating \n";
+        String result = "";
         try (BufferedReader br = new BufferedReader(new FileReader("Reviews.txt"))) {
             String line = br.readLine();
             while (line != null) {
                 String[] subpart = line.split(",");
-                if (storeName.equals("")) {
-                    if (subpart[1].contains(productName)) {
-                        result += line + "\n";
-                    }
-                } else {
-                    if (subpart[0].contains(storeName) && subpart[1].contains(productName)) {
-                        result += line + "\n";
+                if(subpart.length >1) {
+                    if (storeName.equals("")) {
+                        if (subpart[1].contains(productName)) {
+                            result += line + "\n";
+                        }
+                    } else {
+                        if (subpart[0].contains(storeName) && subpart[1].contains(productName)) {
+                            result += line + "\n";
+                        }
                     }
                 }
                 line = br.readLine();
@@ -450,7 +453,10 @@ public abstract class Customer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        result = result.replace(",", "|");
+        if(result.equals("")){
+            result = "No Results Found;\n";
+        }
+        result = result.replace(" , ", ";");
         return result;
     }
 }

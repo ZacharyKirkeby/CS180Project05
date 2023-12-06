@@ -8,7 +8,7 @@ import java.util.*;
  * Note: Class is UNTESTED
  * Manages all stores and allows for creation and deletion of stores
  * Also allows for creation, editing, and deletion of products in stores
- * Create stores.txt and products.txt before using
+ * Create stores.txt before using
  *
  * @author Alexander Chen, 05
  * @author Armaan Sayyad, 05
@@ -590,7 +590,7 @@ public abstract class Seller {
     }
 
     /**
-     * Writes Store and Product information to stores.txt and products.txt
+     * Writes Store and Product information to stores.txt
      */
     private static void writeToFile() {
         try {
@@ -609,7 +609,7 @@ public abstract class Seller {
     }
 
     /**
-     * Reads Store and Product information from stores.txt and products.txt
+     * Reads Store and Product information from stores.txt
      * The toStrings for Store and Product should separate attributes with a ","
      */
     private static void readFromFile() {
@@ -645,14 +645,13 @@ public abstract class Seller {
      */
     public static String searchByStore(String storeName) {
         readFromFile();
-        String searchedStore = null;
+        String searchedStore = "";
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
                 searchedStore += stores.get(i).getStoreName() + ";" +
                         Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
-        searchedStore = searchedStore.substring(4);
         if (searchedStore.equals("")) {
             searchedStore = "No Store Found ";
         }
@@ -668,17 +667,17 @@ public abstract class Seller {
      */
     public static String searchByProduct(String productName) {
         readFromFile();
-        String searched = null;
+        String searched = "";
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getName().equalsIgnoreCase(productName)) {
                     searched += stores.get(i).getStoreName() + ";" + stores.get(i).getProductList().get(j).getName()
+                            + ";" + stores.get(i).getProductList().get(j).getPurchasePrice()
                             + ";" + stores.get(i).getProductList().get(j).getStockQuantity()
                             + ";" + stores.get(i).getProductList().get(j).getDescription() + "\n";
                 }
             }
         }
-        searched = searched.substring(4);
         if (searched.equals("")) {
             searched = "No locations found selling this product ";
         }
@@ -694,8 +693,8 @@ public abstract class Seller {
      */
     public static String searchByDescription(String productDescription) {
         readFromFile();
-        String searchedProduct = null;
-        String searchedStore = null;
+        String searchedProduct = "";
+        String searchedStore = "";
         String searched = "";
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
@@ -705,12 +704,13 @@ public abstract class Seller {
                     searched +=
                             stores.get(i).getStoreName() + ";" +
                                     stores.get(i).getProductList().get(j).getName() + ";" +
+                                    stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
                                     stores.get(i).getProductList().get(j).getStockQuantity() + ";" +
                                     stores.get(i).getProductList().get(j).getDescription() + "\n";
                 }
             }
         }
-        if (searchedProduct == null) {
+        if (searchedProduct.equals("")) {
             searched = "No Product found ";
         }
         if (searched.equals("")) {

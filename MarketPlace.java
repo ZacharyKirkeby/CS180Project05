@@ -1,5 +1,7 @@
 package src;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -926,21 +928,6 @@ public class MarketPlace {
              */
             JFrame buyerSortCheapestFrame = new JFrame();
             JPanel buyerSortCheapestPanel = new JPanel();
-            String[] coloumn = Seller.sortCheapest().split("\n");
-            String[][] temp = new String[coloumn.length][4];
-            String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable tableModelSortCheapest = new JTable(temp, columnNames);
-            for(int i = 0; i < coloumn.length; i++){
-                String[] row = coloumn[i].split(";");
-                for(int j = 0; j < row.length; j++){
-                    tableModelSortCheapest.setValueAt(row[j], i, j);
-                }
-            }
-            buyerSortCheapestPanel.add(new JScrollPane(tableModelSortCheapest));
-            buyerSortCheapestFrame.add(buyerSortCheapestPanel);
-            buyerSortCheapestFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            buyerSortCheapestFrame.pack();
-            buyerSortCheapestFrame.setLocationRelativeTo(null);
             /*
             END BUYER SORT CHEAPEST FRAME
              */
@@ -950,21 +937,6 @@ public class MarketPlace {
              */
             JFrame buyerSortExpensiveFrame = new JFrame();
             JPanel buyerSortExpensivePanel = new JPanel();
-            coloumn = Seller.sortExpensive().split("\n");
-            temp = new String[coloumn.length][4];
-            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable tableModelSortExpensive = new JTable(temp, columnNames);
-            for(int i = 0; i < coloumn.length; i++){
-                String[] row = coloumn[i].split(";");
-                for(int j = 0; j < row.length; j++){
-                    tableModelSortExpensive.setValueAt(row[j], i, j);
-                }
-            }
-            buyerSortExpensivePanel.add(new JScrollPane(tableModelSortExpensive));
-            buyerSortExpensiveFrame.add(buyerSortExpensivePanel);
-            buyerSortExpensiveFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            buyerSortExpensiveFrame.pack();
-            buyerSortExpensiveFrame.setLocationRelativeTo(null);
             /*
             END BUYER SORT EXPENSIVE FRAME
              */
@@ -975,21 +947,6 @@ public class MarketPlace {
              */
             JFrame buyerSortByLowestQuantityFrame = new JFrame();
             JPanel buyerSortByLowestQuantityPanel = new JPanel();
-            coloumn = Seller.lowestQuant().split("\n");
-            temp = new String[coloumn.length][4];
-            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable tableModelSortLowestQuant = new JTable(temp, columnNames);
-            for(int i = 0; i < coloumn.length; i++){
-                String[] row = coloumn[i].split(";");
-                for(int j = 0; j < row.length; j++){
-                    tableModelSortLowestQuant.setValueAt(row[j], i, j);
-                }
-            }
-            buyerSortByLowestQuantityPanel.add(new JScrollPane(tableModelSortLowestQuant));
-            buyerSortByLowestQuantityFrame.add(buyerSortByLowestQuantityPanel);
-            buyerSortByLowestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            buyerSortByLowestQuantityFrame.pack();
-            buyerSortByLowestQuantityFrame.setLocationRelativeTo(null);
             /*
             END SORT AVAILIBILITY , LOWEST IN STOCK
              */
@@ -999,21 +956,6 @@ public class MarketPlace {
              */
             JFrame buyerSortByHighestQuantityFrame = new JFrame();
             JPanel buyerSortByHighestQuantityPanel = new JPanel();
-            coloumn = Seller.highestQuant().split("\n");
-            temp = new String[coloumn.length][4];
-            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable tableModelSortHighestQuant = new JTable(temp, columnNames);
-            for(int i = 0; i < coloumn.length; i++){
-                String[] row = coloumn[i].split(";");
-                for(int j = 0; j < row.length; j++){
-                    tableModelSortHighestQuant.setValueAt(row[j], i, j);
-                }
-            }
-            buyerSortByHighestQuantityPanel.add(new JScrollPane(tableModelSortHighestQuant));
-            buyerSortByHighestQuantityFrame.add(buyerSortByHighestQuantityPanel);
-            buyerSortByHighestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            buyerSortByHighestQuantityFrame.pack();
-            buyerSortByHighestQuantityFrame.setLocationRelativeTo(null);
             /*
             END SORT AVAILABILITY, HIGHEST IN STOCK
              */
@@ -1025,26 +967,6 @@ public class MarketPlace {
             JPanel buyerViewAllProductsPanel = new JPanel();
             JButton buyerSearchForProductButton = new JButton("Search for a Product");
             JButton buyerViewAllAddToShoppingCart = new JButton("ADD TO CART");
-            buyerViewAllProductsPanel.setLayout(new BorderLayout());
-            buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.SOUTH);
-            buyerViewAllProductsPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
-            //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
-            String[] columnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
-            temp = new String[columnViewAllProductsAndStores.length][4];
-            columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
-            JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
-            for(int i = 0; i < columnViewAllProductsAndStores.length; i++){
-                String[] row = columnViewAllProductsAndStores[i].split(";");
-                for(int j = 0; j < row.length; j++){
-                    viewAllProductsAndStoresTable.setValueAt(row[j], i, j);
-                }
-            }
-            buyerViewAllProductsPanel.add(new JScrollPane(viewAllProductsAndStoresTable));
-            buyerViewAllProductsFrame.add(buyerViewAllProductsPanel);
-            buyerViewAllProductsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-            buyerViewAllProductsFrame.pack();
-            buyerViewAllProductsFrame.setLocationRelativeTo(null);
-
             /*
             END BUYER VIEW ALL PRODUCTS FRAME
              */
@@ -1658,6 +1580,7 @@ public class MarketPlace {
                     } else if (Account.changeUsername(sellerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                        USERNAME[0] = sellerNewUsername.getText();
                     } else {
                         JOptionPane.showMessageDialog(null, "Change Failed",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
@@ -1856,6 +1779,7 @@ public class MarketPlace {
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerViewAllAddToShoppingCart,
                                 buyerSearchByProductFrame
                                 , buyerSearchByProductPanel);
                     }
@@ -1873,6 +1797,7 @@ public class MarketPlace {
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                buyerViewAllAddToShoppingCart,
                                 buyerSearchByProductFrame, buyerSearchByProductPanel);
                     }
 
@@ -1888,9 +1813,10 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        buyerViewAllProductsFrame.setVisible(false);
-                        searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton, buyerSearchByProductFrame
-                                , buyerSearchByProductPanel);
+                        buyerViewAllProducts(false, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
+                                buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                        searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
+                                buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
                     }
                 }
             });
@@ -1912,19 +1838,20 @@ public class MarketPlace {
             sortProductsByCheapestButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerSortCheapestFrame.setVisible(true);
+                    buyerSortCheapest(true, buyerSortCheapestPanel, buyerSortCheapestFrame);
                 }
             });
             sortProductsByMostExpensiveButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerSortExpensiveFrame.setVisible(true);
+                    buyerSortExpensive(true, buyerSortExpensivePanel, buyerSortExpensiveFrame);
                 }
             });
             viewAllProductsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerViewAllProductsFrame.setVisible(true);
+                    buyerViewAllProducts(true, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
+                            buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
                 }
             });
 
@@ -1938,11 +1865,15 @@ public class MarketPlace {
                     System.out.println(input);
                     if(input != null) {
                         if (input.equals("Sort by Lowest Quantity")) {
-                            buyerSortByLowestQuantityFrame.setVisible(true);
-                            buyerSortByHighestQuantityFrame.setVisible(false);
+                            buyerSortByLowestQuantity(true, buyerSortByLowestQuantityPanel,
+                                    buyerSortByLowestQuantityFrame);
+                            buyerSortByHighestQuantity(false, buyerSortByHighestQuantityPanel,
+                                    buyerSortByHighestQuantityFrame);
                         } else if (input.equals("Sort by Highest Quantity")) {
-                            buyerSortByHighestQuantityFrame.setVisible(true);
-                            buyerSortByLowestQuantityFrame.setVisible(false);
+                            buyerSortByHighestQuantity(true, buyerSortByHighestQuantityPanel,
+                                    buyerSortByHighestQuantityFrame);
+                            buyerSortByLowestQuantity(false, buyerSortByLowestQuantityPanel,
+                                    buyerSortByLowestQuantityFrame);
                         }
                     }
                 }
@@ -1983,6 +1914,7 @@ public class MarketPlace {
                     } else if (Account.changeUsername(buyerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                        USERNAME[0] = buyerNewUsername.getText();
                     } else {
                         JOptionPane.showMessageDialog(null, "Change Failed",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
@@ -2244,12 +2176,12 @@ public class MarketPlace {
         buyerSearchByStorePanel.repaint();
         buyerSearchByStorePanel.revalidate();
         buyerSearchByStorePanel.setLayout(new BorderLayout());
-        String[] columnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
-        String[][] temp = new String[columnSearchStores.length][2];
+        String[] coloumnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
+        String[][] temp = new String[coloumnSearchStores.length][2];
         String[] columnNames = new String[]{"Store Name", "Product Name"};
         JTable searchedStoreTable = new JTable(temp, columnNames);
-        for (int i = 0; i < columnSearchStores.length; i++) {
-            String[] row = columnSearchStores[i].split(";");
+        for (int i = 0; i < coloumnSearchStores.length; i++) {
+            String[] row = coloumnSearchStores[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedStoreTable.setValueAt(row[j], i, j);
             }
@@ -2277,12 +2209,13 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.repaint();
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
-        String[] columnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
-        String[][] temp = new String[columnSearchDescription.length][4];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
+        String[][] temp = new String[coloumnSearchDescription.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+                "Description"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
-        for (int i = 0; i < columnSearchDescription.length; i++) {
-            String[] row = columnSearchDescription[i].split(";");
+        for (int i = 0; i < coloumnSearchDescription.length; i++) {
+            String[] row = coloumnSearchDescription[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedDescriptionTable.setValueAt(row[j], i, j);
             }
@@ -2301,24 +2234,26 @@ public class MarketPlace {
     }
 
     public static void searchByProduct(boolean visible, String buyerSearchedProduct,
-                                       JButton searchForProductButton,
+                                       JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
                                        JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel){
         buyerSearchByProductPanel.removeAll();
         buyerSearchByProductPanel.repaint();
         buyerSearchByProductPanel.revalidate();
         buyerSearchByProductPanel.setLayout(new BorderLayout());
-        String[] columnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
-        String[][] temp = new String[columnSearchProduct.length][4];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
+        String[][] temp = new String[coloumnSearchProduct.length][5];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", 
+                "Description"};
         JTable searchedProductTable = new JTable(temp, columnNames);
-        for (int i = 0; i < columnSearchProduct.length; i++) {
-            String[] row = columnSearchProduct[i].split(";");
+        for (int i = 0; i < coloumnSearchProduct.length; i++) {
+            String[] row = coloumnSearchProduct[i].split(";");
             for (int j = 0; j < row.length; j++) {
                 searchedProductTable.setValueAt(row[j], i, j);
             }
         }
         buyerSearchByProductPanel.add(new JScrollPane(searchedProductTable));
         buyerSearchByProductPanel.add(searchForProductButton, BorderLayout.SOUTH);
+        buyerSearchByProductPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
         buyerSearchByProductFrame.add(buyerSearchByProductPanel);
         buyerSearchByProductFrame.pack();
         buyerSearchByProductFrame.setLocationRelativeTo(null);
@@ -2337,14 +2272,14 @@ public class MarketPlace {
         buyerDisplayReviewsPanel.repaint();
         buyerDisplayReviewsPanel.revalidate();
         buyerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] buyerViewReviewsColumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
+        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
                 buyerViewReviewsProductName.getText()).split("\n");
-        String[][] temp = new String[buyerViewReviewsColumn.length][5];
+        String[][] temp = new String[buyerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
-        for (int i = 0; i < buyerViewReviewsColumn.length; i++) {
-            String[] row = buyerViewReviewsColumn[i].split(";");
-            System.out.println(buyerViewReviewsColumn.length);
+        for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
+            String[] row = buyerViewReviewsColoumn[i].split(";");
+            System.out.println(buyerViewReviewsColoumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
@@ -2368,14 +2303,14 @@ public class MarketPlace {
         sellerDisplayReviewsPanel.repaint();
         sellerDisplayReviewsPanel.revalidate();
         sellerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] sellerViewReviewsColumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
+        String[] sellerViewReviewsColoumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
                 username).split("\n");
-        String[][] temp = new String[sellerViewReviewsColumn.length][5];
+        String[][] temp = new String[sellerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
-        for (int i = 0; i < sellerViewReviewsColumn.length; i++) {
-            String[] row = sellerViewReviewsColumn[i].split(";");
-            System.out.println(sellerViewReviewsColumn.length);
+        for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
+            String[] row = sellerViewReviewsColoumn[i].split(";");
+            System.out.println(sellerViewReviewsColoumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
@@ -2399,13 +2334,13 @@ public class MarketPlace {
         buyerViewShoppingCartPanel.repaint();
         buyerViewShoppingCartPanel.revalidate();
         buyerViewShoppingCartPanel.setLayout(new BorderLayout());
-        String[] buyerViewShoppingCartColumn = Customer.getShoppingCartofCustomer(username).toArray(new String[0]);
-        String[][] temp = new String[buyerViewShoppingCartColumn.length][5];
+        String[] buyerViewShoppingCartColoumn = Customer.getShoppingCartofCustomer(username).split("\n");
+        String[][] temp = new String[buyerViewShoppingCartColoumn.length][5];
         String[] columnNames = new String[]{"Customer Username", "Email", "Store Name", "Product Name", "Quantity"};
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
-        for (int i = 0; i < buyerViewShoppingCartColumn.length; i++) {
-            String[] row = buyerViewShoppingCartColumn[i].split(";");
-            System.out.println(buyerViewShoppingCartColumn.length);
+        for (int i = 0; i < buyerViewShoppingCartColoumn.length; i++) {
+            String[] row = buyerViewShoppingCartColoumn[i].split(";");
+            System.out.println(buyerViewShoppingCartColoumn.length);
             System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewShoppingCartTable.setValueAt(row[j], i, j);
@@ -2422,5 +2357,145 @@ public class MarketPlace {
             buyerViewShoppingCartFrame.setVisible(false);
         }
 
+    }
+
+    public static void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame){
+        buyerSortCheapestPanel.removeAll();
+        buyerSortCheapestFrame.repaint();
+        buyerSortCheapestPanel.revalidate();
+        String[] coloumn = Seller.sortCheapest().split("\n");
+        String[][] temp = new String[coloumn.length][4];
+        String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable tableModelSortCheapest = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumn.length; i++){
+            String[] row = coloumn[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                tableModelSortCheapest.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSortCheapestPanel.add(new JScrollPane(tableModelSortCheapest));
+        buyerSortCheapestFrame.add(buyerSortCheapestPanel);
+        buyerSortCheapestFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerSortCheapestFrame.pack();
+        buyerSortCheapestFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerSortCheapestFrame.setVisible(true);
+        } else{
+            buyerSortCheapestFrame.setVisible(false);
+        }
+    }
+    public static void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame){
+        buyerSortExpensivePanel.removeAll();
+        buyerSortExpensivePanel.repaint();
+        buyerSortExpensivePanel.revalidate();
+        String[] coloumn = Seller.sortExpensive().split("\n");
+        String[][] temp = new String[coloumn.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable tableModelSortExpensive = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumn.length; i++){
+            String[] row = coloumn[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                tableModelSortExpensive.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSortExpensivePanel.add(new JScrollPane(tableModelSortExpensive));
+        buyerSortExpensiveFrame.add(buyerSortExpensivePanel);
+        buyerSortExpensiveFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerSortExpensiveFrame.pack();
+        buyerSortExpensiveFrame.setLocationRelativeTo(null);
+
+        if(visible){
+            buyerSortExpensiveFrame.setVisible(true);
+        } else{
+            buyerSortExpensiveFrame.setVisible(false);
+        }
+    }
+
+    public static void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
+                                                            JFrame buyerSortByLowestQuantityFrame){
+        buyerSortByLowestQuantityPanel.removeAll();
+        buyerSortByLowestQuantityPanel.repaint();
+        buyerSortByLowestQuantityPanel.revalidate();
+        String[] coloumn = Seller.lowestQuant().split("\n");
+        String[][] temp = new String[coloumn.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable tableModelSortLowestQuant = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumn.length; i++){
+            String[] row = coloumn[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                tableModelSortLowestQuant.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSortByLowestQuantityPanel.add(new JScrollPane(tableModelSortLowestQuant));
+        buyerSortByLowestQuantityFrame.add(buyerSortByLowestQuantityPanel);
+        buyerSortByLowestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerSortByLowestQuantityFrame.pack();
+        buyerSortByLowestQuantityFrame.setLocationRelativeTo(null);
+
+        if(visible){
+            buyerSortByLowestQuantityFrame.setVisible(true);
+        } else{
+            buyerSortByLowestQuantityFrame.setVisible(false);
+        }
+    }
+
+    public static void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
+                                                  JFrame buyerSortByHighestQuantityFrame){
+        buyerSortByHighestQuantityPanel.removeAll();
+        buyerSortByHighestQuantityPanel.repaint();
+        buyerSortByHighestQuantityPanel.revalidate();
+        String[] coloumn = Seller.highestQuant().split("\n");
+        String[][] temp = new String[coloumn.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable tableModelSortHighestQuant = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumn.length; i++){
+            String[] row = coloumn[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                tableModelSortHighestQuant.setValueAt(row[j], i, j);
+            }
+        }
+        buyerSortByHighestQuantityPanel.add(new JScrollPane(tableModelSortHighestQuant));
+        buyerSortByHighestQuantityFrame.add(buyerSortByHighestQuantityPanel);
+        buyerSortByHighestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerSortByHighestQuantityFrame.pack();
+        buyerSortByHighestQuantityFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerSortByHighestQuantityFrame.setVisible(true);
+        } else{
+            buyerSortByHighestQuantityFrame.setVisible(false);
+        }
+    }
+
+    public static void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
+                                            JFrame buyerViewAllProductsFrame, JButton buyerSearchForProductButton,
+                                            JButton buyerViewAllAddToShoppingCart){
+        buyerViewAllProductsPanel.removeAll();
+        buyerViewAllProductsPanel.repaint();
+        buyerViewAllProductsPanel.revalidate();
+        buyerViewAllProductsPanel.setLayout(new BorderLayout());
+        buyerViewAllProductsPanel.add(buyerSearchForProductButton, BorderLayout.SOUTH);
+        buyerViewAllProductsPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
+        //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
+
+        String[] coloumnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
+        String[][] temp = new String[coloumnViewAllProductsAndStores.length][4];
+        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
+        JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
+        for(int i = 0; i < coloumnViewAllProductsAndStores.length; i++){
+            String[] row = coloumnViewAllProductsAndStores[i].split(";");
+            for(int j = 0; j < row.length; j++){
+                viewAllProductsAndStoresTable.setValueAt(row[j], i, j);
+            }
+        }
+        buyerViewAllProductsPanel.add(new JScrollPane(viewAllProductsAndStoresTable));
+        buyerViewAllProductsFrame.add(buyerViewAllProductsPanel);
+        buyerViewAllProductsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        buyerViewAllProductsFrame.pack();
+        buyerViewAllProductsFrame.setLocationRelativeTo(null);
+        if(visible){
+            buyerViewAllProductsFrame.setVisible(true);
+        } else{
+            buyerViewAllProductsFrame.setVisible(false);
+        }
     }
 }

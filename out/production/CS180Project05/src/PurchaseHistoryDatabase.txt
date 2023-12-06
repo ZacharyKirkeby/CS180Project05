@@ -1,1 +1,1 @@
-email2;username2;store name;product name;5;8.00
+email1@gmail.com;username1;Store1;Product1;5;8.00

@@ -163,7 +163,8 @@ public class Store {
      * @Author Zachary Kirkeby
      **/
     public String getCustomersAndPurchases() {
-        String sentence = "Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased \n";
+        String sentence = "Customer Email | Customer Username | Store Name | Product Name " +
+                          "| Quantity Purchased | Price \n";
         try (BufferedReader reader = new BufferedReader(new FileReader("PurchaseHistoryDatabase.txt"))) {
             String line = reader.readLine();
             while (line != null) {
