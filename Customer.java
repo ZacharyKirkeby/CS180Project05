@@ -23,7 +23,9 @@ public abstract class Customer {
     private static String shoppingCartDatabaseFileName = "ShoppingCartDatabase.txt"; //shopping cart database
     private static String purchaseHistoryDatabaseFileName = "PurchaseHistoryDatabase.txt"; // purchase history
     private static boolean bool; //
-
+    public static Object shoppingCartGateKeeper = new Object();
+    public static Object purchaseHistoryGateKeeper = new Object();
+    public static Object reviewGateKeeper = new Object();
 
     /**
      * @param storeName
@@ -266,11 +268,13 @@ public abstract class Customer {
      */
     public static void writeToPurchaseHistoryDatabaseFile(String email, String username, String storeName,
                                                           String productName, int quantity, double unitprice) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(purchaseHistoryDatabaseFileName, true))) {
-            pw.println(String.format("%s;%s;%s;%s;%d;%.2f", email, username, storeName, productName, quantity,
+        synchronized (purchaseHistoryGateKeeper) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(purchaseHistoryDatabaseFileName, true))) {
+                pw.println(String.format("%s;%s;%s;%s;%d;%.2f", email, username, storeName, productName, quantity,
                     unitprice));
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -279,13 +283,15 @@ public abstract class Customer {
      * the shopping cart database file
      */
     public static void writeToShoppingCartDatabaseFile() {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(shoppingCartDatabaseFileName))) {
-            for (int i = 0; i < usernames.size(); i++) {
-                pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
+        synchronized (shoppingCartGateKeeper) {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(shoppingCartDatabaseFileName))) {
+                for (int i = 0; i < usernames.size(); i++) {
+                    pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
                         productNames.get(i), quantities.get(i)));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -403,27 +409,29 @@ public abstract class Customer {
             System.out.println("Invalid Input");
             return false;
         }
-        try (BufferedReader br = new BufferedReader(new FileReader("Reviews.txt"));
-             PrintWriter pw = new PrintWriter(new FileWriter("Reviews.txt", true), true)) {
-            String line = br.readLine();
-            int count = 0;
-            if (line == null) {
-                pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
+        synchronized (reviewGateKeeper) {
+            try (BufferedReader br = new BufferedReader(new FileReader("Reviews.txt"));
+                 PrintWriter pw = new PrintWriter(new FileWriter("Reviews.txt", true), true)) {
+                String line = br.readLine();
+                int count = 0;
+                if (line == null) {
+                    pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
                         description));
-            } else {
-                while (line != null) {
-                    line = br.readLine();
-                    if (line == null) {
-                        pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
+                } else {
+                    while (line != null) {
+                        line = br.readLine();
+                        if (line == null) {
+                            pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
                                 description));
+                        }
                     }
                 }
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     /**
