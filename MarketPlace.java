@@ -482,9 +482,14 @@ public class MarketPlace {
                         } else if (Integer.parseInt(editProductQuantityField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
-                        } else if (Seller.editProductQuantity(editProductQuantityStoreName.getText(),
-                                editProductQuantityProductName.getText(),
-                                Integer.parseInt(editProductQuantityField.getText()), USERNAME[0])) {
+                        } else {
+                            writer.println("sellermodificationchoices,editProductQuantity" + "," +
+                                            editProductQuantityStoreName.getText() + "," +
+                                            editProductQuantityProductName.getText() + "," +
+                                    editProductQuantityField.getText() + "," + USERNAME[0]);
+                            writer.flush();
+                            bool = reader.readLine();
+                        } if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Edited",
                                     "Edit Product Quantity", JOptionPane.INFORMATION_MESSAGE);
                         } else {
