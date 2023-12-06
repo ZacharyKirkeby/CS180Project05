@@ -8,7 +8,7 @@ import java.util.*;
  * Note: Class is UNTESTED
  * Manages all stores and allows for creation and deletion of stores
  * Also allows for creation, editing, and deletion of products in stores
- * Create stores.txt and products.txt before using
+ * Create stores.txt before using
  *
  * @author Alexander Chen, 05
  * @author Armaan Sayyad, 05
@@ -590,7 +590,7 @@ public abstract class Seller {
     }
 
     /**
-     * Writes Store and Product information to stores.txt and products.txt
+     * Writes Store and Product information to stores.txt
      */
     private static void writeToFile() {
         try {
@@ -609,7 +609,7 @@ public abstract class Seller {
     }
 
     /**
-     * Reads Store and Product information from stores.txt and products.txt
+     * Reads Store and Product information from stores.txt
      * The toStrings for Store and Product should separate attributes with a ","
      */
     private static void readFromFile() {
