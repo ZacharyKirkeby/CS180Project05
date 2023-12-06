@@ -354,6 +354,25 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Edit Failed",
                                 "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                     }
+
+                    if (editProductDescriptionStoreName.getText().isEmpty() ||
+                            editProductDescriptionProductName.getText().isEmpty() ||
+                            editProductDescriptionField.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Enter All Fields",
+                                "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        Seller.editProductDescription(editProductDescriptionStoreName.getText(),
+                                editProductDescriptionProductName.getText(),
+                                editProductDescriptionField.getText(), USERNAME[0]);
+                        var variable = // server return
+                        if () { // TODO: MOVE TO SERVER
+                            JOptionPane.showMessageDialog(null, "Product Edited",
+                                    "Edit Product Description", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Edit Failed",
+                                    "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 }
             });
             /*
