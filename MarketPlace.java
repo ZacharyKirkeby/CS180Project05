@@ -1580,6 +1580,7 @@ public class MarketPlace {
                     } else if (Account.changeUsername(sellerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                        USERNAME[0] = sellerNewUsername.getText();
                     } else {
                         JOptionPane.showMessageDialog(null, "Change Failed",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
@@ -1913,6 +1914,7 @@ public class MarketPlace {
                     } else if (Account.changeUsername(buyerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                        USERNAME[0] = buyerNewUsername.getText();
                     } else {
                         JOptionPane.showMessageDialog(null, "Change Failed",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
