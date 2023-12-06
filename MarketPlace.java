@@ -1619,7 +1619,12 @@ public class MarketPlace {
                     if (getCSVStoreName.getText().isEmpty() || getCSVPath.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Get Product CSV", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.writeProductsToCSV(getCSVStoreName.getText(), getCSVPath.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("sellerStatistics,writeProductsToCSV," + getCSVStoreName.getText() + "," +
+                                getCSVPath.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Successfully Written",
                                 "Get Product CSV", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1661,7 +1666,13 @@ public class MarketPlace {
                     if (sellerNewUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeUsername(sellerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changeUsername," + sellerNewUsername.getText() + "," +
+                                USERNAME[0]);
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
                         USERNAME[0] = sellerNewUsername.getText();
@@ -1683,8 +1694,12 @@ public class MarketPlace {
                     if (sellerChangeNewPassword.getText().isEmpty() || sellerChangeOldPassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Password", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changePassword(USERNAME[0], sellerChangeOldPassword.getText(),
-                            sellerChangeNewPassword.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changePassword," + USERNAME[0] + "," +
+                                        sellerChangeOldPassword.getText() + "," + sellerChangeNewPassword.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Password Changed",
                                 "Change Password", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -1705,8 +1720,12 @@ public class MarketPlace {
                     if (sellerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], sellerChangeRolePassword.getText(), "Buyer")) { // TODO:
-                        // MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changeRole," + USERNAME[0] + "," +
+                                sellerChangeRolePassword.getText() + "," "Buyer");
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -1733,7 +1752,12 @@ public class MarketPlace {
                     if (sellerDeleteAccountField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Delete Account", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.deleteAccount(USERNAME[0], sellerDeleteAccountField.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,deleteAccount," + USERNAME[0] + "," +
+                                sellerDeleteAccountField.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Account Deleted",
                                 "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -1996,7 +2020,12 @@ public class MarketPlace {
                     if (buyerNewUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Username", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeUsername(buyerNewUsername.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changeUsername," + buyerNewUsername.getText() + "," +
+                                USERNAME[0]);
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Username Changed",
                                 "Change Username", JOptionPane.INFORMATION_MESSAGE);
                         USERNAME[0] = buyerNewUsername.getText();
