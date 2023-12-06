@@ -1,1 +1,5 @@
 email2;username2;store name;product name;5;8.00
+yang@gmail.com;yang;apple store;fuji;9;2.00
+yang@gmail.com;yang;apple store;grandma;101;1.00
+yang@gmail.com;yang;apple store;fuji;10;2.00
+yang@gmail.com;yang;apple store;red;10;0.50
