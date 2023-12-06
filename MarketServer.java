@@ -68,7 +68,7 @@ public class MarketServer {
                                         writer.flush();
                                         break;
                                     case "editProductDescription":
-                                        bool = Seller.editProductDescription(temp[2], temp[3]. temp[4], temp[5]);
+                                        bool = Seller.editProductDescription(temp[2], temp[3], temp[4], temp[5]);
                                         writer.println(bool);
                                         writer.flush();
                                         break;
