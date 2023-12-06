@@ -531,8 +531,14 @@ public class MarketPlace {
                     if (deleteProductStoreName.getText().isEmpty() || deleteProductNameField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Delete Product", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.deleteProduct(deleteProductStoreName.getText(),
-                            deleteProductNameField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("sellermodificationchoices,deleteProduct" + "," +
+                                        deleteProductStoreName.getText() + "," +
+                                        deleteProductNameField.getText() + "," + USERNAME[0]);
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+
+                    } if (bool) { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Product Deleted",
                                 "Delete Product", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -570,8 +576,13 @@ public class MarketPlace {
                     if (addProductCSVStoreName.getText().isEmpty() || addProductCSVPath.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.readProductsFromCSV(addProductCSVStoreName.getText(),
-                            addProductCSVPath.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("sellermodificationchoices,readProductsFromCSV", + "," +
+                                        addProductCSVStoreName.getText() + "," + addProductCSVPath.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+
+                    } if (bool)  { // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Products Added",
                                 "Add Products From CSV", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -622,9 +633,12 @@ public class MarketPlace {
                                    || (Integer.parseInt(saleCapField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
-                        } else if (store.triggerSale(saleProductName.getText(),
-                                Double.parseDouble(salePriceField.getText()),
-                                Integer.parseInt(saleCapField.getText()))) { // TODO: MOVE TO SERVER
+                        } else {
+                            writer.println("sellermodificationchoices,triggerSale" + "," + saleProductName.getText() +
+                                    "," + salePriceField.getText() + "," + saleCapField.getText());
+                            writer.flush();
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } if (bool)  { // TODO: MOVE TO SERVER
                             JOptionPane.showMessageDialog(null, "Sale Created",
                                     "Start Sale", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -676,8 +690,12 @@ public class MarketPlace {
                         } else if (Integer.parseInt(purchaseLimitField.getText()) < 1) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
-                        } else if (store.triggerOrderCap(purchaseLimitProductName.getText(),
-                                Integer.parseInt(purchaseLimitField.getText()))) { // TODO: MOVE TO SERVER
+                        } else {
+                            writer.println("sellermodificationchoices,triggerOrderCap" + "," +
+                                            purchaseLimitProductName.getText() + "," + purchaseLimitField.getText());
+                            writer.flush();
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } if (bool) { // TODO: MOVE TO SERVER
                             JOptionPane.showMessageDialog(null, "Limit Set",
                                     "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
                         } else {
