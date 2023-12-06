@@ -311,6 +311,7 @@ public class MarketPlace {
                                            createProductStoreNameField.getText() + "," + createProductNameField.getText() + ","
                                            + createProductDescriptionField.getText() + "," + createProductPriceField.getText()
                                            + "," + createProductQuantityField.getText() + "," + USERNAME[0]);
+                            writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Product Created",
@@ -488,8 +489,7 @@ public class MarketPlace {
                                             editProductQuantityProductName.getText() + "," +
                                     editProductQuantityField.getText() + "," + USERNAME[0]);
                             writer.flush();
-                            bool = reader.readLine();
-                        } if (bool) {
+                        } if (Boolean.parseBoolean(reader.readLine())) {
                             JOptionPane.showMessageDialog(null, "Product Edited",
                                     "Edit Product Quantity", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -499,6 +499,8 @@ public class MarketPlace {
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                 "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
                     }
                 }
             });
