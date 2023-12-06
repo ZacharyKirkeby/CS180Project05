@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Project 04 -- MarketPlace.java
+ * Project 05 -- MarketPlace.java
  * creates a Market to manage interactions and listings in a marketplace
  * Handles all MarketPlace related tasks
  * and functions.
@@ -17,6 +17,7 @@ import java.util.Scanner;
  *
  * @author Armaan Sayyad, 05
  * @author Zachary Kirkeby, 05
+ * @author Alex
  * @version November 10, 2023
  */
 public class MarketPlace {
@@ -98,12 +99,15 @@ public class MarketPlace {
      *
      * @param args (String[])
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
 
         Scanner scanner = new Scanner(System.in); //instantiates a scanner object to read terminal inputs
         do {
             boolean logOrRegistration = false;
             final String[] USERNAME = new String[1];
+            Socket socket = new Socket("localhost", 4242);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
             /*
             LOGIN/REGISTRATION FRAME
@@ -295,10 +299,13 @@ public class MarketPlace {
                                 (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Create Product", JOptionPane.ERROR_MESSAGE);
-                        } else if (Seller.createProduct(createProductStoreNameField.getText(),
-                                createProductNameField.getText(), createProductDescriptionField.getText(),
-                                Double.parseDouble(createProductPriceField.getText()),
-                                Integer.parseInt(createProductQuantityField.getText()), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        } else {
+                            writer.println("sellermodificationchoices,createProduct," +
+                                    createProductStoreNameField.getText() + "," + createProductNameField.getText() + ","
+                                    + createProductDescriptionField.getText() + "," + createProductPriceField.getText()
+                                    + "," + createProductQuantityField.getText() + "," + USERNAME[0]);
+                            bool = reader.readLine();
+                        } if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Created",
                                     "Create Product", JOptionPane.INFORMATION_MESSAGE);
                         } else {
@@ -345,9 +352,13 @@ public class MarketPlace {
                             editProductDescriptionField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Edit Product Description", JOptionPane.ERROR_MESSAGE);
-                    } else if (Seller.editProductDescription(editProductDescriptionStoreName.getText(),
-                            editProductDescriptionProductName.getText(),
-                            editProductDescriptionField.getText(), USERNAME[0])) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("sellermodificationchoices,editProductDescription" +
+                                editProductDescriptionStoreName.getText() + "," +
+                                editProductDescriptionProductName.getText() +
+                         "," + editProductDescriptionField.getText() + "," + USERNAME[0]);
+                        bool = reader.readline();
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Product Edited",
                                 "Edit Product Description", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -413,9 +424,14 @@ public class MarketPlace {
                                 editProductPriceField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Edit Product Price", JOptionPane.ERROR_MESSAGE);
-                        } else if (Seller.editProductPrice(editProductPriceStoreName.getText(),
-                                editProductPriceProductName.getText(),
-                                Double.parseDouble(editProductPriceField.getText()), USERNAME[0])) { // TODO: MOVE TO SERVER
+                        } else {
+                            writer.println("sellermodificationchoices,editProductPrice" + "," +
+                                            editProductPriceStoreName.getText() + "," +
+                                            editProductPriceProductName.getText() + "," +
+                                    editProductPriceField.getText() + "," + USERNAME[0]);
+                            bool = reader.readLine();
+
+                        } if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Edited",
                                     "Edit Product Price", JOptionPane.INFORMATION_MESSAGE);
                         } else {
