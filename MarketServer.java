@@ -234,20 +234,17 @@ public class MarketServer {
                                         break;
                                     case "buyProducts":
                                         bool = Customer.buyProductsInShoppingCart(Account.getUsername(temp[2]));
-                                        ArrayList<String> check = Customer.getShoppingCartofCustomer(temp[2]);
-                                        while (!check.isEmpty()) {
-                                            bool = Customer.buyProductsInShoppingCart(
-                                                    Account.getUsername(temp[2]));
-                                            writer.println(bool);
-                                            writer.flush();
-                                            check = Customer.getShoppingCartofCustomer(temp[2]);
+                                        boolean check = Customer.getShoppingCartofCustomer(temp[2]).isEmpty();
+                                        while (!check) {
+                                            bool = Customer.buyProductsInShoppingCart(temp[2]);
+                                            check = Customer.getShoppingCartofCustomer(temp[2]).isEmpty();
                                         }
                                         writer.println(bool);
                                         writer.flush();
                                         break;
                                     case "getShoppingCart":
                                         String print = "";
-                                        for (String s : Customer.getShoppingCartofCustomer(temp[2])) {
+                                        for (String s : Customer.getShoppingCartofCustomer(temp[2]).split("\n")) {
                                             String[] view = s.split(";");
                                             print += ("Customer Name | Store Name " +
                                                     "| Product Name | Qty\n");

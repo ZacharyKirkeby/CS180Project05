@@ -1070,7 +1070,7 @@ public class MarketPlace {
             JTextField buyerChangeRolePassword = new JTextField();
             buyerChangeRolePanel.add(buyerChangeRolePassword);
             buyerChangeRolePanel.add(new JLabel());
-            JButton buyerChangeRole = new JButton("Change To Buyer");
+            JButton buyerChangeRole = new JButton("Change To Seller");
             buyerChangeRolePanel.add(buyerChangeRole);
             buyerChangeRoleFrame.add(buyerChangeRolePanel);
             buyerChangeRoleFrame.setTitle("Change Role");
@@ -1293,15 +1293,15 @@ public class MarketPlace {
                                 "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else if (Account.login(loginUsernameOrEmailField.getText(), loginPasswordField.getText())) { // TODO: MOVE TO SERVER
                         // TODO: MOVE TO SERVER
-                        USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText());
+                        USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
                         loginRegisterFrame.setVisible(false);
                         registerFrame.setVisible(false);
                         loginFrame.setVisible(false);
                         loginUsernameOrEmailField.setText("");
                         loginPasswordField.setText("");
-                        if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
+                        if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) { // TODO: MOVE TO SERVER
                             sellerOptionsFrame.setVisible(true);
-                        } else if(Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")){
+                        } else if(Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")){ // TODO: MOVE TO SERVER
                             buyerOptionsFrame.setVisible(true);
                         }
                     } else {
@@ -1871,7 +1871,7 @@ public class MarketPlace {
             buyerManageAccountButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    sellerManageAccountFrame.setVisible(true);
+                    buyerManageAccountFrame.setVisible(true);
                 }
             });
 
@@ -1995,7 +1995,7 @@ public class MarketPlace {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Buyer")) { // TODO:
+                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Seller")) { // TODO:
                         // MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
