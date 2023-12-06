@@ -117,8 +117,6 @@ Expected result: Application loads the "Login Failed" page because the account h
 
 Test Status: Passed.
 
-
-
 **SELLER MARKETPLACE TEST CASES**
 
 
