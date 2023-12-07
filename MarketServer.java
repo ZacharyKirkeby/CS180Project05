@@ -49,6 +49,21 @@ public class MarketServer {
                             boolean loggedIn = Account.login(temp[1], temp[2]);
                             writer.println(loggedIn);
                             writer.flush();
+                            String check1 = reader.readLine();
+                            if (check1 != null) {
+                                check1 = reader.readLine();
+                                writer.println(Account.getUsername(check1));
+                                writer.flush();
+                                bool = Account.getRole(check1).equalsIgnoreCase("Seller");
+                                writer.println(bool);
+                                writer.flush();
+                                if (!bool) {
+                                    bool = Account.getRole(check1).equalsIgnoreCase("Buyer");
+                                    writer.println(bool);
+                                    writer.flush();
+                                }
+
+                            }
                             break;
                         case "register":
                             boolean success = Account.createAccount(temp[1], temp[2], temp[3], temp[4]);
