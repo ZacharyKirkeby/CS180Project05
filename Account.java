@@ -260,6 +260,7 @@ public class Account {
      * @return String username
      */
     public static String getUsername(String usernameOrEmail) {
+        readFromFile();
         int index = -1;
         if (usernameOrEmail.contains("@")) {
             for (int i = 0; i < emails.size(); i++) {
@@ -286,6 +287,7 @@ public class Account {
      * @return String email
      */
     public static String getEmail(String usernameOrEmail) {
+        readFromFile();
         int index = -1;
         if (usernameOrEmail.contains("@")) {
             for (int i = 0; i < emails.size(); i++) {
@@ -312,6 +314,7 @@ public class Account {
      * @return String value of role or null
      */
     public static String getRole(String usernameOrEmail) {
+        readFromFile();
         if (usernameOrEmail.contains("\\") || usernameOrEmail.contains(" ")) {
             return null;
         }

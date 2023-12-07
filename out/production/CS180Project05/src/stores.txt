@@ -1,4 +1,1 @@
-Store1,IN,username;Product1,Food,10.0,5;
-apple store,indiana,yilin;fuji,juicy,2.0,0;grandma,green,1.0,90;red,very red,0.5,90;
-
-
+orange store,indiana,me;
