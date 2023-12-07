@@ -1289,8 +1289,6 @@ public class MarketPlace {
                             throw new RuntimeException(ex);
                         }
                         if (bool) {
-                            writer.println("something");
-                            writer.flush();
                             writer.println(loginUsernameOrEmailField.getText());
                             writer.flush();
                             try {
@@ -1303,8 +1301,6 @@ public class MarketPlace {
                             loginFrame.setVisible(false);
                             loginUsernameOrEmailField.setText("");
                             loginPasswordField.setText("");
-                            writer.println("getRole");
-                            writer.flush();
                             try {
                                 bool = Boolean.parseBoolean(reader.readLine());
                             } catch (IOException ex) {
@@ -1313,13 +1309,7 @@ public class MarketPlace {
                             if (bool) {
                                 sellerOptionsFrame.setVisible(true); //server doesnt distinguish atm
                             } else {
-                                try {
-                                    if (Boolean.parseBoolean(reader.readLine())) { // TODO: MOVE TO SERVER
-                                        buyerOptionsFrame.setVisible(true);
-                                    }
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
-                                }
+                                buyerOptionsFrame.setVisible(true);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Login Failed",
@@ -2250,7 +2240,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Delete Account", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,deleteAccount" + USERNAME[0] + "," +
+                        writer.println("manageAccount,deleteAccount," + USERNAME[0] + "," +
                                        buyerDeleteAccountField.getText());
                         writer.flush();
                         boolean bool = false;
