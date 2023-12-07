@@ -1286,16 +1286,37 @@ public class MarketPlace {
                             throw new RuntimeException(ex);
                         }
                         if (bool) {
-                            USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
+                            writer.println("something");
+                            writer.flush();
+                            writer.println(loginUsernameOrEmailField.getText());
+                            writer.flush();
+                            try {
+                                USERNAME[0] = reader.readLine();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                             loginRegisterFrame.setVisible(false);
                             registerFrame.setVisible(false);
                             loginFrame.setVisible(false);
                             loginUsernameOrEmailField.setText("");
                             loginPasswordField.setText("");
-                            if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) { // TODO: MOVE TO SERVER
+                            writer.println("getRole");
+                            writer.flush();
+                            try {
+                                bool = Boolean.parseBoolean(reader.readLine());
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            if (bool) {
                                 sellerOptionsFrame.setVisible(true); //server doesnt distinguish atm
-                            } else if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")) { // TODO: MOVE TO SERVER
-                                buyerOptionsFrame.setVisible(true);
+                            } else {
+                                try {
+                                    if (Boolean.parseBoolean(reader.readLine())) { // TODO: MOVE TO SERVER
+                                        buyerOptionsFrame.setVisible(true);
+                                    }
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Login Failed",
