@@ -28,7 +28,15 @@ import java.util.ArrayList;
 
 public class MarketPlace {
     private static ArrayList<Store> stores = new ArrayList<>(); //
-    private final Socket socket = new Socket("localhost", 4242);
+    static Socket socket;
+
+    static {
+        try {
+            socket = new Socket("localhost", 4242);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Constructors for the MarketPlace
@@ -55,14 +63,13 @@ public class MarketPlace {
      *
      * @param args (String[])
      */
-    public void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
 
         do {
             boolean logOrRegistration = false;
             final String[] USERNAME = new String[1];
-            //Socket socket = new Socket("localhost", 4242);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
             /*
             LOGIN/REGISTRATION FRAME
@@ -2436,7 +2443,7 @@ public class MarketPlace {
         } while (true);
     }
 
-    public void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
+    public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
                                      JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel) throws IOException {
         /*
             BUYER SEARCH BY STORE FRAME
@@ -2477,7 +2484,7 @@ public class MarketPlace {
              */
     }
 
-    public void searchByDescription(boolean visible, String buyerSearchedDescription,
+    public static void searchByDescription(boolean visible, String buyerSearchedDescription,
                                            JButton searchProductByDescriptionButton,
                                            JFrame buyerSearchByDescriptionFrame, JPanel buyerSearchByDescriptionPanel) throws IOException {
         buyerSearchByDescriptionPanel.removeAll();
@@ -2485,7 +2492,7 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
         writer.println("searchByDescription," + buyerSearchedDescription);
@@ -2515,7 +2522,7 @@ public class MarketPlace {
         }
     }
 
-    public void searchByProduct(boolean visible, String buyerSearchedProduct,
+    public static void searchByProduct(boolean visible, String buyerSearchedProduct,
                                        JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
                                        JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel) throws IOException {
         buyerSearchByProductPanel.removeAll();
@@ -2585,7 +2592,7 @@ public class MarketPlace {
         }
     }
 
-    public void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
+    public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
                                             JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel) throws IOException {
         sellerDisplayReviewsPanel.removeAll();
         sellerDisplayReviewsPanel.repaint();
@@ -2652,7 +2659,7 @@ public class MarketPlace {
 
     }
 
-    public void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame) throws IOException {
+    public static void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame) throws IOException {
         buyerSortCheapestPanel.removeAll();
         buyerSortCheapestFrame.repaint();
         buyerSortCheapestPanel.revalidate();
@@ -2685,7 +2692,7 @@ public class MarketPlace {
         }
     }
 
-    public void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) throws IOException {
+    public static void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) throws IOException {
         buyerSortExpensivePanel.removeAll();
         buyerSortExpensivePanel.repaint();
         buyerSortExpensivePanel.revalidate();
@@ -2719,7 +2726,7 @@ public class MarketPlace {
         }
     }
 
-    public void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
+    public static void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
                                                  JFrame buyerSortByLowestQuantityFrame) throws IOException {
         buyerSortByLowestQuantityPanel.removeAll();
         buyerSortByLowestQuantityPanel.repaint();
@@ -2754,7 +2761,7 @@ public class MarketPlace {
         }
     }
 
-    public void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
+    public static void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
                                                   JFrame buyerSortByHighestQuantityFrame) throws IOException {
         buyerSortByHighestQuantityPanel.removeAll();
         buyerSortByHighestQuantityPanel.repaint();
@@ -2788,7 +2795,7 @@ public class MarketPlace {
         }
     }
 
-    public void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
+    public static void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
                                             JFrame buyerViewAllProductsFrame, JButton buyerSearchForProductButton,
                                             JButton buyerViewAllAddToShoppingCart) throws IOException {
         buyerViewAllProductsPanel.removeAll();
@@ -2828,7 +2835,7 @@ public class MarketPlace {
         }
     }
 
-    public void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
+    public static void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
                                                    JFrame sellerViewCustomerPurchasesFrame, String storeName,
                                                    String username, boolean sorted) throws IOException {
         sellerViewCustomerPurchasesPanel.removeAll();
