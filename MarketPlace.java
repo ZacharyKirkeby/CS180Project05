@@ -24,15 +24,18 @@ import java.util.ArrayList;
  * @author Alex
  * @version November 10, 2023
  */
+
+
 public class MarketPlace {
     private static ArrayList<Store> stores = new ArrayList<>(); //
+    private final Socket socket = new Socket("localhost", 4242);
 
     /**
      * Constructors for the MarketPlace
      *
      * @param stores (ArrayList<Stores></>)
      */
-    public MarketPlace(ArrayList<Store> stores) {
+    public MarketPlace(ArrayList<Store> stores) throws IOException {
         this.stores = stores;
         // some kind of logic tbd
     }
@@ -52,14 +55,14 @@ public class MarketPlace {
      *
      * @param args (String[])
      */
-    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
+    public void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
 
         do {
             boolean logOrRegistration = false;
             final String[] USERNAME = new String[1];
-            Socket socket = new Socket("localhost", 4242);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            //Socket socket = new Socket("localhost", 4242);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            PrintWriter writer = new PrintWriter(this.socket.getOutputStream());
 
             /*
             LOGIN/REGISTRATION FRAME
@@ -1544,13 +1547,21 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
                     } else if (customerPurchasesBox.getSelectedItem().toString().equals("Yes")) {
-                        sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
-                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
-                                customerPurchasesUsername.getText(), true);
+                        try {
+                            sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
+                                    sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                    customerPurchasesUsername.getText(), true);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     } else {
-                        sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
-                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
-                                customerPurchasesUsername.getText(), false);
+                        try {
+                            sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
+                                    sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                    customerPurchasesUsername.getText(), false);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1660,8 +1671,12 @@ public class MarketPlace {
             customerReviews.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    sellerDisplayReviews(true, customerReviewsName, USERNAME[0], sellerDisplayReviewsFrame,
-                            sellerDisplayReviewsPanel);
+                    try {
+                        sellerDisplayReviews(true, customerReviewsName, USERNAME[0], sellerDisplayReviewsFrame,
+                                sellerDisplayReviewsPanel);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
             /*
@@ -1866,8 +1881,12 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
-                                buyerSearchByStorePanel);
+                        try {
+                            searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
+                                    buyerSearchByStorePanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1880,8 +1899,12 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
-                                buyerSearchByStorePanel);
+                        try {
+                            searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy, buyerSearchByStoreFrame,
+                                    buyerSearchByStorePanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1896,8 +1919,12 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Description", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
-                                buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                        try {
+                            searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
+                                    buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1912,8 +1939,12 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Description", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
-                                buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                        try {
+                            searchByDescription(true, buyerSearchedDescription, searchProductByDescriptionButtonCopy,
+                                    buyerSearchByDescriptionFrame, buyerSearchByDescriptionPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1928,10 +1959,14 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
-                                buyerViewAllAddToShoppingCart,
-                                buyerSearchByProductFrame
-                                , buyerSearchByProductPanel);
+                        try {
+                            searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                    buyerViewAllAddToShoppingCart,
+                                    buyerSearchByProductFrame
+                                    , buyerSearchByProductPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
 
                 }
@@ -1946,9 +1981,13 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
-                                buyerViewAllAddToShoppingCart,
-                                buyerSearchByProductFrame, buyerSearchByProductPanel);
+                        try {
+                            searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
+                                    buyerViewAllAddToShoppingCart,
+                                    buyerSearchByProductFrame, buyerSearchByProductPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
 
                 }
@@ -1963,10 +2002,18 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        buyerViewAllProducts(false, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
-                                buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
-                        searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
-                                buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
+                        try {
+                            buyerViewAllProducts(false, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
+                                    buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        try {
+                            searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
+                                    buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 }
             });
@@ -1988,20 +2035,32 @@ public class MarketPlace {
             sortProductsByCheapestButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerSortCheapest(true, buyerSortCheapestPanel, buyerSortCheapestFrame);
+                    try {
+                        buyerSortCheapest(true, buyerSortCheapestPanel, buyerSortCheapestFrame);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
             sortProductsByMostExpensiveButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerSortExpensive(true, buyerSortExpensivePanel, buyerSortExpensiveFrame);
+                    try {
+                        buyerSortExpensive(true, buyerSortExpensivePanel, buyerSortExpensiveFrame);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
             viewAllProductsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerViewAllProducts(true, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
-                            buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                    try {
+                        buyerViewAllProducts(true, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
+                                buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
 
@@ -2015,15 +2074,31 @@ public class MarketPlace {
                     System.out.println(input);
                     if (input != null) {
                         if (input.equals("Sort by Lowest Quantity")) {
-                            buyerSortByLowestQuantity(true, buyerSortByLowestQuantityPanel,
-                                    buyerSortByLowestQuantityFrame);
-                            buyerSortByHighestQuantity(false, buyerSortByHighestQuantityPanel,
-                                    buyerSortByHighestQuantityFrame);
+                            try {
+                                buyerSortByLowestQuantity(true, buyerSortByLowestQuantityPanel,
+                                        buyerSortByLowestQuantityFrame);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            try {
+                                buyerSortByHighestQuantity(false, buyerSortByHighestQuantityPanel,
+                                        buyerSortByHighestQuantityFrame);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         } else if (input.equals("Sort by Highest Quantity")) {
-                            buyerSortByHighestQuantity(true, buyerSortByHighestQuantityPanel,
-                                    buyerSortByHighestQuantityFrame);
-                            buyerSortByLowestQuantity(false, buyerSortByLowestQuantityPanel,
-                                    buyerSortByLowestQuantityFrame);
+                            try {
+                                buyerSortByHighestQuantity(true, buyerSortByHighestQuantityPanel,
+                                        buyerSortByHighestQuantityFrame);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                            try {
+                                buyerSortByLowestQuantity(false, buyerSortByLowestQuantityPanel,
+                                        buyerSortByLowestQuantityFrame);
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }
@@ -2361,8 +2436,8 @@ public class MarketPlace {
         } while (true);
     }
 
-    public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
-                                     JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel) {
+    public void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
+                                     JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel) throws IOException {
         /*
             BUYER SEARCH BY STORE FRAME
              */
@@ -2370,7 +2445,13 @@ public class MarketPlace {
         buyerSearchByStorePanel.repaint();
         buyerSearchByStorePanel.revalidate();
         buyerSearchByStorePanel.setLayout(new BorderLayout());
-        String[] coloumnSearchStores = Seller.searchByStore(buyerSearchedStore).split("\n");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("searchByStore," + buyerSearchedStore);
+        writer.flush();
+
+        String[] coloumnSearchStores = reader.readLine().split("\n");
         String[][] temp = new String[coloumnSearchStores.length][2];
         String[] columnNames = new String[]{"Store Name", "Product Name"};
         JTable searchedStoreTable = new JTable(temp, columnNames);
@@ -2396,14 +2477,21 @@ public class MarketPlace {
              */
     }
 
-    public static void searchByDescription(boolean visible, String buyerSearchedDescription,
+    public void searchByDescription(boolean visible, String buyerSearchedDescription,
                                            JButton searchProductByDescriptionButton,
-                                           JFrame buyerSearchByDescriptionFrame, JPanel buyerSearchByDescriptionPanel) {
+                                           JFrame buyerSearchByDescriptionFrame, JPanel buyerSearchByDescriptionPanel) throws IOException {
         buyerSearchByDescriptionPanel.removeAll();
         buyerSearchByDescriptionPanel.repaint();
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
-        String[] coloumnSearchDescription = Seller.searchByDescription(buyerSearchedDescription).split("\n");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("searchByDescription," + buyerSearchedDescription);
+        writer.flush();
+
+        String[] coloumnSearchDescription = reader.readLine().split("\n");
         String[][] temp = new String[coloumnSearchDescription.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
                 "Description"};
@@ -2427,14 +2515,20 @@ public class MarketPlace {
         }
     }
 
-    public static void searchByProduct(boolean visible, String buyerSearchedProduct,
+    public void searchByProduct(boolean visible, String buyerSearchedProduct,
                                        JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
-                                       JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel) {
+                                       JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel) throws IOException {
         buyerSearchByProductPanel.removeAll();
         buyerSearchByProductPanel.repaint();
         buyerSearchByProductPanel.revalidate();
         buyerSearchByProductPanel.setLayout(new BorderLayout());
-        String[] coloumnSearchProduct = Seller.searchByProduct(buyerSearchedProduct).split("\n");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("searchByProduct," + buyerSearchedProduct);
+        writer.flush();
+
+        String[] coloumnSearchProduct = reader.readLine().split("\n");
         String[][] temp = new String[coloumnSearchProduct.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
                 "Description"};
@@ -2491,14 +2585,19 @@ public class MarketPlace {
         }
     }
 
-    public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
-                                            JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel) {
+    public void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
+                                            JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel) throws IOException {
         sellerDisplayReviewsPanel.removeAll();
         sellerDisplayReviewsPanel.repaint();
         sellerDisplayReviewsPanel.revalidate();
         sellerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] sellerViewReviewsColoumn = Seller.viewCustomerReviews(sellerViewReviewsProductName.getText(),
-                username).split("\n");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("viewCustomerReviews," + sellerViewReviewsProductName.getText() + "," + username);
+        writer.flush();
+
+        String[] sellerViewReviewsColoumn = reader.readLine().split("\n");
         String[][] temp = new String[sellerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
@@ -2553,11 +2652,18 @@ public class MarketPlace {
 
     }
 
-    public static void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame) {
+    public void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame) throws IOException {
         buyerSortCheapestPanel.removeAll();
         buyerSortCheapestFrame.repaint();
         buyerSortCheapestPanel.revalidate();
-        String[] coloumn = Seller.sortCheapest().split("\n");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("sortCheapest,");
+        writer.flush();
+
+        String[] coloumn = reader.readLine().split("\n");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortCheapest = new JTable(temp, columnNames);
@@ -2579,11 +2685,18 @@ public class MarketPlace {
         }
     }
 
-    public static void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) {
+    public void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) throws IOException {
         buyerSortExpensivePanel.removeAll();
         buyerSortExpensivePanel.repaint();
         buyerSortExpensivePanel.revalidate();
-        String[] coloumn = Seller.sortExpensive().split("\n");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("sortExpensive,");
+        writer.flush();
+
+        String[] coloumn = reader.readLine().split("\n");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortExpensive = new JTable(temp, columnNames);
@@ -2606,12 +2719,19 @@ public class MarketPlace {
         }
     }
 
-    public static void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
-                                                 JFrame buyerSortByLowestQuantityFrame) {
+    public void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
+                                                 JFrame buyerSortByLowestQuantityFrame) throws IOException {
         buyerSortByLowestQuantityPanel.removeAll();
         buyerSortByLowestQuantityPanel.repaint();
         buyerSortByLowestQuantityPanel.revalidate();
-        String[] coloumn = Seller.lowestQuant().split("\n");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("lowestQuant,");
+        writer.flush();
+
+        String[] coloumn = reader.readLine().split("\n");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortLowestQuant = new JTable(temp, columnNames);
@@ -2634,12 +2754,19 @@ public class MarketPlace {
         }
     }
 
-    public static void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
-                                                  JFrame buyerSortByHighestQuantityFrame) {
+    public void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
+                                                  JFrame buyerSortByHighestQuantityFrame) throws IOException {
         buyerSortByHighestQuantityPanel.removeAll();
         buyerSortByHighestQuantityPanel.repaint();
         buyerSortByHighestQuantityPanel.revalidate();
-        String[] coloumn = Seller.highestQuant().split("\n");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("highestQuant,");
+        writer.flush();
+
+        String[] coloumn = reader.readLine().split("\n");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortHighestQuant = new JTable(temp, columnNames);
@@ -2661,9 +2788,9 @@ public class MarketPlace {
         }
     }
 
-    public static void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
+    public void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
                                             JFrame buyerViewAllProductsFrame, JButton buyerSearchForProductButton,
-                                            JButton buyerViewAllAddToShoppingCart) {
+                                            JButton buyerViewAllAddToShoppingCart) throws IOException {
         buyerViewAllProductsPanel.removeAll();
         buyerViewAllProductsPanel.repaint();
         buyerViewAllProductsPanel.revalidate();
@@ -2672,7 +2799,14 @@ public class MarketPlace {
         buyerViewAllProductsPanel.add(buyerViewAllAddToShoppingCart, BorderLayout.BEFORE_FIRST_LINE);
         //buyerViewAllProductsPanel.add(buyerSearchForProductButton);
 
-        String[] coloumnViewAllProductsAndStores = Seller.printProductAndStores().split("\n");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("printProductAndStore");
+        writer.flush();
+
+
+        String[] coloumnViewAllProductsAndStores = reader.readLine().split("\n");
         String[][] temp = new String[coloumnViewAllProductsAndStores.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
@@ -2694,16 +2828,22 @@ public class MarketPlace {
         }
     }
 
-    public static void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
+    public void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
                                                    JFrame sellerViewCustomerPurchasesFrame, String storeName,
-                                                   String username, boolean sorted) {
+                                                   String username, boolean sorted) throws IOException {
         sellerViewCustomerPurchasesPanel.removeAll();
         sellerViewCustomerPurchasesPanel.repaint();
         sellerViewCustomerPurchasesPanel.revalidate();
         sellerViewCustomerPurchasesPanel.setLayout(new BorderLayout());
 
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("sellerStatistics,getCustomerAndPurchases," + storeName + "," + username + "," + sorted);
+        writer.flush();
+
         String[] coloumnSellerViewCustomerPurchases =
-                Seller.getCustomersAndPurchases(storeName, username, sorted).split("\n");
+                reader.readLine().split("\n");
         String[][] temp = new String[coloumnSellerViewCustomerPurchases.length][6];
         String[] columnNames = new String[]{"Customer Email", "Customer Username", "Store", "Product Bought ",
                 "Quantity Bought", "Price"};
