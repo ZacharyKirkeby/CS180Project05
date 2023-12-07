@@ -116,7 +116,7 @@ Steps:
 3. User selects the "Delete Account" button.
 4. User selects the "Password" textbox.
 5. User enters the password via the keyboard.
-6. User sees the "Account Deleted" page. 
+6. User sees the "Account Deleted" page.
 7. User selects the "OK" button.
 8. User sees the login/register page automatically.
 9. User tries to log in with the deleted account username and password. (User Test Cases - Test 2)
@@ -265,6 +265,8 @@ Test Status: Passed.
 
 Test 6: Seller Add From CSV
 
+Steps:
+
 1. Seller selects the "Add From CSV" button.
 2. Seller selects the "Store Name" textbox.
 3. Seller enters the store name via the keyboard.
@@ -275,10 +277,93 @@ Test 6: Seller Add From CSV
 
 Expected result: Buyers can purchase products added from the csv file (Buyer Shopping Cart Test Cases 1 & 5).
 
-Test Status: Failed.
+Test Status: Failed because screen freezes but products were eventually added.
 
+Test 7: Seller Start Sale
 
+Steps:
+
+1. Seller selects the "Start Sale" button.
+2. Seller selects the "Store Name" textbox.
+3. Seller enters the store name via the keyboard.
+4. Seller selects the "Product Name" textbox.
+5. Seller enters the product name via the keyboard.
+6. Seller selects the "Sale Price" textbox.
+7. Seller enters the sale price via the keyboard.
+8. Seller selects the "Sale Cap" textbox.
+9. Seller enters the sale cap via the keyboard.
+10. Seller selects the "Start" button.
+11. 
+
+Expected result: Buyers can purchase the products at sale price and at quantities less than or equal to the sale cap (
+Buyer Shopping Cart Test Cases 1 & 5).
+
+Test Status: Failed because screen freezes.
+
+Test 8: Seller Add Purchase Limit
+
+Steps:
+
+1. Seller selects the "Add Purchase Limit" button.
+2. Seller selects the "Store Name" textbox.
+3. Seller enters the store name via the keyboard.
+4. Seller selects the "Product Name" textbox.
+5. Seller enters the product name via the keyboard.
+6. Seller selects the "Purchase Limit" textbox.
+7. Seller enters the purchase limit via the keyboard.
+8. Seller selects the "Set Limit" button.
+9.
+
+Expected result: Buyers can purchase the products at quantities less than or equal to the purchase limit (Buyer Shopping Cart Test Cases 1 & 5).
+
+Test Status: Failed because screen freezes.
 **END OF SELLER MODIFY STORE TEST CASES**
+
+Test 2: Seller Delete Store
+
+Steps:
+
+1. Seller selects the "Delete Store" button.
+2. Seller selects the "Store Name" textbox.
+3. Seller enters the store name via the keyboard.
+4. Seller selects the "Delete" button.
+5. Seller sees the "Store Deleted" page.
+6. Seller selects the "OK" button.
+7. Seller selects the red circle to return to the homepage.
+
+Expected result: Buyers can no longer purchase the products in the store because it has been deleted (Buyer Shopping Cart Test Cases 1 & 5).
+
+Test Status: Passed.
+
+**SELLER STATS TEST CASES**
+
+Steps before performing the following test cases:
+
+1. After logging in (User Test Cases - Test 2)
+2. Seller selects the "Seller Stats" button.
+
+Test 1: Seller View Customer Purchases
+
+Steps: 
+
+1. Seller selects the "View Customer Purchases" button.
+2. Seller selects the "Store Name" textbox.
+3. Seller enters the store name via the keyboard.
+4. Seller selects the "Usename" textbox.
+3. Seller enters the username via the keyboard.
+4. 
+
+Test 2: Seller View Product Sales
+
+Test 3: View Products In Cart
+
+Test 4: Seller Get Product CSV
+
+
+**END OF SELLER STATS TEST CASES**
+
+Test 3: Seller View Customer Reviews
+
 **END OF SELLER MARKETPLACE TEST CASES**
 
 **BUYER MARKETPLACE TEST CASES**

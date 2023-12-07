@@ -1,1 +1,1 @@
-orange store,indiana,me;
+peach store,indiana,me;peach,juicy,2.0,90;
