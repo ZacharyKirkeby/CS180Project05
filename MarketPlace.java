@@ -2128,15 +2128,21 @@ public class MarketPlace {
                                 "Change Password", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("manageAccount,changePassword," + USERNAME[0] + "," +
-                                        buyerChangeOldPassword.getText() + "," + buyerChangeNewPassword.getText());
+                                buyerChangeOldPassword.getText() + "," + buyerChangeNewPassword.getText());
                         writer.flush();
-                        bool = Boolean.parseBoolean(reader.readLine());
-                    } if (bool) {
-                        JOptionPane.showMessageDialog(null, "Password Changed",
-                                "Change Password", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                        boolean bool = false;
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Password Changed",
+                                    "Change Password", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Change Failed",
+                                    "Change Password", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             });
@@ -2156,19 +2162,25 @@ public class MarketPlace {
                         writer.println("manageAccount,changeRole," + USERNAME[0] + "," +
                                 buyerChangeRolePassword.getText() + "," + "Seller");
                         writer.flush();
-                        bool = Boolean.parseBoolean(reader.readLine());
-                    } if (bool)  {
-                        JOptionPane.showMessageDialog(null, "Role Changed",
-                                "Change Role", JOptionPane.INFORMATION_MESSAGE);
-                        for (Frame frame : Frame.getFrames()) {
-                            if (frame instanceof JFrame) {
-                                ((JFrame) frame).setVisible(false);
-                            }
+                        boolean bool = false;
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
                         }
-                        loginRegisterFrame.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Role Changed",
+                                    "Change Role", JOptionPane.INFORMATION_MESSAGE);
+                            for (Frame frame : Frame.getFrames()) {
+                                if (frame instanceof JFrame) {
+                                    ((JFrame) frame).setVisible(false);
+                                }
+                            }
+                            loginRegisterFrame.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Change Failed",
+                                    "Change Role", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             });
@@ -2188,19 +2200,25 @@ public class MarketPlace {
                         writer.println("manageAccount,deleteAccount" + USERNAME[0] + "," +
                                 buyerDeleteAccountField.getText());
                         writer.flush();
-                        bool = Boolean.parseBoolean(reader.readLine());
-                    } if (bool) {
-                        JOptionPane.showMessageDialog(null, "Account Deleted",
-                                "Delete Account", JOptionPane.INFORMATION_MESSAGE);
-                        for (Frame frame : Frame.getFrames()) {
-                            if (frame instanceof JFrame) {
-                                ((JFrame) frame).setVisible(false);
-                            }
+                        boolean bool = false;
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
                         }
-                        loginRegisterFrame.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Deletion Failed",
-                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                        if (bool) {
+                            JOptionPane.showMessageDialog(null, "Account Deleted",
+                                    "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                            for (Frame frame : Frame.getFrames()) {
+                                if (frame instanceof JFrame) {
+                                    ((JFrame) frame).setVisible(false);
+                                }
+                            }
+                            loginRegisterFrame.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Deletion Failed",
+                                    "Delete Account", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 }
             });
