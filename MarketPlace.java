@@ -640,7 +640,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        Store store = Seller.whichStore(saleStoreName.getText()); // TODO: MOVE TO SERVER
+                        Store store = Seller.whichStore(saleStoreName.getText());
                         if (saleStoreName.getText().isEmpty() || saleProductName.getText().isEmpty() ||
                                 salePriceField.getText().isEmpty() || saleCapField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
@@ -698,7 +698,7 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        Store store = Seller.whichStore(purchaseLimitStoreName.getText()); // TODO: MOVE TO SERVER
+                        Store store = Seller.whichStore(purchaseLimitStoreName.getText());
                         if (purchaseLimitStoreName.getText().isEmpty() ||
                                 purchaseLimitProductName.getText().isEmpty() ||
                                 purchaseLimitField.getText().isEmpty()) {
@@ -1343,15 +1343,15 @@ public class MarketPlace {
                             throw new RuntimeException(ex);
                         }
                         if (bool) {
-                            USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
+                            USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText());
                             loginRegisterFrame.setVisible(false);
                             registerFrame.setVisible(false);
                             loginFrame.setVisible(false);
                             loginUsernameOrEmailField.setText("");
                             loginPasswordField.setText("");
-                            if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) { // TODO: MOVE TO SERVER
+                            if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Seller")) {
                                 sellerOptionsFrame.setVisible(true); //server doesnt distinguish atm
-                            } else if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")) { // TODO: MOVE TO SERVER
+                            } else if (Account.getRole(USERNAME[0]).equalsIgnoreCase("Buyer")) {
                                 buyerOptionsFrame.setVisible(true);
                             }
                         } else {
@@ -1613,14 +1613,28 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Product Sales", JOptionPane.ERROR_MESSAGE);
                     } else if (productSalesBox.getSelectedItem().toString().equals("Yes")) {
-                        JOptionPane.showMessageDialog(null,
-                                Seller.getProductSales(productSalesStoreName.getText(),
-                                        productSalesUsername.getText(), true), // TODO: MOVE TO SERVER
+                        writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
+                                        productSalesUsername.getText() + "," + true);
+                        writer.flush();
+                        String output;
+                        try {
+                            output = reader.readLine();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null,
-                                Seller.getProductSales(productSalesStoreName.getText(),
-                                        productSalesUsername.getText(), false), // TODO: MOVE TO SERVER
+                        writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
+                                productSalesUsername.getText() + "," + false);
+                        writer.flush();
+                        String output;
+                        try {
+                            output = reader.readLine();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
