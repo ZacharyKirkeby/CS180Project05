@@ -320,7 +320,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("sellermodificationchoices,editProductDescription" +
+                        writer.println("sellermodificationchoices,editProductDescription," +
                                        editProductDescriptionStoreName.getText() + "," +
                                        editProductDescriptionProductName.getText() +
                                        "," + editProductDescriptionField.getText() + "," + USERNAME[0]);
@@ -604,7 +604,8 @@ public class MarketPlace {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else {
-                            writer.println("sellermodificationchoices,triggerSale" + "," + saleProductName.getText() +
+                            writer.println("sellermodificationchoices,triggerSale," + saleStoreName.getText()
+                                           + "," + saleProductName.getText() +
                                            "," + salePriceField.getText() + "," + saleCapField.getText());
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
@@ -662,6 +663,7 @@ public class MarketPlace {
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,triggerOrderCap" + "," +
+                                           purchaseLimitStoreName.getText() + "," +
                                            purchaseLimitProductName.getText() + "," + purchaseLimitField.getText());
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
