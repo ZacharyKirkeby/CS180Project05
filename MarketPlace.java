@@ -2126,8 +2126,12 @@ public class MarketPlace {
                     if (buyerChangeNewPassword.getText().isEmpty() || buyerChangeOldPassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Password", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changePassword(USERNAME[0], buyerChangeOldPassword.getText(),
-                            buyerChangeNewPassword.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changePassword," + USERNAME[0] + "," +
+                                        buyerChangeOldPassword.getText() + "," + buyerChangeNewPassword.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Password Changed",
                                 "Change Password", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -2148,8 +2152,12 @@ public class MarketPlace {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Change Role", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.changeRole(USERNAME[0], buyerChangeRolePassword.getText(), "Seller")) { // TODO:
-                        // MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,changeRole," + USERNAME[0] + "," +
+                                buyerChangeRolePassword.getText() + "," + "Seller");
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool)  {
                         JOptionPane.showMessageDialog(null, "Role Changed",
                                 "Change Role", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
@@ -2176,7 +2184,12 @@ public class MarketPlace {
                     if (buyerDeleteAccountField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Delete Account", JOptionPane.ERROR_MESSAGE);
-                    } else if (Account.deleteAccount(USERNAME[0], buyerDeleteAccountField.getText())) { // TODO: MOVE TO SERVER
+                    } else {
+                        writer.println("manageAccount,deleteAccount" + USERNAME[0] + "," +
+                                buyerDeleteAccountField.getText());
+                        writer.flush();
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Account Deleted",
                                 "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                         for (Frame frame : Frame.getFrames()) {
