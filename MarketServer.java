@@ -99,7 +99,9 @@ public class MarketServer {
                                     writer.flush();
                                     break;
                                 case "readProductsFromCSV":
-                                    Seller.readProductsFromCSV(temp[2], temp[3]);
+                                    bool = Seller.readProductsFromCSV(temp[2], temp[3]);
+                                    writer.println(bool);
+                                    writer.flush();
                                     break;
                                 case "triggerSale":
                                     Store store = Seller.whichStore(temp[2]);
