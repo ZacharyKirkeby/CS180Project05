@@ -1343,7 +1343,6 @@ public class MarketPlace {
                             throw new RuntimeException(ex);
                         }
                         if (bool) {
-                            System.out.println(loginUsernameOrEmailField.getText());
                             USERNAME[0] = Account.getUsername(loginUsernameOrEmailField.getText()); // TODO: MOVE TO SERVER
                             loginRegisterFrame.setVisible(false);
                             registerFrame.setVisible(false);
