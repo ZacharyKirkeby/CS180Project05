@@ -320,7 +320,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("sellermodificationchoices,editProductDescription" +
+                        writer.println("sellermodificationchoices,editProductDescription," +
                                        editProductDescriptionStoreName.getText() + "," +
                                        editProductDescriptionProductName.getText() +
                                        "," + editProductDescriptionField.getText() + "," + USERNAME[0]);
