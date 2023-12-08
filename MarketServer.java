@@ -283,11 +283,9 @@ class ClientThread implements Runnable {
                             case "buyProducts":
                                 bool = Customer.buyProductsInShoppingCart(Account.getUsername(temp[2]));
                                 boolean check = Customer.getShoppingCartofCustomer(temp[2]).isEmpty();
-                                while (!check) {
-                                    bool = Customer.buyProductsInShoppingCart(temp[2]);
-                                    check = Customer.getShoppingCartofCustomer(temp[2]).isEmpty();
-                                }
                                 writer.println(bool);
+                                writer.flush();
+                                writer.println(check);
                                 writer.flush();
                                 break;
                             case "getShoppingCart":

@@ -2460,13 +2460,36 @@ public class MarketPlace {
                         bool = false;
                         System.out.println("integer parsing error");
                     }
-                    if (Customer.searchedStoreExists(buyerChangeQtyInShoppingCartStoreName.getText(), stores) &&
-                            Customer.searchedProductExists(buyerChangeQtyInShoppingCartProductName.getText(), stores)
-                            && bool) { // TODO: MOVE TO SERVER
-                        bool = Customer.addToCartChangeCheckoutQuantity(
-                                buyerChangeQtyInShoppingCartStoreName.getText(),
-                                buyerChangeQtyInShoppingCartProductName.getText(),
+                    Boolean exists = false;
+                    Boolean pExists = false;
+                    writer.println("searchedStoreExists," + buyerShoppingCartStoreName.getText() + "," + stores);
+                    writer.flush();
+                    try {
+                        exists = Boolean.valueOf(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    writer.println("searchedProductExists," + "," + buyerShoppingCartProductName.getText() + "," +
+                            stores);
+                    writer.flush();
+
+                    try {
+                        pExists = Boolean.valueOf(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    if (exists && pExists && bool) {
+                        writer.println("shoppingcart,changeCheckoutQuantity," +
+                                        buyerChangeQtyInShoppingCartStoreName.getText() + "," +
+                                buyerChangeQtyInShoppingCartProductName.getText() + "," +
                                 Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
+                        writer.flush();
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Added Product Quantity",
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
@@ -2492,11 +2515,36 @@ public class MarketPlace {
             checkoutShoppingCart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    boolean bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
-                    boolean check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
+                    writer.println("shoppingcart,buyProducts," + USERNAME[0]);
+                    writer.flush();
+                    boolean bool = false;
+                    try {
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    boolean check = false;
+                    try {
+                        check = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
                     while (!check) {
-                        bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
-                        check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
+                        writer.println("shoppingcart,buyProducts," + USERNAME[0]);
+                        writer.flush();
+                        bool = false;
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        check = false;
+                        try {
+                            check = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchased Successfully",
