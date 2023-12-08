@@ -44,7 +44,7 @@ public class MarketPlace {
      * @param stores (ArrayList<Stores></>)
      */
     public MarketPlace(ArrayList<Store> stores) throws IOException {
-        this.stores = stores;
+        MarketPlace.stores = stores;
         // some kind of logic tbd
     }
 
@@ -63,7 +63,7 @@ public class MarketPlace {
      *
      * @param args (String[])
      */
-    public static void main(String[] args) throws UnknownHostException, IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         do {
             boolean logOrRegistration = false;
@@ -1788,7 +1788,7 @@ public class MarketPlace {
                                     "Change Role", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
-                                    ((JFrame) frame).setVisible(false);
+                                    frame.setVisible(false);
                                 }
                             }
                             loginRegisterFrame.setVisible(true);
@@ -1826,7 +1826,7 @@ public class MarketPlace {
                                     "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
-                                    ((JFrame) frame).setVisible(false);
+                                    frame.setVisible(false);
                                 }
                             }
                             loginRegisterFrame.setVisible(true);
@@ -2243,7 +2243,7 @@ public class MarketPlace {
                                     "Change Role", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
-                                    ((JFrame) frame).setVisible(false);
+                                    frame.setVisible(false);
                                 }
                             }
                             loginRegisterFrame.setVisible(true);
@@ -2281,7 +2281,7 @@ public class MarketPlace {
                                     "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
-                                    ((JFrame) frame).setVisible(false);
+                                    frame.setVisible(false);
                                 }
                             }
                             loginRegisterFrame.setVisible(true);
@@ -2335,7 +2335,7 @@ public class MarketPlace {
                         throw new RuntimeException(ex);
                     }
                     writer.println("searchedProductExists," + "," + buyerShoppingCartProductName.getText() + "," +
-                                    stores);
+                                   stores);
                     writer.flush();
 
                     try {
@@ -2355,8 +2355,8 @@ public class MarketPlace {
                         }
 
                         writer.println("shoppingCart,addToCart," + email + "," + USERNAME[0] + "," +
-                                buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
-                                "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
+                                       buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
+                                       "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
                         writer.flush();
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
@@ -2526,11 +2526,7 @@ public class MarketPlace {
         buyerSearchByStoreFrame.add(buyerSearchByStorePanel);
         buyerSearchByStoreFrame.pack();
         buyerSearchByStoreFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerSearchByStoreFrame.setVisible(true);
-        } else {
-            buyerSearchByStoreFrame.setVisible(false);
-        }
+        buyerSearchByStoreFrame.setVisible(visible);
 
             /*
             END BUYER SEARCH BY STORE FRAME
@@ -2568,11 +2564,7 @@ public class MarketPlace {
         buyerSearchByDescriptionFrame.add(buyerSearchByDescriptionPanel);
         buyerSearchByDescriptionFrame.pack();
         buyerSearchByDescriptionFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerSearchByDescriptionFrame.setVisible(true);
-        } else {
-            buyerSearchByDescriptionFrame.setVisible(false);
-        }
+        buyerSearchByDescriptionFrame.setVisible(visible);
     }
 
     public static void searchByProduct(boolean visible, String buyerSearchedProduct,
@@ -2605,11 +2597,7 @@ public class MarketPlace {
         buyerSearchByProductFrame.add(buyerSearchByProductPanel);
         buyerSearchByProductFrame.pack();
         buyerSearchByProductFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerSearchByProductFrame.setVisible(true);
-        } else {
-            buyerSearchByProductFrame.setVisible(false);
-        }
+        buyerSearchByProductFrame.setVisible(visible);
 
     }
 
@@ -2638,11 +2626,7 @@ public class MarketPlace {
         buyerDisplayReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         buyerDisplayReviewsFrame.pack();
         buyerDisplayReviewsFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerDisplayReviewsFrame.setVisible(true);
-        } else {
-            buyerDisplayReviewsFrame.setVisible(false);
-        }
+        buyerDisplayReviewsFrame.setVisible(visible);
     }
 
     public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
@@ -2674,11 +2658,7 @@ public class MarketPlace {
         sellerDisplayReviewsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         sellerDisplayReviewsFrame.pack();
         sellerDisplayReviewsFrame.setLocationRelativeTo(null);
-        if (visible) {
-            sellerDisplayReviewsFrame.setVisible(true);
-        } else {
-            sellerDisplayReviewsFrame.setVisible(false);
-        }
+        sellerDisplayReviewsFrame.setVisible(visible);
     }
 
     public static void buyerViewShoppingCart(boolean visible, String username, JFrame buyerViewShoppingCartFrame,
@@ -2704,11 +2684,7 @@ public class MarketPlace {
         buyerViewShoppingCartFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         buyerViewShoppingCartFrame.pack();
         buyerViewShoppingCartFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerViewShoppingCartFrame.setVisible(true);
-        } else {
-            buyerViewShoppingCartFrame.setVisible(false);
-        }
+        buyerViewShoppingCartFrame.setVisible(visible);
 
     }
 
@@ -2738,11 +2714,7 @@ public class MarketPlace {
         buyerSortCheapestFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         buyerSortCheapestFrame.pack();
         buyerSortCheapestFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerSortCheapestFrame.setVisible(true);
-        } else {
-            buyerSortCheapestFrame.setVisible(false);
-        }
+        buyerSortCheapestFrame.setVisible(visible);
     }
 
     public static void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) throws IOException {
@@ -2772,11 +2744,7 @@ public class MarketPlace {
         buyerSortExpensiveFrame.pack();
         buyerSortExpensiveFrame.setLocationRelativeTo(null);
 
-        if (visible) {
-            buyerSortExpensiveFrame.setVisible(true);
-        } else {
-            buyerSortExpensiveFrame.setVisible(false);
-        }
+        buyerSortExpensiveFrame.setVisible(visible);
     }
 
     public static void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
@@ -2807,11 +2775,7 @@ public class MarketPlace {
         buyerSortByLowestQuantityFrame.pack();
         buyerSortByLowestQuantityFrame.setLocationRelativeTo(null);
 
-        if (visible) {
-            buyerSortByLowestQuantityFrame.setVisible(true);
-        } else {
-            buyerSortByLowestQuantityFrame.setVisible(false);
-        }
+        buyerSortByLowestQuantityFrame.setVisible(visible);
     }
 
     public static void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
@@ -2841,11 +2805,7 @@ public class MarketPlace {
         buyerSortByHighestQuantityFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         buyerSortByHighestQuantityFrame.pack();
         buyerSortByHighestQuantityFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerSortByHighestQuantityFrame.setVisible(true);
-        } else {
-            buyerSortByHighestQuantityFrame.setVisible(false);
-        }
+        buyerSortByHighestQuantityFrame.setVisible(visible);
     }
 
     public static void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
@@ -2881,11 +2841,7 @@ public class MarketPlace {
         buyerViewAllProductsFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         buyerViewAllProductsFrame.pack();
         buyerViewAllProductsFrame.setLocationRelativeTo(null);
-        if (visible) {
-            buyerViewAllProductsFrame.setVisible(true);
-        } else {
-            buyerViewAllProductsFrame.setVisible(false);
-        }
+        buyerViewAllProductsFrame.setVisible(visible);
     }
 
     public static void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
@@ -2919,10 +2875,6 @@ public class MarketPlace {
         sellerViewCustomerPurchasesFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         sellerViewCustomerPurchasesFrame.pack();
         sellerViewCustomerPurchasesFrame.setLocationRelativeTo(null);
-        if (visible) {
-            sellerViewCustomerPurchasesFrame.setVisible(true);
-        } else {
-            sellerViewCustomerPurchasesFrame.setVisible(false);
-        }
+        sellerViewCustomerPurchasesFrame.setVisible(visible);
     }
 }
