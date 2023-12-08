@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-peach store,indiana,me;peach,juicy,2.0,100;
-=======
-Store1,IN,username;Product1,Desc,10.0,5;
+peach store,indiana,me;peach,juicy,2.0,90;
+Store1,IN,username;Product1,description,10.0,5;
 apple store,indiana,yilin;fuji,juicy,2.0,0;grandma,green,1.0,90;red,very red,0.5,90;
->>>>>>> 82c2d38d27d41e11beeb3fd00ea79ce1d14da027
