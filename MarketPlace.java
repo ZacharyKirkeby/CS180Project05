@@ -1189,9 +1189,6 @@ public class MarketPlace {
             JTextField buyerRemoveFromShoppingCartProductName = new JTextField();
             buyerRemoveFromShoppingCartPanel.add(new JLabel("Enter Product Name: "));
             buyerRemoveFromShoppingCartPanel.add(buyerRemoveFromShoppingCartProductName);
-            JTextField buyerRemoveFromShoppingCartQuantity = new JTextField();
-            buyerRemoveFromShoppingCartPanel.add(new JLabel("Enter Quantity"));
-            buyerRemoveFromShoppingCartPanel.add(buyerRemoveFromShoppingCartQuantity);
             buyerRemoveFromShoppingCartPanel.add(new JLabel());
             JButton removeFromCart = new JButton("REMOVE");
             buyerRemoveFromShoppingCartPanel.add(removeFromCart, BorderLayout.SOUTH);
