@@ -464,11 +464,11 @@ public abstract class Customer {
                 if(subpart.length >1) {
                     if (storeName.equals("")) {
                         if (subpart[1].contains(productName)) {
-                            result += line + "\n";
+                            result += line + ",";
                         }
                     } else {
                         if (subpart[0].contains(storeName) && subpart[1].contains(productName)) {
-                            result += line + "\n";
+                            result += line + ",";
                         }
                     }
                 }
