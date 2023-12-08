@@ -83,24 +83,6 @@ public abstract class Customer {
      * @param quantity
      */
     public static boolean addToCart(String email, String username, String store, String product, int quantity) {
-        Store store1 = null;
-        for (int i = 0; i < Seller.getStores().size(); i++) {
-            if (Seller.getStores().get(i).getStoreName().equalsIgnoreCase(store)) {
-                store1 = Seller.getStores().get(i);
-            }
-        }
-        if (store1 == null) {
-            return false;
-        }
-        Product product1 = null;
-        for (int i = 0; i < store1.getProductList().size(); i++) {
-            if (store1.getProductList().get(i).getName().equalsIgnoreCase(product)) {
-                product1 = store1.getProductList().get(i);
-            }
-        }
-        if (product1 == null) {
-            return false;
-        }
         if (alreadyInCartOfUser(store, product, username)) {
             System.out.println("This product is already in the Cart!");
             return false;
@@ -211,9 +193,10 @@ public abstract class Customer {
                                          int quantity) {
         boolean successfullyRemovedFromCart = false;
         readFromShoppingCartDatabaseFile();
+        System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
-            if (emails.get(i).equals(email) && usernames.get(i).equals(username) && storeNames.get(i).equals(storeName)
-                    && productNames.get(i).equals(productName) && quantities.get(i) == quantity) {
+            if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
+                    && productNames.get(i).equalsIgnoreCase(productName)) {
                 successfullyRemovedFromCart = true;
                 Seller.changeQuantity(storeName, productName, quantity);
                 emails.remove(i);
@@ -222,12 +205,6 @@ public abstract class Customer {
                 productNames.remove(i);
                 quantities.remove(i);
                 break;
-            } else if (emails.get(i).equals(email) && usernames.get(i).equals(username)
-                    && storeNames.get(i).equals(storeName)
-                    && productNames.get(i).equals(productName) && quantities.get(i) > quantity) {
-                quantities.set(i, quantities.get(i) - quantity);
-                Seller.changeQuantity(storeName, productName, quantity);
-                successfullyRemovedFromCart = true;
             }
 
         }
@@ -263,7 +240,7 @@ public abstract class Customer {
                                         productNames.get(i), quantities.get(i), unitprice);
                                 removeFromCart(emails.get(i), usernames.get(i), storeNames.get(i),
                                         productNames.get(i), quantities.get(i));
-                                writeToShoppingCartDatabaseFile();
+
                                 productsBoughtSuccessfully = true;
                                 return true;
                             }
@@ -289,7 +266,7 @@ public abstract class Customer {
         synchronized (purchaseHistoryGateKeeper) {
             try (PrintWriter pw = new PrintWriter(new FileWriter(purchaseHistoryDatabaseFileName, true))) {
                 pw.println(String.format("%s;%s;%s;%s;%d;%.2f", email, username, storeName, productName, quantity,
-                    unitprice));
+                        unitprice));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -305,7 +282,7 @@ public abstract class Customer {
             try (PrintWriter pw = new PrintWriter(new FileWriter(shoppingCartDatabaseFileName))) {
                 for (int i = 0; i < usernames.size(); i++) {
                     pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
-                        productNames.get(i), quantities.get(i)));
+                            productNames.get(i), quantities.get(i)));
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -434,13 +411,13 @@ public abstract class Customer {
                 int count = 0;
                 if (line == null) {
                     pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
-                        description));
+                            description));
                 } else {
                     while (line != null) {
                         line = br.readLine();
                         if (line == null) {
                             pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
-                                description));
+                                    description));
                         }
                     }
                 }
