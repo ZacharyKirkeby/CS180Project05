@@ -190,7 +190,7 @@ public abstract class Customer {
      * @return
      */
     public static boolean editCartQuantity(String email, String username, String storeName, String productName,
-                                         int quantity) {
+                                           int quantity) {
         boolean successfullyRemovedFromCart = false;
         readFromShoppingCartDatabaseFile();
         System.out.println("fuck");
@@ -213,13 +213,13 @@ public abstract class Customer {
     }
 
     public static boolean removeFromCart(String email, String username, String storeName, String productName,
-                                           int quantity) {
+                                         int quantity) {
         boolean successfullyRemovedFromCart = false;
         readFromShoppingCartDatabaseFile();
+        System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
-                && productNames.get(i).equalsIgnoreCase(productName)) {
-                Seller.changeQuantity(storeName, productName, -1 * quantities.get(i));
+                    && productNames.get(i).equalsIgnoreCase(productName)) {
                 successfullyRemovedFromCart = true;
                 emails.remove(i);
                 usernames.remove(i);
@@ -396,18 +396,17 @@ public abstract class Customer {
             return false;
         }
         readFromPurchaseHistoryDatabaseFile();
-        if(fileName != null && !fileName.equals("")) {
-            try (PrintWriter pw = new PrintWriter(new FileWriter(fileName))) {
-                for (int i = 0; i < usernames.size(); i++) {
-                    if (usernames.get(i).equals(username)) { // check if username and email match
-                        pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
-                                productNames.get(i), quantities.get(i)));
-                    }
+        try (PrintWriter pw = new PrintWriter(new FileWriter(fileName), true)) {
+            for (int i = 0; i < usernames.size(); i++) {
+                if (usernames.get(i).equals(username) ) { // check if username and email match
+                    System.out.println("we found a match");
+                    pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
+                            productNames.get(i), quantities.get(i)));
+                    success = true;
                 }
-                success = true;
-            } catch (IOException e) {
-                success = false;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return success;
     }
