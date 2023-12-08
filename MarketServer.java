@@ -251,6 +251,10 @@ class ClientThread implements Runnable {
                                 break;
                         }
                         break;
+                    case "getEmail":
+                        writer.println(Account.getEmail(temp[1]));
+                        writer.flush();
+                        break;
                     case "shoppingCart":
                         switch (temp[1]) {
                             case "addToCart":
