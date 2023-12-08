@@ -65,8 +65,10 @@ class ClientThread implements Runnable {
                 String username;
                 String password;
                 String message = reader.readLine();
+                System.out.println(message);
                 String[] temp = message.split(",");
                 message = temp[0];
+                System.out.println(message);
                 boolean bool = false;
                 // format of method,parameter1,parameter2
                 switch (message) {
@@ -315,6 +317,7 @@ class ClientThread implements Runnable {
                     case "leaveReview":
                         bool = Customer.leaveReview(temp[1],
                                 temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
+                        System.out.println(bool);
                         writer.println(bool);
                         writer.flush();
                         break;
