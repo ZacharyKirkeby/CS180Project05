@@ -272,10 +272,14 @@ class ClientThread implements Runnable {
                                 writer.flush();
                                 break;
                             case "removeFromCart":
+                                for (int i = 0; i < temp.length; i++) {
+                                    System.out.println(temp[i]);
+                                }
                                 bool = Customer.removeFromCart(
                                         Account.getEmail(temp[2]),
-                                        Account.getUsername(temp[3]),
-                                        temp[4], temp[5], Integer.parseInt(temp[6]));
+                                        temp[3],
+                                        temp[4], temp[5], 5);
+                                System.out.print("278");
                                 writer.println(bool);
                                 writer.flush();
                                 break;
