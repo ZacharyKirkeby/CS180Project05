@@ -293,12 +293,14 @@ Steps:
 8. Seller selects the "Sale Cap" textbox.
 9. Seller enters the sale cap via the keyboard.
 10. Seller selects the "Start" button.
-11. 
+11. Seller sees the "Sale Created" page.
+
+![img_6.png](img_6.png)
 
 Expected result: Buyers can purchase the products at sale price and at quantities less than or equal to the sale cap (
 Buyer Shopping Cart Test Cases 1 & 5).
 
-Test Status: Failed because screen freezes.
+Test Status: Passed.
 
 Test 8: Seller Add Purchase Limit
 
@@ -312,11 +314,14 @@ Steps:
 6. Seller selects the "Purchase Limit" textbox.
 7. Seller enters the purchase limit via the keyboard.
 8. Seller selects the "Set Limit" button.
-9.
+9. Seller sees the "Limit Set" page.
+
+![img_7.png](img_7.png)
 
 Expected result: Buyers can purchase the products at quantities less than or equal to the purchase limit (Buyer Shopping Cart Test Cases 1 & 5).
 
-Test Status: Failed because screen freezes.
+Test Status: Passed.
+
 **END OF SELLER MODIFY STORE TEST CASES**
 
 Test 2: Seller Delete Store

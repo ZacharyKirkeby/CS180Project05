@@ -1860,7 +1860,7 @@ public class MarketPlace {
                     } else {
                         Customer.leaveReview(leaveReviewStoreName.getText(), leaveReviewProductName.getText(),
                                 USERNAME[0], Integer.parseInt((String) leaveReviewRating.getSelectedItem()),
-                                leaveReviewDescription.getText());
+                                leaveReviewDescription.getText()); // TODO: MOVE TO SERVER
                         JOptionPane.showMessageDialog(null, "Review Left Successfully!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -2119,7 +2119,7 @@ public class MarketPlace {
                     String filename = JOptionPane.showInputDialog(null,
                             "Enter Filename to be Exported to", "Marketplace",
                             JOptionPane.QUESTION_MESSAGE);
-                    boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename);
+                    boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename); // TODO: MOVE TO SERVER
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
                                                             "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
@@ -2308,7 +2308,7 @@ public class MarketPlace {
                     }
                     if (Customer.searchedStoreExists(buyerShoppingCartStoreName.getText(), stores) &&
                         Customer.searchedProductExists(buyerShoppingCartProductName.getText(), stores) && bool) {
-                        bool = Customer.addToCart(Account.getEmail(USERNAME[0]),
+                        bool = Customer.addToCart(Account.getEmail(USERNAME[0]), // TODO: MOVE TO SERVER
                                 Account.getUsername(USERNAME[0]),
                                 buyerShoppingCartStoreName.getText(), buyerShoppingCartProductName.getText(),
                                 Integer.parseInt(buyerShoppingCartQuantity.getText()));
@@ -2352,7 +2352,7 @@ public class MarketPlace {
                     if (Customer.searchedStoreExists(buyerRemoveFromShoppingCartStoreName.getText(), stores) &&
                         Customer.searchedProductExists(buyerRemoveFromShoppingCartProductName.getText(), stores)
                         && bool) {
-                        bool = Customer.removeFromCart(Account.getEmail(USERNAME[0]),
+                        bool = Customer.removeFromCart(Account.getEmail(USERNAME[0]), // TODO: MOVE TO SERVER
                                 Account.getUsername(USERNAME[0]),
                                 buyerRemoveFromShoppingCartStoreName.getText(),
                                 buyerRemoveFromShoppingCartProductName.getText(),
@@ -2390,7 +2390,7 @@ public class MarketPlace {
                     }
                     if (Customer.searchedStoreExists(buyerChangeQtyInShoppingCartStoreName.getText(), stores) &&
                         Customer.searchedProductExists(buyerChangeQtyInShoppingCartProductName.getText(), stores)
-                        && bool) {
+                        && bool) { // TODO: MOVE TO SERVER
                         bool = Customer.addToCartChangeCheckoutQuantity(
                                 buyerChangeQtyInShoppingCartStoreName.getText(),
                                 buyerChangeQtyInShoppingCartProductName.getText(),
@@ -2420,10 +2420,10 @@ public class MarketPlace {
             checkoutShoppingCart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    boolean bool = Customer.buyProductsInShoppingCart(USERNAME[0]);
+                    boolean bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
                     boolean check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
                     while (!check) {
-                        bool = Customer.buyProductsInShoppingCart(USERNAME[0]);
+                        bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
                         check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
                     }
                     if (bool) {
@@ -2569,7 +2569,7 @@ public class MarketPlace {
         buyerDisplayReviewsPanel.repaint();
         buyerDisplayReviewsPanel.revalidate();
         buyerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(),
+        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(), // TODO: MOVE TO SERVER
                 buyerViewReviewsProductName.getText()).split("\n");
         String[][] temp = new String[buyerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
@@ -2636,7 +2636,7 @@ public class MarketPlace {
         buyerViewShoppingCartPanel.repaint();
         buyerViewShoppingCartPanel.revalidate();
         buyerViewShoppingCartPanel.setLayout(new BorderLayout());
-        String[] buyerViewShoppingCartColoumn = Customer.getShoppingCartofCustomer(username).split("\n");
+        String[] buyerViewShoppingCartColoumn = Customer.getShoppingCartofCustomer(username).split("\n"); // TODO: MOVE TO SERVER
         String[][] temp = new String[buyerViewShoppingCartColoumn.length][5];
         String[] columnNames = new String[]{"Customer Username", "Email", "Store Name", "Product Name", "Quantity"};
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
