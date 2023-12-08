@@ -70,7 +70,6 @@ class ClientThread implements Runnable {
                         writer.println(loggedIn);
                         writer.flush();
                         if (loggedIn) {
-                            System.out.println("reached");
                             String check1 = reader.readLine();
                             if (check1 != null) {
                                 writer.println(Account.getUsername(check1));
