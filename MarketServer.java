@@ -69,13 +69,16 @@ class ClientThread implements Runnable {
                         boolean loggedIn = Account.login(temp[1], temp[2]);
                         writer.println(loggedIn);
                         writer.flush();
-                        String check1 = reader.readLine();
-                        if (check1 != null) {
-                            writer.println(Account.getUsername(check1));
-                            writer.flush();
-                            bool = Account.getRole(check1).equalsIgnoreCase("Seller");
-                            writer.println(bool);
-                            writer.flush();
+                        if (loggedIn) {
+                            System.out.println("reached");
+                            String check1 = reader.readLine();
+                            if (check1 != null) {
+                                writer.println(Account.getUsername(check1));
+                                writer.flush();
+                                bool = Account.getRole(check1).equalsIgnoreCase("Seller");
+                                writer.println(bool);
+                                writer.flush();
+                            }
                         }
                         break;
                     case "register":

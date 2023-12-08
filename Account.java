@@ -277,6 +277,9 @@ public class Account {
                 }
             }
         }
+        if (index == -1) {
+            return null;
+        }
         return usernames.get(index);
     }
 
@@ -303,6 +306,9 @@ public class Account {
                     break;
                 }
             }
+        }
+        if (index == -1) {
+            return null;
         }
         return emails.get(index);
     }
