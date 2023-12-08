@@ -656,7 +656,7 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
                 searchedStore += stores.get(i).getStoreName() + ";" +
-                        Seller.printProducts(stores.get(i).getStoreName()) + ",";
+                        Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
         if (searchedStore.equals("")) {
