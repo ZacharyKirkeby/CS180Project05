@@ -2491,7 +2491,7 @@ public class MarketPlace {
         writer.println("searchByStore," + buyerSearchedStore);
         writer.flush();
 
-        String[] coloumnSearchStores = reader.readLine().split(",");
+        String[] coloumnSearchStores = reader.readLine().split("\n");
         String[][] temp = new String[coloumnSearchStores.length][2];
         String[] columnNames = new String[]{"Store Name", "Product Name"};
         JTable searchedStoreTable = new JTable(temp, columnNames);
