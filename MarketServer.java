@@ -219,6 +219,16 @@ class ClientThread implements Runnable {
                         writer.println(Seller.searchByStore(temp[1]));
                         writer.flush();
                         break;
+                    case "searchedStoreExists":
+                        ArrayList<Store> stores = MarketPlace.getStores();
+                        writer.println(Customer.searchedStoreExists(temp[1], stores));
+                        writer.flush();
+                        break;
+                    case "searchedProductExists":
+                        ArrayList<Store> store = MarketPlace.getStores();
+                        writer.println(Customer.searchedProductExists(temp[1], store));
+                        writer.flush();
+                        break;
                     case "searchByProduct":
                         writer.println(Seller.searchByProduct(temp[1]));
                         writer.flush();

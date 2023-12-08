@@ -2399,14 +2399,36 @@ public class MarketPlace {
                     } catch (NumberFormatException f) {
                         bool = false;
                     }
-                    if (Customer.searchedStoreExists(buyerRemoveFromShoppingCartStoreName.getText(), stores) &&
-                            Customer.searchedProductExists(buyerRemoveFromShoppingCartProductName.getText(), stores)
-                            && bool) {
-                        bool = Customer.removeFromCart(Account.getEmail(USERNAME[0]), // TODO: MOVE TO SERVER
-                                Account.getUsername(USERNAME[0]),
-                                buyerRemoveFromShoppingCartStoreName.getText(),
-                                buyerRemoveFromShoppingCartProductName.getText(),
+                    writer.println("searchedStoreExists," + buyerRemoveFromShoppingCartStoreName.getText() + "," +
+                            stores.toString());
+                    writer.flush();
+                    Boolean exists = false;
+                    try {
+                        exists = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    writer.println("searchedProductExists," + buyerRemoveFromShoppingCartProductName.getText());
+                    writer.flush();
+                    boolean pExists = false;
+                    try {
+                        pExists = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    if (exists && pExists && bool) {
+                        writer.println("shoppingcart,removeFromCart," + USERNAME[0] + "," + USERNAME[0] + "," +
+                                        buyerRemoveFromShoppingCartStoreName.getText() + "," +
+                                buyerRemoveFromShoppingCartProductName.getText() + "," +
                                 Integer.parseInt(buyerRemoveFromShoppingCartQuantity.getText()));
+                        writer.flush();
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Removed From Cart!",
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
