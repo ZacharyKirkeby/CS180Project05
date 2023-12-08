@@ -1,5 +1,4 @@
 package src;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -163,20 +162,20 @@ public class Store {
      * @Author Zachary Kirkeby
      **/
     public String getCustomersAndPurchases() {
-        String sentence = "Customer Email | Customer Username | Store Name | Product Name " +
-                          "| Quantity Purchased | Price \n";
+        String sentence = "";
         try (BufferedReader reader = new BufferedReader(new FileReader("PurchaseHistoryDatabase.txt"))) {
             String line = reader.readLine();
             while (line != null) {
                 String[] subpart = line.split(";");
                 if (subpart[2].equals(storeName)) {
-                    sentence += line.replaceAll(";", " | ") + "\n";
+                    sentence += line + "\n";
                 }
                 line = reader.readLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(sentence);
         return sentence;
     }
 
@@ -205,7 +204,7 @@ public class Store {
      * @return All customers and purchases sorted by the amount spend per customer
      */
     public String getSortedCustomersAndPurchases() {
-        String result = "Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased \n";
+        String result = "";
         ;
         String sentence = getAllCustomersAndPurchases();
         if (sentence == null || sentence.isEmpty()) {
@@ -232,7 +231,6 @@ public class Store {
         for (int a = 0; a < lineList.size(); a++) {
             result += lineList.get(a) + "\n";
         }
-        result = result.replace(";", " | ");
         return result;
     }
 
