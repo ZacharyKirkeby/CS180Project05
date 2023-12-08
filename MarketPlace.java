@@ -1860,16 +1860,17 @@ public class MarketPlace {
                                 "Leave Review", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("leaveReview," + leaveReviewStoreName.getText() + "," +
-                                leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
-                                Integer.parseInt((String) leaveReviewRating.getSelectedItem()) + "," +
-                                leaveReviewDescription.getText());
+                                       leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
+                                       Integer.parseInt((String) leaveReviewRating.getSelectedItem()) + "," +
+                                       leaveReviewDescription.getText());
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
 
-                    } if (bool) {
+                    }
+                    if (bool) {
                         JOptionPane.showMessageDialog(null, "Review Left Successfully!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -2137,7 +2138,7 @@ public class MarketPlace {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    if (bool){
+                    if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
                                                             "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     } else if (!bool) {

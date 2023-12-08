@@ -1,4 +1,5 @@
 package src;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -245,7 +246,7 @@ public class Store {
      */
     public String getCustomerInformationAndRevenue() {
         String sentence = "Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased |"
-                + " Revenue From Customer \n";
+                          + " Revenue From Customer \n";
         try (BufferedReader reader = new BufferedReader(new FileReader("PurchaseHistoryDatabase.txt"))) {
             String line = reader.readLine();
             while (line != null) {

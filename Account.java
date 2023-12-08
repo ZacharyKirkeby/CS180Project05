@@ -1,4 +1,5 @@
 package src;
+
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,10 +18,10 @@ import java.util.regex.Pattern;
 
 public class Account {
 
-    private static ArrayList<String> emails = new ArrayList<>(); // email arraylist
-    private static ArrayList<String> usernames = new ArrayList<>(); // username arraylist
-    private static ArrayList<String> passwords = new ArrayList<>(); // password arraylist
-    private static ArrayList<String> roles = new ArrayList<>(); // roles arraylist
+    private static final ArrayList<String> emails = new ArrayList<>(); // email arraylist
+    private static final ArrayList<String> usernames = new ArrayList<>(); // username arraylist
+    private static final ArrayList<String> passwords = new ArrayList<>(); // password arraylist
+    private static final ArrayList<String> roles = new ArrayList<>(); // roles arraylist
 
     /**
      * Creates new account if username and email are unique (case-insensitive) and stores
@@ -357,7 +358,7 @@ public class Account {
             return false;
         }
         if (Pattern.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", email)) {
+                            + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", email)) {
             for (int i = 0; i < emails.size(); i++) {
                 if (emails.get(i).equalsIgnoreCase(email)) {
                     return false;
