@@ -656,7 +656,7 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
                 searchedStore += stores.get(i).getStoreName() + ";" +
-                        Seller.printProducts(stores.get(i).getStoreName()) + "\n";
+                        Seller.printProducts(stores.get(i).getStoreName()) + ",";
             }
         }
         if (searchedStore.equals("")) {
@@ -681,7 +681,7 @@ public abstract class Seller {
                     searched += stores.get(i).getStoreName() + ";" + stores.get(i).getProductList().get(j).getName()
                             + ";" + stores.get(i).getProductList().get(j).getPurchasePrice()
                             + ";" + stores.get(i).getProductList().get(j).getStockQuantity()
-                            + ";" + stores.get(i).getProductList().get(j).getDescription() + "\n";
+                            + ";" + stores.get(i).getProductList().get(j).getDescription() + ",";
                 }
             }
         }
@@ -713,7 +713,7 @@ public abstract class Seller {
                                     stores.get(i).getProductList().get(j).getName() + ";" +
                                     stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
                                     stores.get(i).getProductList().get(j).getStockQuantity() + ";" +
-                                    stores.get(i).getProductList().get(j).getDescription() + "\n";
+                                    stores.get(i).getProductList().get(j).getDescription() + ",";
                 }
             }
         }
@@ -885,7 +885,7 @@ public abstract class Seller {
         if (!(productName.equals(""))) {
             for (int i = 0; i < stores.size(); i++) {
                 if (stores.get(i).getSellerUsername().equalsIgnoreCase(user)) {
-                    result += Customer.viewReviews(stores.get(i).getStoreName(), productName) + "\n";
+                    result += Customer.viewReviews(stores.get(i).getStoreName(), productName) + ",";
                 } else {
                     result += "No store found";
                 }
@@ -895,7 +895,7 @@ public abstract class Seller {
                 if (stores.get(i).getSellerUsername().equalsIgnoreCase(user)) {
                     for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                         result += Customer.viewReviews(stores.get(i).getStoreName(),
-                                stores.get(i).getProductList().get(j).getName()) + "\n";
+                                stores.get(i).getProductList().get(j).getName()) + ",";
                     }
                 } else {
                     result += "No store found";
