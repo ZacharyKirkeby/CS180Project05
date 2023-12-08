@@ -2419,7 +2419,7 @@ public class MarketPlace {
                     }
                     if (exists && pExists && bool) {
                         writer.println("shoppingcart,removeFromCart," + USERNAME[0] + "," + USERNAME[0] + "," +
-                                        buyerRemoveFromShoppingCartStoreName.getText() + "," +
+                                buyerRemoveFromShoppingCartStoreName.getText() + "," +
                                 buyerRemoveFromShoppingCartProductName.getText() + "," +
                                 Integer.parseInt(buyerRemoveFromShoppingCartQuantity.getText()));
                         writer.flush();
@@ -2720,7 +2720,7 @@ public class MarketPlace {
         writer.println("sortCheapest,");
         writer.flush();
 
-        String[] coloumn = reader.readLine().split("\n");
+        String[] coloumn = reader.readLine().split(",");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = {"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortCheapest = new JTable(temp, columnNames);
@@ -2749,7 +2749,7 @@ public class MarketPlace {
         writer.println("sortExpensive,");
         writer.flush();
 
-        String[] coloumn = reader.readLine().split("\n");
+        String[] coloumn = reader.readLine().split(",");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortExpensive = new JTable(temp, columnNames);
@@ -2780,7 +2780,7 @@ public class MarketPlace {
         writer.println("availability,lowestQuant,");
         writer.flush();
 
-        String[] coloumn = reader.readLine().split("\n");
+        String[] coloumn = reader.readLine().split(",");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortLowestQuant = new JTable(temp, columnNames);
@@ -2811,7 +2811,7 @@ public class MarketPlace {
         writer.println("availability,highestQuant,");
         writer.flush();
 
-        String[] coloumn = reader.readLine().split("\n");
+        String[] coloumn = reader.readLine().split(",");
         String[][] temp = new String[coloumn.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable tableModelSortHighestQuant = new JTable(temp, columnNames);
@@ -2847,7 +2847,7 @@ public class MarketPlace {
         writer.flush();
 
 
-        String[] coloumnViewAllProductsAndStores = reader.readLine().split("\n");
+        String[] coloumnViewAllProductsAndStores = reader.readLine().split(",");
         String[][] temp = new String[coloumnViewAllProductsAndStores.length][4];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock"};
         JTable viewAllProductsAndStoresTable = new JTable(temp, columnNames);
