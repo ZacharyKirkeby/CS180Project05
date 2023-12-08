@@ -1853,17 +1853,27 @@ public class MarketPlace {
             leaveR.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    boolean bool = false;
                     if (leaveReviewProductName.getText().isEmpty() || leaveReviewStoreName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Do not leave Store and Product" +
                                                             " Fields Empty!",
                                 "Leave Review", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        Customer.leaveReview(leaveReviewStoreName.getText(), leaveReviewProductName.getText(),
-                                USERNAME[0], Integer.parseInt((String) leaveReviewRating.getSelectedItem()),
-                                leaveReviewDescription.getText()); // TODO: MOVE TO SERVER
+                        writer.println("leaveReview," + leaveReviewStoreName.getText() + "," +
+                                leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
+                                Integer.parseInt((String) leaveReviewRating.getSelectedItem()) + "," +
+                                leaveReviewDescription.getText());
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                    } if (bool) {
                         JOptionPane.showMessageDialog(null, "Review Left Successfully!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     }
+
                 }
             });
 
@@ -2119,8 +2129,15 @@ public class MarketPlace {
                     String filename = JOptionPane.showInputDialog(null,
                             "Enter Filename to be Exported to", "Marketplace",
                             JOptionPane.QUESTION_MESSAGE);
-                    boolean bool = Customer.getPurchaseHistoryofCustomer(loginUsernameOrEmailField.getText(), filename); // TODO: MOVE TO SERVER
-                    if (bool) {
+                    writer.println("getPurchaseHistory," + loginUsernameOrEmailField.getText() + "," + filename);
+                    writer.flush();
+                    boolean bool = false;
+                    try {
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    if (bool){
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
                                                             "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     } else if (!bool) {
@@ -2306,6 +2323,16 @@ public class MarketPlace {
                     } catch (NumberFormatException f) {
                         bool = false;
                     }
+                    writer.println("searchedStoreExists," + buyerShoppingCartStoreName.getText() + "," + stores);
+                    writer.flush();
+                    try {
+                        Boolean exists = Boolean.valueOf(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    Boolean pExists;
+
+
                     if (Customer.searchedStoreExists(buyerShoppingCartStoreName.getText(), stores) &&
                         Customer.searchedProductExists(buyerShoppingCartProductName.getText(), stores) && bool) {
                         bool = Customer.addToCart(Account.getEmail(USERNAME[0]), // TODO: MOVE TO SERVER
