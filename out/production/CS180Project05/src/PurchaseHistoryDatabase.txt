@@ -6,3 +6,4 @@ yang@gmail.com;yang;apple store;red;10;0.50
 
 yilin@gmail.com;yilin;apple store;grandma;10;1.00
 keefe@gmail.com;keefe;peach store;peach;10;2.00
+yang@gmail.com;yang;peach store;peach;10;2.00

@@ -1271,14 +1271,12 @@ public class MarketPlace {
             openLoginButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    loginRegisterFrame.setVisible(false);
                     loginFrame.setVisible(true);
                 }
             });
             openRegisterButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    loginRegisterFrame.setVisible(false);
                     registerFrame.setVisible(true);
                 }
             });
