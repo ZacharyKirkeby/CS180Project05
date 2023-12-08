@@ -197,7 +197,7 @@ Steps:
 
 Expected result: Application loads the "Product Edited" page.
 
-Test Status: Failed.
+Test Status: Passed.
 
 Test 3: Seller Edit Price
 
@@ -277,7 +277,7 @@ Steps:
 
 Expected result: Buyers can purchase products added from the csv file (Buyer Shopping Cart Test Cases 1 & 5).
 
-Test Status: Failed because screen freezes but products were eventually added.
+Test Status: Passed.
 
 Test 7: Seller Start Sale
 
