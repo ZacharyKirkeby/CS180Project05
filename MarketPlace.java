@@ -2319,6 +2319,9 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     boolean bool = true;
+                    Boolean pExists = false;
+                    Boolean exists = false;
+
                     try {
                         Integer.parseInt(buyerShoppingCartQuantity.getText());
                     } catch (NumberFormatException f) {
@@ -2327,19 +2330,39 @@ public class MarketPlace {
                     writer.println("searchedStoreExists," + buyerShoppingCartStoreName.getText() + "," + stores);
                     writer.flush();
                     try {
-                        Boolean exists = Boolean.valueOf(reader.readLine());
+                        exists = Boolean.valueOf(reader.readLine());
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
-                    Boolean pExists;
+                    writer.println("searchedProductExists," + "," + buyerShoppingCartProductName.getText() + "," +
+                                    stores);
+                    writer.flush();
 
+                    try {
+                        pExists = Boolean.valueOf(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
-                    if (Customer.searchedStoreExists(buyerShoppingCartStoreName.getText(), stores) &&
-                        Customer.searchedProductExists(buyerShoppingCartProductName.getText(), stores) && bool) {
-                        bool = Customer.addToCart(Account.getEmail(USERNAME[0]), // TODO: MOVE TO SERVER
-                                Account.getUsername(USERNAME[0]),
-                                buyerShoppingCartStoreName.getText(), buyerShoppingCartProductName.getText(),
-                                Integer.parseInt(buyerShoppingCartQuantity.getText()));
+                    if (exists && pExists) {
+                        writer.println("getEmail," + USERNAME[0]);
+                        writer.flush();
+                        String email = "";
+                        try {
+                            email = reader.readLine();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+
+                        writer.println("shoppingCart,addToCart," + email + "," + USERNAME[0] + "," +
+                                buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
+                                "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
+                        writer.flush();
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Added to Cart!",
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
