@@ -83,6 +83,24 @@ public abstract class Customer {
      * @param quantity
      */
     public static boolean addToCart(String email, String username, String store, String product, int quantity) {
+        Store store1 = null;
+        for (int i = 0; i < Seller.getStores().size(); i++) {
+            if (Seller.getStores().get(i).getStoreName().equalsIgnoreCase(store)) {
+                store1 = Seller.getStores().get(i);
+            }
+        }
+        if (store1 == null) {
+            return false;
+        }
+        Product product1 = null;
+        for (int i = 0; i < store1.getProductList().size(); i++) {
+            if (store1.getProductList().get(i).getName().equalsIgnoreCase(product)) {
+                product1 = store1.getProductList().get(i);
+            }
+        }
+        if (product1 == null) {
+            return false;
+        }
         if (alreadyInCartOfUser(store, product, username)) {
             System.out.println("This product is already in the Cart!");
             return false;

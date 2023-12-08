@@ -318,7 +318,8 @@ Steps:
 
 ![img_7.png](img_7.png)
 
-Expected result: Buyers can purchase the products at quantities less than or equal to the purchase limit (Buyer Shopping Cart Test Cases 1 & 5).
+Expected result: Buyers can purchase the products at quantities less than or equal to the purchase limit (Buyer Shopping
+Cart Test Cases 1 & 5).
 
 Test Status: Passed.
 
@@ -336,7 +337,8 @@ Steps:
 6. Seller selects the "OK" button.
 7. Seller selects the red circle to return to the homepage.
 
-Expected result: Buyers can no longer purchase the products in the store because it has been deleted (Buyer Shopping Cart Test Cases 1 & 5).
+Expected result: Buyers can no longer purchase the products in the store because it has been deleted (Buyer Shopping
+Cart Test Cases 1 & 5).
 
 Test Status: Passed.
 
@@ -349,14 +351,14 @@ Steps before performing the following test cases:
 
 Test 1: Seller View Customer Purchases
 
-Steps: 
+Steps:
 
 1. Seller selects the "View Customer Purchases" button.
 2. Seller selects the "Store Name" textbox.
 3. Seller enters the store name via the keyboard.
 4. Seller selects the "Usename" textbox.
 5. Seller enters the username via the keyboard.
-6. Seller chooses whether to sort the data using the "Sort" dropdown menu. 
+6. Seller chooses whether to sort the data using the "Sort" dropdown menu.
 7. Seller selects the "View" button.
 8. Seller sees the "Customer Purchases" page.
 9. Seller selects the red circle to return to the seller stats homepage.
@@ -367,7 +369,7 @@ Test Status: Failed because the "Customer Purchases" is empty even though I just
 
 Test 2: Seller View Product Sales
 
-Steps: 
+Steps:
 
 1. Seller selects the "View Product Sales" button.
 2. Seller selects the "Store Name" textbox.
@@ -381,7 +383,7 @@ Steps:
 
 Expected result: Application loads the "Product Sales" page.
 
-Test Status: Failed because the "Product Sales" page shows no peaches bought. even though I just bought 10 peaches
+Test Status: Failed because it prints one line at a time 
 
 Test 3: View Products In Cart
 
@@ -414,7 +416,7 @@ Steps:
 
 Expected result: Application creates the Product CSV file with the product data.
 
-Test Status: Failed Wrote to file but didn't display the right page.
+Test Status: Failed Wrote to file but didn't display the right page (maybe GUI problem).
 
 **END OF SELLER STATS TEST CASES**
 
@@ -427,7 +429,7 @@ Steps:
 3. Seller enters the product name or doesn't enter anything via the keyboard.
 4. Seller selects the "View" button.
 5. Seller sees the "Customer Reviews" page.
-6. 
+6.
 
 Expected result: Application loads the "Customer Reviews" page.
 
@@ -735,6 +737,21 @@ Test Status: Passed.
 
 **CONCURRENCY & NETWORK IO TEST CASES**
 
-// concurrency
-2 buyers and buy from same seller, same store, same product make sure quantity decreases by right number
-2 sellers and the customer view products updates correctly
+Steps:
+
+1. Run an instance of MarketServer.
+2. Run three instances of MarketPlace.
+3. Log in for two instances as different buyers (User Test Cases - Test 2)
+4. Log in for one instance as a seller (User Test Cases - Test 2)
+5. Seller creates a store (Seller Test Cases - Test 1).
+6. Seller creates a product with current quantity 100 (SELLER MODIFY STORE - Test 1).
+6. Buyer 1 adds 10 units of the product to their shopping cart and checks out (BUYER SHOPPING CART - Test 1 & 5).
+7. Buyer 2 adds 10 units of the product to their shopping cart and checks out (BUYER SHOPPING CART - Test 1 & 5).
+7. Buyer 1 adds 10 units of the product to their shopping cart (BUYER SHOPPING CART - Test 1).
+8. Buyer 2 adds 10 units of the product to their shopping cart (BUYER SHOPPING CART - Test 1).
+7. Seller does View customer Purchases and sees 20 of the product was purchased (SELLER STATS - Test 1).
+8. Seller does View Products In Cart and sees 20 of the product is in customer's shopping carts (SELLER STATS - Test 3).
+
+Expected result: Application updates the purchase history and shopping cart databases so that the seller can view recent customer purchases and view products currently in customer's shopping carts.
+
+Test Status: Intellij problems so can't test 3 MarketPlaces running simultaneously.

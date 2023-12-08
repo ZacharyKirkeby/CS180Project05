@@ -1,4 +1,4 @@
-pacakge src;
+package src;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -260,8 +260,7 @@ class ClientThread implements Runnable {
                     case "shoppingCart":
                         switch (temp[1]) {
                             case "addToCart":
-                                bool = Customer.addToCart(Account.getEmail(temp[2]),
-                                        Account.getUsername(temp[3]),
+                                bool = Customer.addToCart(Account.getEmail(temp[2]), temp[3],
                                         temp[4], temp[5], Integer.parseInt(temp[6]));
                                 writer.println(bool);
                                 writer.flush();
