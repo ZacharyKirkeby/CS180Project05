@@ -73,18 +73,18 @@ public abstract class Seller {
                     //    stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
                     //  "Out of Stock");
                     result += stores.get(i).getStoreName() + ";" +
-                        stores.get(i).getProductList().get(j).getName() + ";" +
-                        stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
-                        "Out of Stock" + "\n";
+                              stores.get(i).getProductList().get(j).getName() + ";" +
+                              stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
+                              "Out of Stock" + "\n";
                 } else {
                     //System.out.println(stores.get(i).getStoreName() + " | " +
                     //  stores.get(i).getProductList().get(j).getName() + " | " +
                     //  stores.get(i).getProductList().get(j).getPurchasePrice() + " | " +
                     // stores.get(i).getProductList().get(j).getStockQuantity());
                     result += stores.get(i).getStoreName() + ";" +
-                        stores.get(i).getProductList().get(j).getName() + ";" +
-                        stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
-                        stores.get(i).getProductList().get(j).getStockQuantity() + "\n";
+                              stores.get(i).getProductList().get(j).getName() + ";" +
+                              stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
+                              stores.get(i).getProductList().get(j).getStockQuantity() + "\n";
                 }
             }
         }
@@ -379,7 +379,7 @@ public abstract class Seller {
             while ((line != null) && (!line.isEmpty())) {
                 split = line.split(",");
                 createProductInternal(storeName, split[0], split[1], Double.parseDouble(split[2]),
-                    Integer.parseInt(split[3]));
+                        Integer.parseInt(split[3]));
                 line = bfr.readLine();
             }
             writeToFile();
@@ -534,12 +534,12 @@ public abstract class Seller {
         } else {
             for (int i = 0; i < stores.get(index).getProductList().size(); i++) {
                 productSales.add(stores.get(index).getProductList().get(i).getName() + ": " +
-                    stores.get(index).getProductList().get(i).getRevenue());
+                                 stores.get(index).getProductList().get(i).getRevenue());
             }
         }
         if (sorted) {
             productSales.sort(Comparator.comparing(s -> s.substring(s.indexOf(":") + 2),
-                Comparator.reverseOrder()));
+                    Comparator.reverseOrder()));
         }
         return String.join("\n", productSales);
     }
@@ -558,10 +558,10 @@ public abstract class Seller {
             if (stores.get(i).getSellerUsername().equalsIgnoreCase(username)) {
                 for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                     shoppingCartProducts += stores.get(i).getStoreName() + " - " +
-                        stores.get(i).getProductList().get(j).getName() + " | in stock: "
-                        + stores.get(i).getProductList().get(j).getStockQuantity() + " | in shopping cart: " +
-                        Customer.getTotalInCart(stores.get(i).getStoreName(),
-                            stores.get(i).getProductList().get(j).getName()) + "\n";
+                                            stores.get(i).getProductList().get(j).getName() + " | in stock: "
+                                            + stores.get(i).getProductList().get(j).getStockQuantity() + " | in shopping cart: " +
+                                            Customer.getTotalInCart(stores.get(i).getStoreName(),
+                                                    stores.get(i).getProductList().get(j).getName()) + "\n";
                 }
             }
         }
@@ -632,8 +632,8 @@ public abstract class Seller {
                 for (int i = 1; i < split.length; i++) {
                     String[] attributeSplit = split[i].split(",");
                     stores.get(index).getProductList().add(new Product(attributeSplit[0],
-                        attributeSplit[1], Double.parseDouble(attributeSplit[2]),
-                        Integer.parseInt(attributeSplit[3])));
+                            attributeSplit[1], Double.parseDouble(attributeSplit[2]),
+                            Integer.parseInt(attributeSplit[3])));
                 }
                 index++;
                 line = bfr.readLine();
@@ -657,7 +657,7 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             if (stores.get(i).getStoreName().equals(storeName)) {
                 searchedStore += stores.get(i).getStoreName() + ";" +
-                    Seller.printProducts(stores.get(i).getStoreName()) + "\n";
+                                 Seller.printProducts(stores.get(i).getStoreName()) + "\n";
             }
         }
         if (searchedStore.equals("")) {
@@ -680,9 +680,9 @@ public abstract class Seller {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 if (stores.get(i).getProductList().get(j).getName().equalsIgnoreCase(productName)) {
                     searched += stores.get(i).getStoreName() + ";" + stores.get(i).getProductList().get(j).getName()
-                        + ";" + stores.get(i).getProductList().get(j).getPurchasePrice()
-                        + ";" + stores.get(i).getProductList().get(j).getStockQuantity()
-                        + ";" + stores.get(i).getProductList().get(j).getDescription() + "\n";
+                                + ";" + stores.get(i).getProductList().get(j).getPurchasePrice()
+                                + ";" + stores.get(i).getProductList().get(j).getStockQuantity()
+                                + ";" + stores.get(i).getProductList().get(j).getDescription() + "\n";
                 }
             }
         }
@@ -710,7 +710,7 @@ public abstract class Seller {
                     searchedStore += stores.get(i).getStoreName();
                     searchedProduct += stores.get(i).getProductList().get(j).getName();
                     searched +=
-                        stores.get(i).getStoreName() + ";" +
+                            stores.get(i).getStoreName() + ";" +
                             stores.get(i).getProductList().get(j).getName() + ";" +
                             stores.get(i).getProductList().get(j).getPurchasePrice() + ";" +
                             stores.get(i).getProductList().get(j).getStockQuantity() + ";" +
@@ -739,9 +739,9 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 String element = stores.get(i).getStoreName() + ";"
-                    + stores.get(i).getProductList().get(j).getName() + ";"
-                    + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
-                    + stores.get(i).getProductList().get(j).getStockQuantity();
+                                 + stores.get(i).getProductList().get(j).getName() + ";"
+                                 + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
+                                 + stores.get(i).getProductList().get(j).getStockQuantity();
                 combined.add(element);
             }
         }
@@ -776,9 +776,9 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 String element = stores.get(i).getStoreName() + ";"
-                    + stores.get(i).getProductList().get(j).getName() + ";"
-                    + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
-                    + stores.get(i).getProductList().get(j).getStockQuantity();
+                                 + stores.get(i).getProductList().get(j).getName() + ";"
+                                 + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
+                                 + stores.get(i).getProductList().get(j).getStockQuantity();
                 combined.add(element);
             }
         }
@@ -813,9 +813,9 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 String element = stores.get(i).getStoreName() + ";"
-                    + stores.get(i).getProductList().get(j).getName() + ";"
-                    + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
-                    + stores.get(i).getProductList().get(j).getStockQuantity();
+                                 + stores.get(i).getProductList().get(j).getName() + ";"
+                                 + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
+                                 + stores.get(i).getProductList().get(j).getStockQuantity();
                 combined.add(element);
             }
         }
@@ -849,9 +849,9 @@ public abstract class Seller {
         for (int i = 0; i < stores.size(); i++) {
             for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                 String element = stores.get(i).getStoreName() + ";"
-                    + stores.get(i).getProductList().get(j).getName() + ";"
-                    + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
-                    + stores.get(i).getProductList().get(j).getStockQuantity();
+                                 + stores.get(i).getProductList().get(j).getName() + ";"
+                                 + stores.get(i).getProductList().get(j).getPurchasePrice() + ";"
+                                 + stores.get(i).getProductList().get(j).getStockQuantity();
                 combined.add(element);
             }
         }
@@ -896,7 +896,7 @@ public abstract class Seller {
                 if (stores.get(i).getSellerUsername().equalsIgnoreCase(user)) {
                     for (int j = 0; j < stores.get(i).getProductList().size(); j++) {
                         result += Customer.viewReviews(stores.get(i).getStoreName(),
-                            stores.get(i).getProductList().get(j).getName()) + "\n";
+                                stores.get(i).getProductList().get(j).getName()) + "\n";
                     }
                 } else {
                     result += "No store found";
@@ -938,7 +938,7 @@ public abstract class Seller {
                             return false;
                         }
                         stores.get(i).getProductList().get(j).setStockQuantity(
-                            (stores.get(i).getProductList().get(j).getStockQuantity() - quantity)
+                                (stores.get(i).getProductList().get(j).getStockQuantity() - quantity)
                         );
 
                     }

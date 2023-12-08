@@ -1,4 +1,5 @@
 package src;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class MarketServer {
 class ClientThread implements Runnable {
 
     private Socket threadSocket;
+
     public ClientThread(Socket socket) {
         threadSocket = socket;
     }
@@ -291,10 +293,10 @@ class ClientThread implements Runnable {
                                 for (String s : Customer.getShoppingCartofCustomer(temp[2]).split("\n")) {
                                     String[] view = s.split(";");
                                     print += ("Customer Name | Store Name " +
-                                            "| Product Name | Qty\n");
+                                              "| Product Name | Qty\n");
                                     String output =
                                             view[1] + " | " + view[2] +
-                                                    " | " + view[3] + " | " + view[4] + "\n";
+                                            " | " + view[3] + " | " + view[4] + "\n";
                                     print += output;
                                 }
                                 writer.println(print);
