@@ -1,5 +1,4 @@
 package src;
-
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -70,7 +69,6 @@ class ClientThread implements Runnable {
                         writer.println(loggedIn);
                         writer.flush();
                         if (loggedIn) {
-                            System.out.println("reached");
                             String check1 = reader.readLine();
                             if (check1 != null) {
                                 writer.println(Account.getUsername(check1));
@@ -95,7 +93,7 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "createProduct":
                                 bool = Seller.createProduct(temp[2], temp[3], temp[4],
-                                    Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
+                                        Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -106,13 +104,13 @@ class ClientThread implements Runnable {
                                 break;
                             case "editProductPrice":
                                 bool = Seller.editProductPrice(temp[2],
-                                    temp[3], Double.parseDouble(temp[4]), temp[5]);
+                                        temp[3], Double.parseDouble(temp[4]), temp[5]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "editProductQuantity":
                                 bool = Seller.editProductQuantity(temp[2], temp[3],
-                                    Integer.parseInt(temp[4]), temp[5]);
+                                        Integer.parseInt(temp[4]), temp[5]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -155,12 +153,12 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "getCustomersAndPurchases":
                                 writer.println(Seller.getCustomersAndPurchases(temp[2],
-                                    temp[3], Boolean.parseBoolean(temp[4])));
+                                        temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.flush();
                                 break;
                             case "getProductSales":
                                 writer.println(Seller.getProductSales(temp[2],
-                                    temp[3], Boolean.parseBoolean(temp[4])));
+                                        temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.flush();
                                 break;
                             case "getShoppingCart":
@@ -227,9 +225,8 @@ class ClientThread implements Runnable {
                         writer.println(Seller.searchByDescription(temp[1]));
                         writer.flush();
                         break;
-                    case "searchAll":
-                        String result = Seller.searchByProduct(temp[1]);
-                        writer.println(Seller.printProductAndStores() + result);
+                    case "printProductAndStore":
+                        writer.println(Seller.printProductAndStores());
                         writer.flush();
                         break;
                     case "sortCheapest":
@@ -256,22 +253,22 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "addToCart":
                                 bool = Customer.addToCart(Account.getEmail(temp[2]),
-                                    Account.getUsername(temp[3]),
-                                    temp[4], temp[5], Integer.parseInt(temp[6]));
+                                        Account.getUsername(temp[3]),
+                                        temp[4], temp[5], Integer.parseInt(temp[6]));
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "changeCheckoutQuantity":
                                 bool = Customer.addToCartChangeCheckoutQuantity(
-                                    temp[2], temp[3], Integer.parseInt(temp[4]));
+                                        temp[2], temp[3], Integer.parseInt(temp[4]));
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "removeFromCart":
                                 bool = Customer.removeFromCart(
-                                    Account.getEmail(temp[2]),
-                                    Account.getUsername(temp[3]),
-                                    temp[4], temp[5], Integer.parseInt(temp[6]));
+                                        Account.getEmail(temp[2]),
+                                        Account.getUsername(temp[3]),
+                                        temp[4], temp[5], Integer.parseInt(temp[6]));
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -290,10 +287,10 @@ class ClientThread implements Runnable {
                                 for (String s : Customer.getShoppingCartofCustomer(temp[2]).split("\n")) {
                                     String[] view = s.split(";");
                                     print += ("Customer Name | Store Name " +
-                                        "| Product Name | Qty\n");
+                                            "| Product Name | Qty\n");
                                     String output =
-                                        view[1] + " | " + view[2] +
-                                            " | " + view[3] + " | " + view[4] + "\n";
+                                            view[1] + " | " + view[2] +
+                                                    " | " + view[3] + " | " + view[4] + "\n";
                                     print += output;
                                 }
                                 writer.println(print);
@@ -308,7 +305,7 @@ class ClientThread implements Runnable {
                         break;
                     case "leaveReview":
                         bool = Customer.leaveReview(temp[1],
-                            temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
+                                temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
                         writer.println(bool);
                         writer.flush();
                         break;
@@ -327,4 +324,3 @@ class ClientThread implements Runnable {
         } while (!(threadSocket == null) && threadSocket.isConnected());
     }
 }
-
