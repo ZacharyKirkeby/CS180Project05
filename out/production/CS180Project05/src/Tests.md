@@ -350,19 +350,83 @@ Steps:
 2. Seller selects the "Store Name" textbox.
 3. Seller enters the store name via the keyboard.
 4. Seller selects the "Usename" textbox.
-3. Seller enters the username via the keyboard.
-4. 
+5. Seller enters the username via the keyboard.
+6. Seller chooses whether to sort the data using the "Sort" dropdown menu. 
+7. Seller selects the "View" button.
+8. Seller sees the "Customer Purchases" page.
+9. Seller selects the red circle to return to the seller stats homepage.
+
+Expected result: Application loads the "Customer Purchases" page.
+
+Test Status: Failed because the "Customer Purchases" is empty even though I just made a purchase as a buyer.
 
 Test 2: Seller View Product Sales
 
+Steps: 
+
+1. Seller selects the "View Product Sales" button.
+2. Seller selects the "Store Name" textbox.
+2. Seller enters the store name via the keyboard.
+4. Seller selects the "Usename" textbox.
+5. Seller enters the username via the keyboard.
+6. Seller chooses whether to sort the data using the "Sort" dropdown menu.
+7. Seller selects the "View" button.
+8. Seller sees the "Product Sales" page with the data.
+9. Seller selects the red circle to return to the seller stats homepage.
+
+Expected result: Application loads the "Product Sales" page.
+
+Test Status: Failed because the "Product Sales" page shows no peaches bought. even though I just bought 10 peaches
+
 Test 3: View Products In Cart
+
+Steps:
+
+1. Seller selects the "View Products In Cart" button.
+2. Seller selects the "Username" textbox.
+3. Seller enters the username via the keyboard.
+4. Seller selects the "View" button.
+5. Seller sees the "Products In Cart" page.
+6. Seller selects the "OK" button.
+7. Seller selects the red circle to return to the seller stats homepage.
+
+![img_5.png](img_5.png)
+
+Expected result: Application loads the "Products In Cart" page.
+
+Test Status: Passed.
 
 Test 4: Seller Get Product CSV
 
+Steps:
+
+1. Seller selects the "Get Product CSV" button.
+2. Seller selects the "Store Name" textbox.
+3. Seller enters the store name via the keyboard.
+4. Seller selects the "File Path" textbox.
+5. Seller enters the file path via the keyboard.
+6. Seller selects the "Write" button.
+
+Expected result: Application creates the Product CSV file with the product data.
+
+Test Status: Failed Wrote to file but didn't display the right page.
 
 **END OF SELLER STATS TEST CASES**
 
 Test 3: Seller View Customer Reviews
+
+Steps:
+
+1. Seller selects the "View Customer Reviews" button.
+2. Seller selects the "Product Name (Leave Empty To View All)" textbox.
+3. Seller enters the product name or doesn't enter anything via the keyboard.
+4. Seller selects the "View" button.
+5. Seller sees the "Customer Reviews" page.
+6. 
+
+Expected result: Application loads the "Customer Reviews" page.
+
+Test Status: Failed didn't display the reviews.
 
 **END OF SELLER MARKETPLACE TEST CASES**
 

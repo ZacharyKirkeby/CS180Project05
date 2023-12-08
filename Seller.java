@@ -908,8 +908,9 @@ public abstract class Seller {
      * @return
      */
     public static Store whichStore(String storeName) {
+        readFromFile();
         for (Store s : stores) {
-            if (s.equals(storeName)) {
+            if (s.getStoreName().equals(storeName)) {
                 return s;
             }
         }

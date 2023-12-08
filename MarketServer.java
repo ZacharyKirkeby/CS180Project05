@@ -37,9 +37,7 @@ public class MarketServer {
                     PrintWriter writer = new PrintWriter(socket.getOutputStream());
                     String username;
                     String password;
-                    System.out.println("do while reached");
                     String message = reader.readLine();
-                    System.out.println("readline reached");
                     String[] temp = message.split(",");
                     message = temp[0];
                     boolean bool = false;
@@ -105,13 +103,21 @@ public class MarketServer {
                                     break;
                                 case "triggerSale":
                                     Store store = Seller.whichStore(temp[2]);
-                                    bool = store.triggerSale(temp[3], Double.parseDouble(temp[4]), Integer.parseInt(temp[5]));
+                                    if (store != null) {
+                                        bool = store.triggerSale(temp[3], Double.parseDouble(temp[4]), Integer.parseInt(temp[5]));
+                                    } else {
+                                        bool = false;
+                                    }
                                     writer.println(bool);
                                     writer.flush();
                                     break;
                                 case "triggerOrderCap":
                                     store = Seller.whichStore(temp[2]);
-                                    bool = store.triggerOrderCap(temp[3], Integer.parseInt(temp[4]));
+                                    if (store != null) {
+                                        bool = store.triggerOrderCap(temp[3], Integer.parseInt(temp[4]));
+                                    } else {
+                                        bool = false;
+                                    }
                                     writer.println(bool);
                                     writer.flush();
                                     break;

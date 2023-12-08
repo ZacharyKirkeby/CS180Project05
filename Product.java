@@ -264,11 +264,11 @@ public class Product {
         if (salePrice <= 0 || saleCap <= 0) {
             return false;
         } else {
-            this.salePrice = salePrice;
             if (saleCap > this.stockQuantity) {
-                this.saleCap = stockQuantity;
+                return false;
             } else {
                 this.saleCap = saleCap;
+                this.salePrice = salePrice;
             }
         }
         this.onSale = true;
