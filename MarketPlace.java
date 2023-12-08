@@ -1854,11 +1854,14 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Do not leave Store and Product" +
                                         " Fields Empty!",
                                 "Leave Review", JOptionPane.ERROR_MESSAGE);
+                        return;
                     } else {
+                        System.out.println("I got in");
                         writer.println("leaveReview," + leaveReviewStoreName.getText() + "," +
                                 leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
-                                Integer.parseInt((String) leaveReviewRating.getSelectedItem()) + "," +
+                                ((String) leaveReviewRating.getSelectedItem()) + "," +
                                 leaveReviewDescription.getText());
+                        writer.flush();
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
                         } catch (IOException ex) {
@@ -1869,6 +1872,9 @@ public class MarketPlace {
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Review Left Successfully!",
                                 "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Review failed, try again!",
+                                "Leave Review", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
