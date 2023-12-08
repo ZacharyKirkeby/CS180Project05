@@ -46,11 +46,14 @@ public abstract class Seller {
             }
         }
         if (index == -1) {
-            result += "Store not found";
+            return "Store not found";
         } else {
             for (int i = 0; i < stores.get(index).getProductList().size(); i++) {
                 result += stores.get(index).getProductList().get(i).getName() + ", ";
             }
+        }
+        if (result.equals("")) {
+            return "";
         }
         return result.substring(0, result.length() - 2);
     }
