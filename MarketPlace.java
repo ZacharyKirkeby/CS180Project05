@@ -2132,7 +2132,7 @@ public class MarketPlace {
                     String filename = JOptionPane.showInputDialog(null,
                             "Enter Filename to be Exported to", "Marketplace",
                             JOptionPane.QUESTION_MESSAGE);
-                    writer.println("getPurchaseHistory," + loginUsernameOrEmailField.getText() + "," + filename);
+                    writer.println("getPurchaseHistory," + USERNAME[0] + "," + filename);
                     writer.flush();
                     boolean bool = false;
                     try {
