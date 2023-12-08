@@ -216,10 +216,10 @@ public abstract class Customer {
                                            int quantity) {
         boolean successfullyRemovedFromCart = false;
         readFromShoppingCartDatabaseFile();
-        System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
                 && productNames.get(i).equalsIgnoreCase(productName)) {
+                Seller.changeQuantity(storeName, productName, -1 * quantities.get(i));
                 successfullyRemovedFromCart = true;
                 emails.remove(i);
                 usernames.remove(i);
