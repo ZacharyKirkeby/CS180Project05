@@ -1,5 +1,4 @@
 package src;
-
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -43,7 +42,6 @@ public class MarketServer {
 class ClientThread implements Runnable {
 
     private Socket threadSocket;
-
     public ClientThread(Socket socket) {
         threadSocket = socket;
     }
@@ -54,10 +52,16 @@ class ClientThread implements Runnable {
         System.out.println("Client connected!");
         boolean logOrRegistration = false;
         boolean isLoggedIn = false;
+        BufferedReader reader = null;
+        PrintWriter writer = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(threadSocket.getInputStream()));
+            writer = new PrintWriter(threadSocket.getOutputStream());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         do {
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(threadSocket.getInputStream()));
-                PrintWriter writer = new PrintWriter(threadSocket.getOutputStream());
                 String username;
                 String password;
                 String message = reader.readLine();
@@ -71,6 +75,7 @@ class ClientThread implements Runnable {
                         writer.println(loggedIn);
                         writer.flush();
                         if (loggedIn) {
+                            System.out.println("reached");
                             String check1 = reader.readLine();
                             if (check1 != null) {
                                 writer.println(Account.getUsername(check1));
@@ -219,16 +224,6 @@ class ClientThread implements Runnable {
                         writer.println(Seller.searchByStore(temp[1]));
                         writer.flush();
                         break;
-                    case "searchedStoreExists":
-                        ArrayList<Store> stores = MarketPlace.getStores();
-                        writer.println(Customer.searchedStoreExists(temp[1], stores));
-                        writer.flush();
-                        break;
-                    case "searchedProductExists":
-                        ArrayList<Store> store = MarketPlace.getStores();
-                        writer.println(Customer.searchedProductExists(temp[1], store));
-                        writer.flush();
-                        break;
                     case "searchByProduct":
                         writer.println(Seller.searchByProduct(temp[1]));
                         writer.flush();
@@ -239,6 +234,7 @@ class ClientThread implements Runnable {
                         break;
                     case "printProductAndStore":
                         writer.println(Seller.printProductAndStores());
+                        System.out.println(Seller.printProductAndStores());
                         writer.flush();
                         break;
                     case "sortCheapest":
@@ -260,10 +256,6 @@ class ClientThread implements Runnable {
                                 writer.flush();
                                 break;
                         }
-                        break;
-                    case "getEmail":
-                        writer.println(Account.getEmail(temp[1]));
-                        writer.flush();
                         break;
                     case "shoppingCart":
                         switch (temp[1]) {
@@ -303,10 +295,10 @@ class ClientThread implements Runnable {
                                 for (String s : Customer.getShoppingCartofCustomer(temp[2]).split("\n")) {
                                     String[] view = s.split(";");
                                     print += ("Customer Name | Store Name " +
-                                              "| Product Name | Qty\n");
+                                            "| Product Name | Qty\n");
                                     String output =
                                             view[1] + " | " + view[2] +
-                                            " | " + view[3] + " | " + view[4] + "\n";
+                                                    " | " + view[3] + " | " + view[4] + "\n";
                                     print += output;
                                 }
                                 writer.println(print);
