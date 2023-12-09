@@ -75,13 +75,12 @@ public class MarketPlace {
              */
             JFrame loginRegisterFrame = new JFrame();
             JPanel loginRegisterPanel = new JPanel(new GridLayout(0, 2, 4, 16));
-            loginRegisterPanel.add(new JLabel("WELCOME TO BOILERBUY!"));
             JButton openLoginButton = new JButton("Login");
             JButton openRegisterButton = new JButton("Register");
             loginRegisterPanel.add(openLoginButton);
             loginRegisterPanel.add(openRegisterButton);
             loginRegisterFrame.add(loginRegisterPanel);
-            loginRegisterFrame.setTitle("Marketplace");
+            loginRegisterFrame.setTitle("WELCOME TO BOILERBUY!");
             loginRegisterFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             loginRegisterFrame.pack();
             loginRegisterFrame.setLocationRelativeTo(null);
