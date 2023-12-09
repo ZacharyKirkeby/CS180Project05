@@ -240,9 +240,16 @@ multiple times, checking each menu and sub menu to ensure that MarketPlace and i
 
 ### [MarketServer](<MarketServer.java>)
 *** 
-Needs to be described
+MarketServer is a Java class designed to create and manage a server for handling data calls in a market application. The server runs continuously until it is manually shut down.
 
+Features:
+Server Initialization: The server starts immediately upon running the main method, with the port number specified as an argument.
+Client Connection Handling: The server waits for client connections, and upon a successful connection, it initiates a new ClientThread for handling client interactions.
+Continuous Operation: The server operates in an infinite loop, constantly listening for new client connections.
 
+Usage:
+Server Launch: Initialize the server by running the main method with the desired port number.
+Client Interaction: Once the server is running, it can handle multiple client requests concurrently, each in its own thread.
 
 ***
 
