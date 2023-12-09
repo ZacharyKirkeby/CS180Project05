@@ -377,7 +377,7 @@ public abstract class Customer {
         String customerProducts = "";
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equals(username)) { // check if username matches
-                customerProducts += (String.format("%s;%s;%s;%s;%d\n", emails.get(i), usernames.get(i),
+                customerProducts += (String.format("%s;%s;%s;%s;%d,", emails.get(i), usernames.get(i),
                         storeNames.get(i), productNames.get(i), quantities.get(i)));
             }
         }
@@ -476,9 +476,6 @@ public abstract class Customer {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if(result.equals("")){
-            result = "No Results Found;\n";
         }
         result = result.replace(" , ", ";");
         return result;
