@@ -20,13 +20,11 @@ Submitted by: Zachary Kirkeby
 ***
 ## Class Descriptions
 ***
-We utilize 6 total classes for the full execution of the program. Product.java represents a product object. Product
-objects serve as the foundational object for the organization of transactions. Store.java represents a singular store,
+We utilize 7 total classes for the full execution of the application. We incorporated network IO and concurrency to make sure any updates to our databases are synchronized. This feature ensures that the application can handle multiple users simultaneously, a necessary capability for real-world applications. Product.java represents a product object. Product objects serve as the foundational object for the organization of transactions. Store.java represents a singular store,
 much like product the overall program utilizes multiple different stores. Account is the foundational class for 
 customers and seller objects, which are permission levels on user accounts. Customer and Seller both manage the
 intrinsic properties and functions of a seller or customer, which will be detailed further below. Marketplace is the
-central program for the program, managing functions from all other calls, handling user input, and calling the 
-needed classes depending on input. 
+central program for the application. It is where the GUI is implemented and reads and writes data from the MarketServer. MarketServer handles the user input data sent from Marketplace, calling the needed classes depending on input and upating the databases (purchase history database, stores database, accounts database, shopping cart database).
 
 ### [Product.java](</src/Product.java>)
 ***
@@ -188,10 +186,7 @@ found [here](</src/SellerTestCases.java>)
 
 ### [MarketPlace.java](</src/MarketPlace.java>)
 ***
-Overarching handler for Sellers, Store, and Customer classes. Creates a looping menu with options depending on user
-designation. First prompts the user to login or register a new account. From there, a looping menu is created showing 
-options based on user designation. The marketplace uses a scanner for all system input and output. The marketplace will
-keep running until the program is terminated. Users can exit at any point. 
+Overarching handler for Sellers, Store, and Customer classes. Overarching handler for Sellers, Store, and Customer classes. The MarketPlace Graphical User Interface (GUI) is designed to be intuitive. It separates the visual aspects from the backend logic, ensuring that the application remains adaptable to user feedback. The GUI is structured to guide users through the marketplace with ease, making their journey from login to transaction as seamless as possible. 
 
 #### Seller Options
 ***
@@ -209,8 +204,7 @@ The statistics menu presents sorting options, customers and purchase records, sh
 export product listings to a file. This is where the seller can see their total sales by store, as well as total revenue
 by store. 
 
-All of the above is handled through a series of nested switch statements. All menus are presented as a list with a
-number corresponding to a different sub menu or choice. There are multiple sub menus. 
+All of the above is handled through the MarketPlace GUI. 
 
 #### Customer Options
 ***
@@ -225,6 +219,7 @@ Within the shopping cart menu, the user can add products to the shopping cart. T
 they are stored in a file. A customer can change the quantity of any product in the cart, as well as remove a product 
 from the cart. A customer can return to shopping as well, or purchase all products in the shopping cart. 
 
+All of the above is handled through the MarketPlace GUI. 
 
 #### Account Management (General Feature)
 ***
@@ -238,11 +233,20 @@ These test to ensure the menus behave correctly, primarily by utilizing differen
 ensure there is a consistent flow within Marketplace logic. Manual testing primarily has involved running Marketplace
 multiple times, checking each menu and sub menu to ensure that MarketPlace and it's calls all work appropriately. 
 
+All of the above is handled through the MarketPlace GUI. 
+
 ### [MarketServer](<MarketServer.java>)
 *** 
-Needs to be described
+MarketServer is a Java class designed to create and manage a server for handling data calls in a market application. The server runs continuously until it is manually shut down.
 
+Features:
+Server Initialization: The server starts immediately upon running the main method, with the port number specified as an argument.
+Client Connection Handling: The server waits for client connections, and upon a successful connection, it initiates a new ClientThread for handling client interactions.
+Continuous Operation: The server operates in an infinite loop, constantly listening for new client connections.
 
+Usage:
+Server Launch: Initialize the server by running the main method with the desired port number.
+Client Interaction: Once the server is running, it can handle multiple client requests concurrently, each in its own thread.
 
 ***
 

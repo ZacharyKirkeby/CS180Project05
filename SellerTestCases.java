@@ -195,8 +195,8 @@ public class SellerTestCases {
         assertEquals("Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased | Revenue " + "From Customer \n" + "email2 | username2 | store name | product name | 5 | 8.00 | 40.0\n", Seller.salesByStore("store name", "sellerUsername"));
 
         // getProductSales is broken as of now
-        System.out.println(Seller.getProductSales("store name", "sellerUsername", false));
-        System.out.println(Seller.getProductSales("store name", "sellerUsername", true));
+        // System.out.println(Seller.getProductSales("store name", "sellerUsername", false));
+        // System.out.println(Seller.getProductSales("store name", "sellerUsername", true));
 
         assertEquals("store name - product name | in stock: 15 | in shopping cart: 1\n" + "store name - second " +
                 "product | in stock: 10 | in shopping cart: 0\n", Seller.getShoppingCartProducts("sellerUsername"));

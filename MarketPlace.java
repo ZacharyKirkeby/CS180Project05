@@ -754,9 +754,6 @@ public class MarketPlace {
             productSalesPanel.add(new JLabel("Store Name:"));
             JTextField productSalesStoreName = new JTextField();
             productSalesPanel.add(productSalesStoreName);
-            productSalesPanel.add(new JLabel("Username:"));
-            JTextField productSalesUsername = new JTextField();
-            productSalesPanel.add(productSalesUsername);
             productSalesPanel.add(new JLabel("Sort:"));
             JComboBox productSalesBox = new JComboBox(new String[]{"Yes", "No"});
             productSalesPanel.add(productSalesBox);
@@ -1580,12 +1577,12 @@ public class MarketPlace {
             productSales.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (productSalesStoreName.getText().isEmpty() || productSalesUsername.getText().isEmpty()) {
+                    if (productSalesStoreName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Product Sales", JOptionPane.ERROR_MESSAGE);
                     } else if (productSalesBox.getSelectedItem().toString().equals("Yes")) {
                         writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
-                                productSalesUsername.getText() + "," + true);
+                                USERNAME[0] + "," + true);
                         writer.flush();
                         String output;
                         try {
@@ -1593,11 +1590,12 @@ public class MarketPlace {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
+                        output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     } else {
                         writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
-                                productSalesUsername.getText() + "," + false);
+                                USERNAME[0] + "," + false);
                         writer.flush();
                         String output;
                         try {
@@ -1605,6 +1603,7 @@ public class MarketPlace {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
+                        output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     }

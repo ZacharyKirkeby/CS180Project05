@@ -1,4 +1,5 @@
 package src;
+
 import java.io.*;
 import java.util.*;
 
@@ -96,7 +97,7 @@ public abstract class Customer {
                                 System.out.println("Error out of Stock");
                                 return false;
                             } else if (Seller.getStores().get(i).getProductList().get(j).getStockQuantity()
-                                    < quantity) {
+                                       < quantity) {
                                 quantity = Seller.getStores().get(i).getProductList().get(j).getStockQuantity();
                                 System.out.println("Quantity Exceeded Maximum in Stock, added as many as available");
                             }
@@ -143,7 +144,7 @@ public abstract class Customer {
         readFromShoppingCartDatabaseFile();
         for (int i = 0; i < storeNames.size(); i++) {
             if (storeNames.get(i).equals(store) && productNames.get(i).equalsIgnoreCase(product)
-                    && usernames.get(i).equalsIgnoreCase(username)) {
+                && usernames.get(i).equalsIgnoreCase(username)) {
                 return true;
             }
         }
@@ -196,7 +197,7 @@ public abstract class Customer {
         System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
-                    && productNames.get(i).equalsIgnoreCase(productName)) {
+                && productNames.get(i).equalsIgnoreCase(productName)) {
                 successfullyRemovedFromCart = true;
                 Seller.changeQuantity(storeName, productName, quantity);
                 emails.remove(i);
@@ -219,7 +220,7 @@ public abstract class Customer {
         System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
-                    && productNames.get(i).equalsIgnoreCase(productName)) {
+                && productNames.get(i).equalsIgnoreCase(productName)) {
                 successfullyRemovedFromCart = true;
                 emails.remove(i);
                 usernames.remove(i);
@@ -368,6 +369,21 @@ public abstract class Customer {
         }
     }
 
+    public static String getProductSales(String storeName, String username, boolean sorted) {
+        readFromPurchaseHistoryDatabaseFile();
+        ArrayList<String> productSales = new ArrayList<>();
+        for (int i = 0; i < storeNames.size(); i++) {
+            if (storeNames.get(i).equalsIgnoreCase(storeName)) {
+                productSales.add(productNames.get(i) + ": " + quantities.get(i));
+            }
+        }
+        if (sorted) {
+            productSales.sort(Comparator.comparing(s -> s.substring(s.indexOf(":") + 2),
+                    Comparator.reverseOrder()));
+        }
+        return String.join(";", productSales);
+    }
+
     /**
      * @param username
      * @return arraylist of the products currently in the shopping cart of the customer identified by the username
@@ -398,7 +414,7 @@ public abstract class Customer {
         readFromPurchaseHistoryDatabaseFile();
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName), true)) {
             for (int i = 0; i < usernames.size(); i++) {
-                if (usernames.get(i).equals(username) ) { // check if username and email match
+                if (usernames.get(i).equals(username)) { // check if username and email match
                     System.out.println("we found a match");
                     pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
                             productNames.get(i), quantities.get(i)));
@@ -461,7 +477,7 @@ public abstract class Customer {
             String line = br.readLine();
             while (line != null) {
                 String[] subpart = line.split(",");
-                if(subpart.length >1) {
+                if (subpart.length > 1) {
                     if (storeName.equals("")) {
                         if (subpart[1].contains(productName)) {
                             result += line + ",";

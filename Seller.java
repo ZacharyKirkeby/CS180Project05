@@ -514,33 +514,17 @@ public abstract class Seller {
      *
      * @param storeName
      * @param username
-     * @param sorted
      * @return String of product sales, can be sorted
      */
-    public static String getProductSales(String storeName, String username, boolean sorted) {
+    public static boolean validateProductSales(String storeName, String username) {
         readFromFile();
-        int index = -1;
-        ArrayList<String> productSales = new ArrayList<>();
         for (int i = 0; i < stores.size(); i++) {
-            if (stores.get(i).getStoreName().equalsIgnoreCase(storeName)
-                    && stores.get(i).getSellerUsername().equalsIgnoreCase(username)) {
-                index = i;
-                break;
+            if (stores.get(i).getStoreName().equalsIgnoreCase(storeName) &&
+                stores.get(i).getSellerUsername().equalsIgnoreCase(username)) {
+                return true;
             }
         }
-        if (index == -1) {
-            return "Error: Invalid parameters";
-        } else {
-            for (int i = 0; i < stores.get(index).getProductList().size(); i++) {
-                productSales.add(stores.get(index).getProductList().get(i).getName() + ": " +
-                        stores.get(index).getProductList().get(i).getRevenue());
-            }
-        }
-        if (sorted) {
-            productSales.sort(Comparator.comparing(s -> s.substring(s.indexOf(":") + 2),
-                    Comparator.reverseOrder()));
-        }
-        return String.join("\n", productSales);
+        return false;
     }
 
     /**
