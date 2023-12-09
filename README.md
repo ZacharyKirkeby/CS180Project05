@@ -20,13 +20,12 @@ Submitted by: Zachary Kirkeby
 ***
 ## Class Descriptions
 ***
-We utilize 6 total classes for the full execution of the program. Product.java represents a product object. Product
+We utilize 7 total classes for the full execution of the program. Product.java represents a product object. Product
 objects serve as the foundational object for the organization of transactions. Store.java represents a singular store,
 much like product the overall program utilizes multiple different stores. Account is the foundational class for 
 customers and seller objects, which are permission levels on user accounts. Customer and Seller both manage the
 intrinsic properties and functions of a seller or customer, which will be detailed further below. Marketplace is the
-central program for the program, managing functions from all other calls, handling user input, and calling the 
-needed classes depending on input. 
+central program for the application. It is where the GUI is implemented and reads and writes data from the MarketServer. MarketServer handles the user input data sent from Marketplace, calling the needed classes depending on input and upating the databases (purchase history database, stores database, accounts database, shopping cart database). 
 
 ### [Product.java](</src/Product.java>)
 ***
