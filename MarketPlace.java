@@ -2710,11 +2710,11 @@ public class MarketPlace {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
-        writer.println("shoppingCart,getShoppingCart" + username);
+        writer.println("shoppingCart,getShoppingCart," + username);
         writer.flush();
 
 
-        String[] buyerViewShoppingCartColoumn = reader.readLine().split("\n");
+        String[] buyerViewShoppingCartColoumn = reader.readLine().split(",");
         String[][] temp = new String[buyerViewShoppingCartColoumn.length][5];
         String[] columnNames = new String[]{"Customer Username", "Email", "Store Name", "Product Name", "Quantity"};
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
