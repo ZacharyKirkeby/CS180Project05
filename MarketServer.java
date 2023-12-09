@@ -307,15 +307,7 @@ class ClientThread implements Runnable {
                                 break;
                             case "getShoppingCart":
                                 String print = "";
-                                for (String s : Customer.getShoppingCartofCustomer(temp[2]).split("\n")) {
-                                    String[] view = s.split(";");
-                                    print += ("Customer Name | Store Name " +
-                                            "| Product Name | Qty\n");
-                                    String output =
-                                            view[1] + " | " + view[2] +
-                                                    " | " + view[3] + " | " + view[4] + "\n";
-                                    print += output;
-                                }
+                               print = Customer.getShoppingCartofCustomer(temp[2]);
                                 writer.println(print);
                                 writer.flush();
                                 break;
