@@ -75,6 +75,7 @@ public class MarketPlace {
              */
             JFrame loginRegisterFrame = new JFrame();
             JPanel loginRegisterPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            loginRegisterPanel.add(new JLabel("WELCOME TO BOILERBUY!"));
             JButton openLoginButton = new JButton("Login");
             JButton openRegisterButton = new JButton("Register");
             loginRegisterPanel.add(openLoginButton);
@@ -1124,10 +1125,10 @@ public class MarketPlace {
              */
             JFrame buyerViewReviewsFrame = new JFrame();
             JPanel buyerViewReviewsPanel = new JPanel(new GridLayout(0, 2, 4, 16));
-            buyerViewReviewsPanel.add(new JLabel("Enter Store Name: "));
+            buyerViewReviewsPanel.add(new JLabel("Enter Store Name (Leave Empty To View All): "));
             JTextField buyerViewReviewsStoreName = new JTextField();
             buyerViewReviewsPanel.add(buyerViewReviewsStoreName);
-            buyerViewReviewsPanel.add(new JLabel("Product Name (Leave Empty To View All):"));
+            buyerViewReviewsPanel.add(new JLabel("Product Name"));
             JTextField buyerViewReviewsProductName = new JTextField();
             buyerViewReviewsPanel.add(buyerViewReviewsProductName);
             buyerViewReviewsPanel.add(new JLabel());
@@ -1889,11 +1890,17 @@ public class MarketPlace {
             buyerViewReviewsButtonCopy.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    try {
-                        buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
-                                buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                    if(buyerViewReviewsProductName.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null, "Do not leave Product" +
+                                        " Field Empty!",
+                                "View Review ", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        try {
+                            buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
+                                    buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
 
                 }
@@ -2681,6 +2688,9 @@ public class MarketPlace {
         writer.flush();
 
         String[] sellerViewReviewsColoumn = reader.readLine().split(",");
+        for(int a = 0; a < sellerViewReviewsColoumn.length; a++){
+            System.out.println(sellerViewReviewsColoumn[a]);
+        }
         String[][] temp = new String[sellerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
