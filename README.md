@@ -188,10 +188,7 @@ found [here](</src/SellerTestCases.java>)
 
 ### [MarketPlace.java](</src/MarketPlace.java>)
 ***
-Overarching handler for Sellers, Store, and Customer classes. Creates a looping menu with options depending on user
-designation. First prompts the user to login or register a new account. From there, a looping menu is created showing 
-options based on user designation. The marketplace uses a scanner for all system input and output. The marketplace will
-keep running until the program is terminated. Users can exit at any point. 
+Overarching handler for Sellers, Store, and Customer classes. Overarching handler for Sellers, Store, and Customer classes. The MarketPlace Graphical User Interface (GUI) is designed to be intuitive. It separates the visual aspects from the backend logic, ensuring that the application remains adaptable to user feedback. The GUI is structured to guide users through the marketplace with ease, making their journey from login to transaction as seamless as possible. 
 
 #### Seller Options
 ***
@@ -209,8 +206,7 @@ The statistics menu presents sorting options, customers and purchase records, sh
 export product listings to a file. This is where the seller can see their total sales by store, as well as total revenue
 by store. 
 
-All of the above is handled through a series of nested switch statements. All menus are presented as a list with a
-number corresponding to a different sub menu or choice. There are multiple sub menus. 
+All of the above is handled through the MarketPlace GUI. 
 
 #### Customer Options
 ***
@@ -225,6 +221,7 @@ Within the shopping cart menu, the user can add products to the shopping cart. T
 they are stored in a file. A customer can change the quantity of any product in the cart, as well as remove a product 
 from the cart. A customer can return to shopping as well, or purchase all products in the shopping cart. 
 
+All of the above is handled through the MarketPlace GUI. 
 
 #### Account Management (General Feature)
 ***
@@ -237,6 +234,8 @@ As for testing. There exists a set of JUnit test cases for marketplace, found [h
 These test to ensure the menus behave correctly, primarily by utilizing different functions and method calls in order to 
 ensure there is a consistent flow within Marketplace logic. Manual testing primarily has involved running Marketplace
 multiple times, checking each menu and sub menu to ensure that MarketPlace and it's calls all work appropriately. 
+
+All of the above is handled through the MarketPlace GUI. 
 
 ### [MarketServer](<MarketServer.java>)
 *** 
