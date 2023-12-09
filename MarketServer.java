@@ -9,7 +9,6 @@ import java.util.Arrays;
  * creates server
  * runs until program is manually shut down
  * handles all data calls
- * runs on localhost 4242
  *
  * @author Zachary Kirkeby, 05
  * @version December 1, 2023
@@ -50,7 +49,6 @@ class ClientThread implements Runnable {
     @Override
     public void run() {
         // throw a thread creator here for multi threading
-        //initial setup values for connections
         System.out.println("Client connected!");
         boolean logOrRegistration = false;
         boolean isLoggedIn = false;
@@ -72,8 +70,7 @@ class ClientThread implements Runnable {
                 message = temp[0];
                 System.out.println(message);
                 boolean bool = false;
-                // format of method,parameter1,parameter2,etc
-                //always listening, handles external class callc
+                // format of method,parameter1,parameter2
                 switch (message) {
                     case "login":
                         boolean loggedIn = Account.login(temp[1], temp[2]);
@@ -161,7 +158,6 @@ class ClientThread implements Runnable {
                                 writer.flush();
                         }
                         break;
-                        // below handles seller options and shopping cart adjacent system
                     case "sellerStatistics":
                         switch (temp[1]) {
                             case "getCustomersAndPurchases":
@@ -195,10 +191,10 @@ class ClientThread implements Runnable {
                         writer.flush();
                         break;
                     case "viewCustomerReviews":
+                        System.out.println(Seller.viewCustomerReviews(temp[1], temp[2]));
                         writer.println(Seller.viewCustomerReviews(temp[1], temp[2]));
                         writer.flush();
                         break;
-                        // settings for account management, applies for both seller/customer
                     case "manageAccount":
                         switch (temp[1]) {
                             case "changeUsername":
@@ -276,7 +272,6 @@ class ClientThread implements Runnable {
                         writer.println(bool);
                         writer.flush();
                         break;
-                        // user side shopping cart
                     case "shoppingCart":
                         switch (temp[1]) {
                             case "addToCart":
@@ -332,8 +327,8 @@ class ClientThread implements Runnable {
                         writer.flush();
                         break;
                     case "viewReviews":
-                        writer.println(Customer.viewReviews(temp[1], temp[2]));
-                        writer.flush();
+                            writer.println(Customer.viewReviews(temp[1], temp[2]));
+                            writer.flush();
                         break;
                     default:
                         writer.println(false);
