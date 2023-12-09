@@ -2468,8 +2468,12 @@ public class MarketPlace {
             viewShoppingCart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerViewShoppingCart(true, USERNAME[0], buyerViewShoppingCartFrame,
-                            buyerViewShoppingCartPanel);
+                    try {
+                        buyerViewShoppingCart(true, USERNAME[0], buyerViewShoppingCartFrame,
+                                buyerViewShoppingCartPanel);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             });
 
