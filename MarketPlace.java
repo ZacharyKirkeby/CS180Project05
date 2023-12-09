@@ -75,6 +75,7 @@ public class MarketPlace {
              */
             JFrame loginRegisterFrame = new JFrame();
             JPanel loginRegisterPanel = new JPanel(new GridLayout(0, 2, 4, 16));
+            loginRegisterPanel.setPreferredSize(new Dimension(300, 30));
             JButton openLoginButton = new JButton("Login");
             JButton openRegisterButton = new JButton("Register");
             loginRegisterPanel.add(openLoginButton);
