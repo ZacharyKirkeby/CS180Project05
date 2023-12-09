@@ -2472,11 +2472,35 @@ public class MarketPlace {
             checkoutShoppingCart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    boolean bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
-                    boolean check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
+                    writer.println("shoppingCart,buyProducts," + USERNAME[0]);
+                    writer.flush();
+                    boolean bool = false;
+                    try {
+                        bool = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    boolean check = false;
+                    try {
+                        check = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                     while (!check) {
-                        bool = Customer.buyProductsInShoppingCart(USERNAME[0]); // TODO: MOVE TO SERVER
-                        check = Customer.getShoppingCartofCustomer(USERNAME[0]).isEmpty();
+                        writer.println("shoppingCart,buyProducts," + USERNAME[0]);
+                        writer.flush();
+                        bool = false;
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        check = false;
+                        try {
+                            check = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchased Successfully",
