@@ -259,6 +259,18 @@ class ClientThread implements Runnable {
                                 break;
                         }
                         break;
+                    case "searchedStoreExists":
+                        ArrayList<Store> stores = MarketPlace.getStores();
+                        bool = Customer.searchedStoreExists(temp[1], stores);
+                        writer.println(bool);
+                        writer.flush();
+                        break;
+                    case "searchedProductExists":
+                        stores = MarketPlace.getStores();
+                        bool = Customer.searchedProductExists(temp[1], stores);
+                        writer.println(bool);
+                        writer.flush();
+                        break;
                     case "shoppingCart":
                         switch (temp[1]) {
                             case "addToCart":

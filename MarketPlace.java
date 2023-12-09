@@ -2419,13 +2419,34 @@ public class MarketPlace {
                         bool = false;
                         System.out.println("integer parsing error");
                     }
-                    if (Customer.searchedStoreExists(buyerChangeQtyInShoppingCartStoreName.getText(), stores) &&
-                            Customer.searchedProductExists(buyerChangeQtyInShoppingCartProductName.getText(), stores)
-                            && bool) { // TODO: MOVE TO SERVER
-                        bool = Customer.addToCartChangeCheckoutQuantity(
-                                buyerChangeQtyInShoppingCartStoreName.getText(),
-                                buyerChangeQtyInShoppingCartProductName.getText(),
+                    Boolean exists = false;
+                    writer.println("searchedStoreExists," + buyerChangeQtyInShoppingCartStoreName.getText());
+                    writer.flush();
+                    try {
+                        exists = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    Boolean bool2 = false;
+                    writer.println("searchedProductExists," + buyerChangeQtyInShoppingCartStoreName.getText());
+                    writer.flush();
+                    try {
+                        bool2 = Boolean.parseBoolean(reader.readLine());
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                    if ( exists && bool2 && bool) {
+                        writer.println("shoppingCart,changeCheckoutQuantity" +
+                                buyerChangeQtyInShoppingCartStoreName.getText() + "," +
+                                buyerChangeQtyInShoppingCartProductName.getText() + "," +
                                 Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
+                        writer.flush();
+                        try {
+                            bool = Boolean.parseBoolean(reader.readLine());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Added Product Quantity",
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
