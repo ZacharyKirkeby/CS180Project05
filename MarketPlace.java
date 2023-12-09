@@ -1889,8 +1889,12 @@ public class MarketPlace {
             buyerViewReviewsButtonCopy.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
-                            buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
+                    try {
+                        buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
+                                buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
                 }
             });
@@ -2628,13 +2632,19 @@ public class MarketPlace {
 
     public static void buyerDisplayReviews(boolean visible, JTextField buyerViewReviewsStoreName,
                                            JTextField buyerViewReviewsProductName,
-                                           JFrame buyerDisplayReviewsFrame, JPanel buyerDisplayReviewsPanel) {
+                                           JFrame buyerDisplayReviewsFrame, JPanel buyerDisplayReviewsPanel) throws IOException {
         buyerDisplayReviewsPanel.removeAll();
         buyerDisplayReviewsPanel.repaint();
         buyerDisplayReviewsPanel.revalidate();
         buyerDisplayReviewsPanel.setLayout(new BorderLayout());
-        String[] buyerViewReviewsColoumn = Customer.viewReviews(buyerViewReviewsStoreName.getText(), // TODO: MOVE TO SERVER
-                buyerViewReviewsProductName.getText()).split(",");
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+        writer.println("viewReviews," + buyerViewReviewsStoreName.getText() + "," +
+                buyerViewReviewsProductName.getText());
+        writer.flush();
+
+        String[] buyerViewReviewsColoumn = reader.readLine().split(",");
         String[][] temp = new String[buyerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
@@ -2687,12 +2697,20 @@ public class MarketPlace {
     }
 
     public static void buyerViewShoppingCart(boolean visible, String username, JFrame buyerViewShoppingCartFrame,
-                                             JPanel buyerViewShoppingCartPanel) {
+                                             JPanel buyerViewShoppingCartPanel) throws IOException {
         buyerViewShoppingCartPanel.removeAll();
         buyerViewShoppingCartPanel.repaint();
         buyerViewShoppingCartPanel.revalidate();
         buyerViewShoppingCartPanel.setLayout(new BorderLayout());
-        String[] buyerViewShoppingCartColoumn = Customer.getShoppingCartofCustomer(username).split("\n"); // TODO: MOVE TO SERVER
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter writer = new PrintWriter(socket.getOutputStream());
+
+        writer.println("shoppingCart,getShoppingCart" + username);
+        writer.flush();
+
+
+        String[] buyerViewShoppingCartColoumn = reader.readLine().split("\n");
         String[][] temp = new String[buyerViewShoppingCartColoumn.length][5];
         String[] columnNames = new String[]{"Customer Username", "Email", "Store Name", "Product Name", "Quantity"};
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
