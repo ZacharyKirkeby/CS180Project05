@@ -243,6 +243,7 @@ class ClientThread implements Runnable {
                         writer.flush();
                         break;
                     case "printProductAndStore":
+                        Seller.readFromFile();
                         writer.println(Seller.printProductAndStores());
                         writer.flush();
                         break;

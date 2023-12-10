@@ -581,7 +581,7 @@ public class MarketPlace {
             startSalePanel.add(new JLabel("Sale Price:"));
             JTextField salePriceField = new JTextField();
             startSalePanel.add(salePriceField);
-            startSalePanel.add(new JLabel("Sale Cap:"));
+            startSalePanel.add(new JLabel("Sale Cap (0 to end):"));
             JTextField saleCapField = new JTextField();
             startSalePanel.add(saleCapField);
             startSalePanel.add(new JLabel());
@@ -601,7 +601,7 @@ public class MarketPlace {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(salePriceField.getText()) <= 0)
-                                   || (Integer.parseInt(saleCapField.getText()) < 1)) {
+                                   || (Integer.parseInt(saleCapField.getText()) < 0)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else {
@@ -639,7 +639,7 @@ public class MarketPlace {
             purchaseLimitPanel.add(new JLabel("Product Name:"));
             JTextField purchaseLimitProductName = new JTextField();
             purchaseLimitPanel.add(purchaseLimitProductName);
-            purchaseLimitPanel.add(new JLabel("Purchase Limit:"));
+            purchaseLimitPanel.add(new JLabel("Purchase Limit (0 to end):"));
             JTextField purchaseLimitField = new JTextField();
             purchaseLimitPanel.add(purchaseLimitField);
             purchaseLimitPanel.add(new JLabel());
@@ -659,7 +659,7 @@ public class MarketPlace {
                             purchaseLimitField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
-                        } else if (Integer.parseInt(purchaseLimitField.getText()) < 1) {
+                        } else if (Integer.parseInt(purchaseLimitField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
                                     "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else {

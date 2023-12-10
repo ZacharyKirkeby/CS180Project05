@@ -241,7 +241,7 @@ public abstract class Customer {
                                         productNames.get(i), quantities.get(i), unitprice);
                                 removeFromCart(emails.get(i), usernames.get(i), storeNames.get(i),
                                         productNames.get(i), quantities.get(i));
-
+                                Seller.readFromFile();
                                 productsBoughtSuccessfully = true;
                                 return true;
                             }

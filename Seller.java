@@ -617,7 +617,7 @@ public abstract class Seller {
                     stores.get(index).getProductList().add(new Product(attributeSplit[0],
                             attributeSplit[1], Double.parseDouble(attributeSplit[2]),
                             Integer.parseInt(attributeSplit[3]), Double.parseDouble(attributeSplit[4]),
-                            Integer.parseInt(attributeSplit[5])));
+                            Integer.parseInt(attributeSplit[5]), Integer.parseInt(attributeSplit[6])));
                 }
                 index++;
                 line = bfr.readLine();

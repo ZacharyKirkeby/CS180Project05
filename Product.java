@@ -42,7 +42,7 @@ public class Product {
         this.stockQuantity = quantity;
         this.purchasePrice = purchasePrice;
         this.quantitySold = 0;
-        this.orderCap = Integer.MAX_VALUE;
+        this.orderCap = 0;
     }
 
     /**
@@ -61,10 +61,10 @@ public class Product {
         this.quantitySold = 0;
         this.salePrice = purchasePrice;
         this.saleCap = 0;
-        this.orderCap = Integer.MAX_VALUE;
+        this.orderCap = 0;
     }
 
-    public Product(String name, String description, double purchasePrice, int quantity, double salePrice, int saleCap) {
+    public Product(String name, String description, double purchasePrice, int quantity, double salePrice, int saleCap, int orderCap) {
         this.name = name;
         this.description = description;
         this.purchasePrice = purchasePrice;
@@ -72,7 +72,7 @@ public class Product {
         this.quantitySold = 0;
         this.salePrice = salePrice;
         this.saleCap = saleCap;
-        this.orderCap = Integer.MAX_VALUE;
+        this.orderCap = orderCap;
     }
 
     /**
@@ -135,6 +135,9 @@ public class Product {
      * @return stockQuantity
      */
     public int getStockQuantity() {
+        if ((this.orderCap > 0) && (orderCap < stockQuantity)) {
+            return orderCap;
+        }
         if (this.getOnSale()) {
             return saleCap;
         }
@@ -156,7 +159,7 @@ public class Product {
      */
     public boolean buyProduct(int quantity) {
         if (this.getOnSale()) {
-            if (this.saleCap > 0 && quantity <= this.saleCap && quantity <= this.orderCap) {
+            if (quantity <= this.saleCap && (quantity <= this.orderCap || (this.orderCap == 0))) {
                 this.stockQuantity -= quantity;
                 this.quantitySold += quantity;
                 this.saleSold += quantity;
@@ -165,13 +168,14 @@ public class Product {
                 return false;
             }
         } else {
-            if (quantity <= stockQuantity && quantity <= this.orderCap) {
+            if (quantity <= stockQuantity && (quantity <= this.orderCap || (this.orderCap == 0))) {
                 this.stockQuantity -= quantity;
                 this.quantitySold += quantity;
             } else {
                 return false;
             }
         }
+        Seller.writeToFile();
         return true;
     }
 
@@ -273,7 +277,7 @@ public class Product {
      * @param saleCap
      */
     public boolean startSale(double salePrice, int saleCap) {
-        if (salePrice <= 0 || saleCap <= 0) {
+        if (salePrice <= 0 || saleCap < 0) {
             return false;
         } else {
             if (saleCap > this.stockQuantity) {
@@ -323,11 +327,12 @@ public class Product {
      * @param cap
      */
     public boolean setCap(int cap) {
-        if (cap > 0) {
+        if (cap >= 0) {
             this.orderCap = cap;
         } else {
             return false;
         }
+        Seller.writeToFile();
         return true;
     }
 
@@ -360,6 +365,6 @@ public class Product {
     @Override
     public String toString() {
         return name + "," + description + "," + purchasePrice + "," + stockQuantity + "," +
-               salePrice + "," + saleCap;
+               salePrice + "," + saleCap + "," + orderCap;
     }
 }
