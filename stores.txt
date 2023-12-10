@@ -1,4 +1,4 @@
-peach store,indiana,me;peach,peachy,2.0,79;
-Store1,IN,username;Product1,description,10.0,3;
-apple store,indiana,yilin;fuji,juicy,2.0,0;grandma,green,1.0,90;red,very red,0.5,90;
-blueberry store,indiana,me;Fresh Blueberries,A pack of fresh juicy blueberries,5.99,100;Blueberry Jam,Homemade blueberry jam with natural sweetness,3.49,50;Blueberry Muffins,Soft and fluffy muffins with blueberries,2.99,75;Dried Blueberries,Naturally dried blueberries,4.99,80;Blueberry Yogurt,Creamy yogurt with real blueberry pieces,2.49,60;
+peach store,indiana,me;peach,peachy,2.0,79,0.0,0;
+Store1,IN,username;Product1,description,10.0,3,3.0,3;Product2,d,50.0,35,3.0,5;
+apple store,indiana,yilin;fuji,juicy,2.0,0,0.0,0;grandma,green,1.0,90,0.0,0;red,very red,0.5,90,0.0,0;
+blueberry store,indiana,me;Fresh Blueberries,A pack of fresh juicy blueberries,5.99,100,0.0,0;Blueberry Jam,Homemade blueberry jam with natural sweetness,3.49,50,0.0,0;Blueberry Muffins,Soft and fluffy muffins with blueberries,2.99,75,0.0,0;Dried Blueberries,Naturally dried blueberries,4.99,80,0.0,0;Blueberry Yogurt,Creamy yogurt with real blueberry pieces,2.49,60,0.0,0;

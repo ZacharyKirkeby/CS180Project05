@@ -581,7 +581,7 @@ public abstract class Seller {
     /**
      * Writes Store and Product information to stores.txt
      */
-    private static void writeToFile() {
+    static void writeToFile() {
         synchronized (storeGateKeeper) {
             try {
                 PrintWriter pw = new PrintWriter(new FileWriter("stores.txt", false));
@@ -603,7 +603,7 @@ public abstract class Seller {
      * Reads Store and Product information from stores.txt
      * The toStrings for Store and Product should separate attributes with a ","
      */
-    private static void readFromFile() {
+    static void readFromFile() {
         stores.clear();
         int index = 0;
         try (BufferedReader bfr = new BufferedReader(new FileReader("stores.txt"))) {
@@ -616,7 +616,8 @@ public abstract class Seller {
                     String[] attributeSplit = split[i].split(",");
                     stores.get(index).getProductList().add(new Product(attributeSplit[0],
                             attributeSplit[1], Double.parseDouble(attributeSplit[2]),
-                            Integer.parseInt(attributeSplit[3])));
+                            Integer.parseInt(attributeSplit[3]), Double.parseDouble(attributeSplit[4]),
+                            Integer.parseInt(attributeSplit[5])));
                 }
                 index++;
                 line = bfr.readLine();

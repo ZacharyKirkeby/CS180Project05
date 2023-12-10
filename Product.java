@@ -24,7 +24,6 @@ public class Product {
     private double purchasePrice; // price of product
 
     // Optional Features Parameters
-    private boolean onSale; // Sale status
     private int saleCap; // Amount of product on sale
     private int saleSold; //Amount of product Sales during the sale
     private double salePrice; // Sale price
@@ -60,6 +59,19 @@ public class Product {
         this.purchasePrice = purchasePrice;
         this.stockQuantity = quantity;
         this.quantitySold = 0;
+        this.salePrice = purchasePrice;
+        this.saleCap = 0;
+        this.orderCap = Integer.MAX_VALUE;
+    }
+
+    public Product(String name, String description, double purchasePrice, int quantity, double salePrice, int saleCap) {
+        this.name = name;
+        this.description = description;
+        this.purchasePrice = purchasePrice;
+        this.stockQuantity = quantity;
+        this.quantitySold = 0;
+        this.salePrice = salePrice;
+        this.saleCap = saleCap;
         this.orderCap = Integer.MAX_VALUE;
     }
 
@@ -123,6 +135,9 @@ public class Product {
      * @return stockQuantity
      */
     public int getStockQuantity() {
+        if (this.getOnSale()) {
+            return saleCap;
+        }
         return stockQuantity;
     }
 
@@ -140,7 +155,7 @@ public class Product {
      * @return true if success in buying product false if not
      */
     public boolean buyProduct(int quantity) {
-        if (onSale) {
+        if (this.getOnSale()) {
             if (this.saleCap > 0 && quantity <= this.saleCap && quantity <= this.orderCap) {
                 this.stockQuantity -= quantity;
                 this.quantitySold += quantity;
@@ -148,9 +163,6 @@ public class Product {
                 this.saleCap -= quantity;
             } else {
                 return false;
-            }
-            if (saleCap == 0) {
-                onSale = false;
             }
         } else {
             if (quantity <= stockQuantity && quantity <= this.orderCap) {
@@ -169,7 +181,7 @@ public class Product {
      * @return purchasePrice
      */
     public double getPurchasePrice() {
-        if (onSale) {
+        if (this.getOnSale()) {
             return salePrice;
         } else {
             return purchasePrice;
@@ -271,7 +283,7 @@ public class Product {
                 this.salePrice = salePrice;
             }
         }
-        this.onSale = true;
+        Seller.writeToFile();
         return true;
     }
 
@@ -281,7 +293,7 @@ public class Product {
      * @return
      */
     public boolean endSale() {
-        this.onSale = false;
+        saleCap = 0;
         return true;
     }
 
@@ -335,7 +347,11 @@ public class Product {
      * @return
      */
     public boolean getOnSale() {
-        return onSale;
+        if (saleCap > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -343,6 +359,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return name + "," + description + "," + purchasePrice + "," + stockQuantity;
+        return name + "," + description + "," + purchasePrice + "," + stockQuantity + "," +
+               salePrice + "," + saleCap;
     }
 }

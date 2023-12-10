@@ -190,34 +190,12 @@ public abstract class Customer {
      * @param quantity
      * @return
      */
-    public static boolean editCartQuantity(String email, String username, String storeName, String productName,
-                                           int quantity) {
-        boolean successfullyRemovedFromCart = false;
-        readFromShoppingCartDatabaseFile();
-        System.out.println("fuck");
-        for (int i = 0; i < usernames.size(); i++) {
-            if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
-                && productNames.get(i).equalsIgnoreCase(productName)) {
-                successfullyRemovedFromCart = true;
-                Seller.changeQuantity(storeName, productName, quantity);
-                emails.remove(i);
-                usernames.remove(i);
-                storeNames.remove(i);
-                productNames.remove(i);
-                quantities.remove(i);
-                break;
-            }
 
-        }
-        writeToShoppingCartDatabaseFile();
-        return successfullyRemovedFromCart;
-    }
 
     public static boolean removeFromCart(String email, String username, String storeName, String productName,
                                          int quantity) {
         boolean successfullyRemovedFromCart = false;
         readFromShoppingCartDatabaseFile();
-        System.out.println("fuck");
         for (int i = 0; i < usernames.size(); i++) {
             if (usernames.get(i).equalsIgnoreCase(username) && storeNames.get(i).equalsIgnoreCase(storeName)
                 && productNames.get(i).equalsIgnoreCase(productName)) {
@@ -261,7 +239,7 @@ public abstract class Customer {
                                         Seller.getStores().get(j).getProductList().get(k).getPurchasePrice();
                                 writeToPurchaseHistoryDatabaseFile(emails.get(i), username, storeNames.get(i),
                                         productNames.get(i), quantities.get(i), unitprice);
-                                editCartQuantity(emails.get(i), usernames.get(i), storeNames.get(i),
+                                removeFromCart(emails.get(i), usernames.get(i), storeNames.get(i),
                                         productNames.get(i), quantities.get(i));
 
                                 productsBoughtSuccessfully = true;
