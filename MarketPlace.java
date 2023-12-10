@@ -1627,7 +1627,7 @@ public class MarketPlace {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                                 "View Products In Cart", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("sellerStatistics,getShoppingCart," + cartProductsUsername.getText());
+                        writer.println("shoppingCart,getShoppingCart," + cartProductsUsername.getText());
                         writer.flush();
                         String stock = null;
                         try {
@@ -1635,7 +1635,10 @@ public class MarketPlace {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
-                        JOptionPane.showMessageDialog(null, stock, "View Products In Cart", JOptionPane.PLAIN_MESSAGE);
+                        stock = stock.replaceAll(",", "\n");
+                        stock = stock.replaceAll(";", ": ");
+                        JOptionPane.showMessageDialog(null, stock, "View Products In Cart",
+                                JOptionPane.PLAIN_MESSAGE);
                     }
                 }
             });

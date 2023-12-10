@@ -1,1 +1,3 @@
 lishen@gmail.com;lishen;peach store;peach;50
+email1@gmail.com;username1;Store1;Product1;1
+email1@gmail.com;username1;Store1;Product2;2

@@ -370,7 +370,7 @@ public abstract class Customer {
         readFromShoppingCartDatabaseFile();
         String customerProducts = "";
         for (int i = 0; i < usernames.size(); i++) {
-            if (usernames.get(i).equals(username)) { // check if username matches
+            if (usernames.get(i).equalsIgnoreCase(username)) { // check if username matches
                 customerProducts += (String.format("%s;%s;%s;%s;%d,", emails.get(i), usernames.get(i),
                         storeNames.get(i), productNames.get(i), quantities.get(i)));
             }
