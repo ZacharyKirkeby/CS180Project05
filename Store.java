@@ -1,5 +1,4 @@
 package src;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -169,7 +168,7 @@ public class Store {
             while (line != null) {
                 String[] subpart = line.split(";");
                 if (subpart[2].equals(storeName)) {
-                    sentence += line + "\n";
+                    sentence += line + ",";
                 }
                 line = reader.readLine();
             }
@@ -230,7 +229,7 @@ public class Store {
             }
         }
         for (int a = 0; a < lineList.size(); a++) {
-            result += lineList.get(a) + "\n";
+            result += lineList.get(a) + ",";
         }
         return result;
     }
@@ -246,7 +245,7 @@ public class Store {
      */
     public String getCustomerInformationAndRevenue() {
         String sentence = "Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased |"
-                          + " Revenue From Customer \n";
+                + " Revenue From Customer \n";
         try (BufferedReader reader = new BufferedReader(new FileReader("PurchaseHistoryDatabase.txt"))) {
             String line = reader.readLine();
             while (line != null) {
