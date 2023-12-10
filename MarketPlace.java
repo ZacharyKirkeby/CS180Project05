@@ -1595,7 +1595,7 @@ public class MarketPlace {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
-                        output.replaceAll(";", "\n");
+                        output = output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     } else {
@@ -1608,7 +1608,7 @@ public class MarketPlace {
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
-                        output.replaceAll(";", "\n");
+                        output = output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
                                 "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     }
