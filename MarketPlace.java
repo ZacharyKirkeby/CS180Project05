@@ -2546,6 +2546,15 @@ public class MarketPlace {
         } while (true);
     }
 
+
+    /**
+     * @param  visible
+     * @param buyerSearchedStore
+     * @param searchForStoreButton
+     * @param buyerSearchByStoreFrame
+     * @param buyerSearchByStorePanel
+     * @return void
+     */
     public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
                                      JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel) throws IOException {
         /*
@@ -2583,6 +2592,14 @@ public class MarketPlace {
              */
     }
 
+    /**
+     * @param  visible
+     * @param buyerSearchedDescription
+     * @param searchProductByDescriptionButton
+     * @param buyerSearchByDescriptionFrame
+     * @param buyerSearchByDescriptionPanel
+     * @return void
+     */
     public static void searchByDescription(boolean visible, String buyerSearchedDescription,
                                            JButton searchProductByDescriptionButton,
                                            JFrame buyerSearchByDescriptionFrame, JPanel buyerSearchByDescriptionPanel) throws IOException {
@@ -2617,6 +2634,16 @@ public class MarketPlace {
         buyerSearchByDescriptionFrame.setVisible(visible);
     }
 
+
+    /**
+     * @param  visible
+     * @param buyerSearchedProduct
+     * @param searchForProductButton
+     * @param buyerViewAllAddToShoppingCart
+     * @param buyerSearchByProductFrame
+     * @param buyerSearchByProductPanel
+     * @return void
+     */
     public static void searchByProduct(boolean visible, String buyerSearchedProduct,
                                        JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
                                        JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel) throws IOException {
@@ -2651,6 +2678,14 @@ public class MarketPlace {
 
     }
 
+    /**
+     * @param  visible
+     * @param buyerViewReviewsStoreName
+     * @param buyerViewReviewsProductName
+     * @param buyerDisplayReviewsFrame
+     * @param buyerDisplayReviewsPanel
+     * @return void
+     */
     public static void buyerDisplayReviews(boolean visible, JTextField buyerViewReviewsStoreName,
                                            JTextField buyerViewReviewsProductName,
                                            JFrame buyerDisplayReviewsFrame, JPanel buyerDisplayReviewsPanel) throws IOException {
@@ -2685,6 +2720,15 @@ public class MarketPlace {
         buyerDisplayReviewsFrame.setVisible(visible);
     }
 
+
+    /**
+     * @param  visible
+     * @param sellerViewReviewsProductName
+     * @param username
+     * @param sellerDisplayReviewsFrame
+     * @param sellerDisplayReviewsPanel
+     * @return void
+     */
     public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
                                             JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel) throws IOException {
         sellerDisplayReviewsPanel.removeAll();
@@ -2720,6 +2764,13 @@ public class MarketPlace {
         sellerDisplayReviewsFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param username
+     * @param buyerViewShoppingCartFrame
+     * @param buyerViewShoppingCartPanel
+     * @return void
+     */
     public static void buyerViewShoppingCart(boolean visible, String username, JFrame buyerViewShoppingCartFrame,
                                              JPanel buyerViewShoppingCartPanel) throws IOException {
         buyerViewShoppingCartPanel.removeAll();
@@ -2756,6 +2807,13 @@ public class MarketPlace {
 
     }
 
+
+    /**
+     * @param  visible
+     * @param buyerSortCheapestPanel
+     * @param buyerSortCheapestFrame
+     * @return void
+     */
     public static void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame) throws IOException {
         buyerSortCheapestPanel.removeAll();
         buyerSortCheapestFrame.repaint();
@@ -2785,6 +2843,12 @@ public class MarketPlace {
         buyerSortCheapestFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param buyerSortExpensivePanel
+     * @param buyerSortExpensiveFrame
+     * @return void
+     */
     public static void buyerSortExpensive(boolean visible, JPanel buyerSortExpensivePanel, JFrame buyerSortExpensiveFrame) throws IOException {
         buyerSortExpensivePanel.removeAll();
         buyerSortExpensivePanel.repaint();
@@ -2815,6 +2879,12 @@ public class MarketPlace {
         buyerSortExpensiveFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param buyerSortByLowestQuantityPanel
+     * @param buyerSortByLowestQuantityFrame
+     * @return void
+     */
     public static void buyerSortByLowestQuantity(boolean visible, JPanel buyerSortByLowestQuantityPanel,
                                                  JFrame buyerSortByLowestQuantityFrame) throws IOException {
         buyerSortByLowestQuantityPanel.removeAll();
@@ -2846,6 +2916,12 @@ public class MarketPlace {
         buyerSortByLowestQuantityFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param buyerSortByHighestQuantityPanel
+     * @param buyerSortByHighestQuantityFrame
+     * @return void
+     */   
     public static void buyerSortByHighestQuantity(boolean visible, JPanel buyerSortByHighestQuantityPanel,
                                                   JFrame buyerSortByHighestQuantityFrame) throws IOException {
         buyerSortByHighestQuantityPanel.removeAll();
@@ -2876,6 +2952,14 @@ public class MarketPlace {
         buyerSortByHighestQuantityFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param buyerViewAllProductsPanel
+     * @param buyerViewAllProductsFrame
+     * @param buyerSearchForProductButton
+     * @param buyerViewAllAddToShoppingCart
+     * @return void
+     */
     public static void buyerViewAllProducts(boolean visible, JPanel buyerViewAllProductsPanel,
                                             JFrame buyerViewAllProductsFrame, JButton buyerSearchForProductButton,
                                             JButton buyerViewAllAddToShoppingCart) throws IOException {
@@ -2912,6 +2996,15 @@ public class MarketPlace {
         buyerViewAllProductsFrame.setVisible(visible);
     }
 
+    /**
+     * @param  visible
+     * @param sellerViewCustomerPurchasesPanel
+     * @param sellerViewCustomerPurchasesFrame
+     * @param storeName
+     * @param username
+     * @param sorted
+     * @return void
+     */
     public static void sellerViewCustomerPurchases(boolean visible, JPanel sellerViewCustomerPurchasesPanel,
                                                    JFrame sellerViewCustomerPurchasesFrame, String storeName,
                                                    String username, boolean sorted) throws IOException {
