@@ -365,7 +365,7 @@ Steps:
 
 Expected result: Application loads the "Customer Purchases" page.
 
-Test Status: Failed because the "Customer Purchases" is empty even though I just made a purchase as a buyer.
+Test Status: Passed.
 
 Test 2: Seller View Product Sales
 
@@ -383,7 +383,7 @@ Steps:
 
 Expected result: Application loads the "Product Sales" page.
 
-Test Status: Failed because it prints one line at a time 
+Test Status: Passed.
 
 Test 3: View Products In Cart
 
@@ -416,7 +416,7 @@ Steps:
 
 Expected result: Application creates the Product CSV file with the product data.
 
-Test Status: Failed Wrote to file but didn't display the right page (maybe GUI problem).
+Test Status: Passed.
 
 **END OF SELLER STATS TEST CASES**
 
@@ -429,11 +429,10 @@ Steps:
 3. Seller enters the product name or doesn't enter anything via the keyboard.
 4. Seller selects the "View" button.
 5. Seller sees the "Customer Reviews" page.
-6.
 
 Expected result: Application loads the "Customer Reviews" page.
 
-Test Status: Failed didn't display the reviews.
+Test Status: Passed.
 
 **END OF SELLER MARKETPLACE TEST CASES**
 

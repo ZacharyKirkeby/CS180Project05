@@ -1,0 +1,1 @@
+Store1,IN,username1;Product1,d,1.0,0,1.0,0,0;

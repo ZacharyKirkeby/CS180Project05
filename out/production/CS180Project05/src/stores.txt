@@ -1,1 +1,0 @@
-Store1,IN,username1;Product1,desc,5.0,5,1.0,3,0;

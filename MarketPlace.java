@@ -264,8 +264,10 @@ public class MarketPlace {
                                     "Create Product", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,createProduct," +
-                                           createProductStoreNameField.getText() + "," + createProductNameField.getText() + ","
-                                           + createProductDescriptionField.getText() + "," + createProductPriceField.getText()
+                                           createProductStoreNameField.getText() + "," +
+                                           createProductNameField.getText() + ","
+                                           + createProductDescriptionField.getText() + "," +
+                                           createProductPriceField.getText()
                                            + "," + createProductQuantityField.getText() + "," + username[0]);
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
@@ -1348,10 +1350,9 @@ public class MarketPlace {
                             registerEmailField.setText("");
                             registerUsernameField.setText("");
                             registerPasswordField.setText("");
-                            if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Seller")) {
+                            if (registerRoleBox.getSelectedItem().toString().equals("Seller")) {
                                 sellerOptionsFrame.setVisible(true);
-                            } else if (registerRoleBox.getSelectedItem().toString().
-                                    equalsIgnoreCase("Buyer")) {
+                            } else if (registerRoleBox.getSelectedItem().toString().equals("Buyer")) {
                                 buyerOptionsFrame.setVisible(true);
                             }
                         } else {
@@ -2059,7 +2060,8 @@ public class MarketPlace {
                         }
                         try {
                             searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
-                                    buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
+                                    buyerViewAllAddToShoppingCart, buyerSearchByProductFrame,
+                                    buyerSearchByProductPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -2174,7 +2176,8 @@ public class MarketPlace {
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
-                                                            "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
+                                                            "Successfully!", "Purchase History File",
+                                JOptionPane.INFORMATION_MESSAGE);
                     } else if (!bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
                                 "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
@@ -2361,7 +2364,8 @@ public class MarketPlace {
                         try {
                             Boolean bool = false;
                             writer.println("shoppingCart,addToCart," + username[0] + "," + username[0] + "," +
-                                           buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
+                                           buyerShoppingCartStoreName.getText() + "," +
+                                           buyerShoppingCartProductName.getText() +
                                            "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
                             writer.flush();
                             try {
@@ -2374,7 +2378,8 @@ public class MarketPlace {
                                         "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                                                    "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                    "try again!", "Shopping Cart",
+                                        JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Invalid Input",
@@ -2426,7 +2431,8 @@ public class MarketPlace {
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                "try again!", "Shopping Cart",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
 
@@ -2483,7 +2489,8 @@ public class MarketPlace {
                                     "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                         } else if (!bool) {
                             JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                "try again!", "Shopping Cart",
+                                    JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid Input",
@@ -2619,17 +2626,14 @@ public class MarketPlace {
         buyerSearchByDescriptionPanel.repaint();
         buyerSearchByDescriptionPanel.revalidate();
         buyerSearchByDescriptionPanel.setLayout(new BorderLayout());
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
-
         writer.println("searchByDescription," + buyerSearchedDescription);
         writer.flush();
-
         String[] coloumnSearchDescription = reader.readLine().split(",");
         String[][] temp = new String[coloumnSearchDescription.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
-                "Description"};
+        String[] columnNames;
+        columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", "Description"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchDescription.length; i++) {
             String[] row = coloumnSearchDescription[i].split(";");
@@ -2672,8 +2676,8 @@ public class MarketPlace {
 
         String[] coloumnSearchProduct = reader.readLine().split(",");
         String[][] temp = new String[coloumnSearchProduct.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
-                "Description"};
+        String[] columnNames;
+        columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock", "Description"};
         JTable searchedProductTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchProduct.length; i++) {
             String[] row = coloumnSearchProduct[i].split(";");
@@ -2716,8 +2720,8 @@ public class MarketPlace {
 
         String[] buyerViewReviewsColoumn = reader.readLine().split(",");
         String[][] temp = new String[buyerViewReviewsColoumn.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name",
-                "Customer Username/Email", "Rating", "Review"};
+        String[] columnNames;
+        columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
             String[] row = buyerViewReviewsColoumn[i].split(";");
@@ -2754,11 +2758,10 @@ public class MarketPlace {
 
         writer.println("viewCustomerReviews," + sellerViewReviewsProductName.getText() + "," + username);
         writer.flush();
-
         String[] sellerViewReviewsColoumn = reader.readLine().split(",");
         String[][] temp = new String[sellerViewReviewsColoumn.length][5];
-        String[] columnNames = new String[]{"Store Name", "Product Name",
-                "Customer Username/Email", "Rating", "Review"};
+        String[] columnNames;
+        columnNames = new String[]{"Store Name", "Product Name", "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
             String[] row = sellerViewReviewsColoumn[i].split(";");
@@ -3029,11 +3032,10 @@ public class MarketPlace {
         writer.println("sellerStatistics,getCustomersAndPurchases," + storeName + "," + username + "," + sorted);
         writer.flush();
 
-        String[] coloumnSellerViewCustomerPurchases =
-                reader.readLine().split(",");
+        String[] coloumnSellerViewCustomerPurchases = reader.readLine().split(",");
         String[][] temp = new String[coloumnSellerViewCustomerPurchases.length][6];
-        String[] columnNames = new String[]{"Customer Email", "Customer Username", "Store", "Product Bought ",
-                "Quantity Bought", "Price"};
+        String[] columnNames;
+        columnNames = new String[]{"Email", "Username", "Store", "Product Bought", "Quantity Bought", "Price"};
         JTable sellerViewCustomerPurchasesTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSellerViewCustomerPurchases.length; i++) {
             String[] row = coloumnSellerViewCustomerPurchases[i].split(";");

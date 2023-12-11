@@ -11,6 +11,12 @@ Once you have verified all files are present you can proceed to the actual code.
 Project Report: PDF File
 
 Submitted by: William Hyun
+
+***
+Project Presentation: Google Drive Link (.mp4)
+
+Submitted by: William Hyun
+
 ***
 
 Project File/Repo: Git copy of Current Repo
@@ -334,4 +340,4 @@ Sellers can elect to hold sales that reduce the price of a product until a speci
 
 Customers can leave reviews associated with specific products from sellers. Other customers can view the reviews after they post. Sellers may view reviews on their products. 
 
-Sellers may set a per product order quantity limit that prohibits customers from ordering more units than the limit. Customers will not be able to place any additional orders for a product after they reach the limit, unless the seller increases or removes it. 
+Sellers may set a per product order quantity limit that prohibits customers from ordering more units than the limit. Customers will not be able to place any additional orders for a product after they reach the limit, unless the seller increases or removes it. The limit is shown when the customer views the product quantity. 

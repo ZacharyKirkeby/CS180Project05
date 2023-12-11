@@ -353,10 +353,7 @@ public class Product {
      * @return
      */
     public boolean getOnSale() {
-        if (saleCap > 0) {
-            return true;
-        }
-        return false;
+        return saleCap > 0;
     }
 
     /**
