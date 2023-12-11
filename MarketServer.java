@@ -136,8 +136,7 @@ class ClientThread implements Runnable {
                                 Store store = Seller.whichStore(temp[2]);
                                 if (store != null) {
                                     bool = store.triggerSale(temp[3], Double.parseDouble(temp[4]),
-                                        Integer.parseInt(temp[5]));
-//                                    System.out.println("140");
+                                            Integer.parseInt(temp[5]));
                                 } else {
                                     bool = false;
                                 }
@@ -162,8 +161,6 @@ class ClientThread implements Runnable {
                     case "sellerStatistics":
                         switch (temp[1]) {
                             case "getCustomersAndPurchases":
-//                                System.out.println(Seller.getCustomersAndPurchases(temp[2],
-//                                        temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.println(Seller.getCustomersAndPurchases(temp[2],
                                     temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.flush();

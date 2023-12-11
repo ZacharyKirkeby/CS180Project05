@@ -88,7 +88,6 @@ public abstract class Seller {
                 }
             }
         }
-//        System.out.println(result);
         return result;
     }
 
@@ -648,7 +647,6 @@ public abstract class Seller {
         if (searchedStore.equals("")) {
             searchedStore = "No Store Found ";
         }
-//        System.out.println(searchedStore);
         return (searchedStore);
     }
 
@@ -674,7 +672,6 @@ public abstract class Seller {
         if (searched.equals("")) {
             searched = "No locations found selling this product ";
         }
-//        System.out.println(searched);
         return (searched);
     }
 
@@ -855,8 +852,6 @@ public abstract class Seller {
         for (int a = 0; a < combined.size(); a++) {
             result += combined.get(a) + ",";
         }
-        //result = result.replace(";", " | ");
-        //System.out.println(result);
         return result;
     }
 

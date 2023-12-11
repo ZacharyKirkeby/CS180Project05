@@ -1865,7 +1865,6 @@ public class MarketPlace {
                             "Leave Review", JOptionPane.ERROR_MESSAGE);
                         return;
                     } else {
-//                        System.out.println("I got in");
                         writer.println("leaveReview," + leaveReviewStoreName.getText() + "," +
                             leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
                             ((String) leaveReviewRating.getSelectedItem()) + "," +
@@ -1918,8 +1917,7 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null,
                         "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals(""))
-                    {
+                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                             "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -1937,8 +1935,7 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null,
                         "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals(""))
-                    {
+                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
                             "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
@@ -2123,9 +2120,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     String[] options = {"Sort by Lowest Quantity", "Sort by Highest Quantity"};
                     String input = (String) JOptionPane.showInputDialog(null, "",
+
                         "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE,
                         null, options, options[0]);
-//                    System.out.println(input);
+
                     if (input != null) {
                         if (input.equals("Sort by Lowest Quantity")) {
                             try {
@@ -2449,7 +2447,6 @@ public class MarketPlace {
                         Integer.parseInt(buyerChangeQtyInShoppingCart.getText());
                     } catch (NumberFormatException f) {
                         bool = false;
-//                        System.out.println("integer parsing error");
                     }
                     Boolean exists = false;
                     writer.println("searchedStoreExists," + buyerChangeQtyInShoppingCartStoreName.getText());
@@ -2568,7 +2565,7 @@ public class MarketPlace {
      */
     public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
                                      JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel)
-                                        throws IOException {
+        throws IOException {
         /*
             BUYER SEARCH BY STORE FRAME
              */
@@ -2722,8 +2719,6 @@ public class MarketPlace {
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
             String[] row = buyerViewReviewsColoumn[i].split(";");
-//            System.out.println(buyerViewReviewsColoumn.length);
-//            System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
             }
@@ -2759,17 +2754,12 @@ public class MarketPlace {
         writer.flush();
 
         String[] sellerViewReviewsColoumn = reader.readLine().split(",");
-//        for (int a = 0; a < sellerViewReviewsColoumn.length; a++) {
-//            System.out.println(sellerViewReviewsColoumn[a]);
-//        }
         String[][] temp = new String[sellerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name",
             "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
             String[] row = sellerViewReviewsColoumn[i].split(";");
-//            System.out.println(sellerViewReviewsColoumn.length);
-//            System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewReviewsTable.setValueAt(row[j], i, j);
             }
@@ -2810,8 +2800,6 @@ public class MarketPlace {
         JTable buyerViewShoppingCartTable = new JTable(temp, columnNames);
         for (int i = 0; i < buyerViewShoppingCartColoumn.length; i++) {
             String[] row = buyerViewShoppingCartColoumn[i].split(";");
-//            System.out.println(buyerViewShoppingCartColoumn.length);
-//            System.out.println(row.length);
             for (int j = 0; j < row.length; j++) {
                 buyerViewShoppingCartTable.setValueAt(row[j], i, j);
             }
