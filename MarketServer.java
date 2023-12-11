@@ -101,7 +101,7 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "createProduct":
                                 bool = Seller.createProduct(temp[2], temp[3], temp[4],
-                                        Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
+                                    Double.parseDouble(temp[5]), Integer.parseInt(temp[6]), temp[7]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -112,13 +112,13 @@ class ClientThread implements Runnable {
                                 break;
                             case "editProductPrice":
                                 bool = Seller.editProductPrice(temp[2],
-                                        temp[3], Double.parseDouble(temp[4]), temp[5]);
+                                    temp[3], Double.parseDouble(temp[4]), temp[5]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "editProductQuantity":
                                 bool = Seller.editProductQuantity(temp[2], temp[3],
-                                        Integer.parseInt(temp[4]), temp[5]);
+                                    Integer.parseInt(temp[4]), temp[5]);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -162,14 +162,14 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "getCustomersAndPurchases":
                                 writer.println(Seller.getCustomersAndPurchases(temp[2],
-                                        temp[3], Boolean.parseBoolean(temp[4])));
+                                    temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.flush();
                                 break;
                             case "getProductSales":
                                 if (Seller.validateProductSales(temp[2],
-                                        temp[3])) {
+                                    temp[3])) {
                                     String productSales = Customer.getProductSales(temp[2],
-                                            temp[3], Boolean.parseBoolean(temp[4]));
+                                        temp[3], Boolean.parseBoolean(temp[4]));
                                     writer.println(productSales);
                                     writer.flush();
                                 } else {
@@ -282,21 +282,21 @@ class ClientThread implements Runnable {
                         switch (temp[1]) {
                             case "addToCart":
                                 bool = Customer.addToCart(Account.getEmail(temp[2]), temp[3],
-                                        temp[4], temp[5], Integer.parseInt(temp[6]));
+                                    temp[4], temp[5], Integer.parseInt(temp[6]));
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "changeCheckoutQuantity":
                                 bool = Customer.addToCartChangeCheckoutQuantity(
-                                        temp[2], temp[3], Integer.parseInt(temp[4]));
+                                    temp[2], temp[3], Integer.parseInt(temp[4]));
                                 writer.println(bool);
                                 writer.flush();
                                 break;
                             case "removeFromCart":
                                 bool = Customer.removeFromCart(
-                                        Account.getEmail(temp[2]),
-                                        temp[3],
-                                        temp[4], temp[5], 5);
+                                    Account.getEmail(temp[2]),
+                                    temp[3],
+                                    temp[4], temp[5], 5);
                                 writer.println(bool);
                                 writer.flush();
                                 break;
@@ -323,7 +323,7 @@ class ClientThread implements Runnable {
                         break;
                     case "leaveReview":
                         bool = Customer.leaveReview(temp[1],
-                                temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
+                            temp[2], temp[3], Integer.parseInt(temp[4]), temp[5]);
                         writer.println(bool);
                         writer.flush();
                         break;

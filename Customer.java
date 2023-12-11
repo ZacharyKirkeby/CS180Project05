@@ -416,7 +416,8 @@ public abstract class Customer {
         }
         synchronized (reviewGateKeeper) {
             try (BufferedReader br = new BufferedReader(new FileReader("Reviews.txt"));
-                 PrintWriter pw = new PrintWriter(new FileWriter("Reviews.txt", true), true)) {
+                 PrintWriter pw = new PrintWriter(new FileWriter("Reviews.txt", true), true))
+            {
                 String line = br.readLine();
                 int count = 0;
                 if (line == null) {
@@ -426,8 +427,8 @@ public abstract class Customer {
                     while (line != null) {
                         line = br.readLine();
                         if (line == null) {
-                            pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName, rating,
-                                    description));
+                            pw.println(String.format("%s , %s , %s , %d , %s", storeName, productName, customerName,
+                                rating, description));
                         }
                     }
                 }

@@ -64,7 +64,8 @@ public class Product {
         this.orderCap = 0;
     }
 
-    public Product(String name, String description, double purchasePrice, int quantity, double salePrice, int saleCap, int orderCap) {
+    public Product(String name, String description, double purchasePrice,
+                   int quantity, double salePrice, int saleCap, int orderCap) {
         this.name = name;
         this.description = description;
         this.purchasePrice = purchasePrice;
@@ -365,6 +366,6 @@ public class Product {
     @Override
     public String toString() {
         return name + "," + description + "," + purchasePrice + "," + stockQuantity + "," +
-               salePrice + "," + saleCap + "," + orderCap;
+            salePrice + "," + saleCap + "," + orderCap;
     }
 }
