@@ -162,6 +162,8 @@ class ClientThread implements Runnable {
                     case "sellerStatistics":
                         switch (temp[1]) {
                             case "getCustomersAndPurchases":
+                                System.out.println(Seller.getCustomersAndPurchases(temp[2],
+                                        temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.println(Seller.getCustomersAndPurchases(temp[2],
                                         temp[3], Boolean.parseBoolean(temp[4])));
                                 writer.flush();
