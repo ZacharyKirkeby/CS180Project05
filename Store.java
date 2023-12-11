@@ -1,4 +1,5 @@
 package src;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -175,7 +176,7 @@ public class Store {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(sentence);
+//        System.out.println(sentence);
         return sentence;
     }
 
@@ -220,9 +221,9 @@ public class Store {
                 String[] attributes = lineList.get(i).split(";");
                 String[] attributesTwo = lineList.get(j).split(";");
                 double amountPurchased1 = Seller.getTotalPurchasePerCustomer(attributes[2], attributes[3],
-                        Integer.parseInt(attributes[4]));
+                    Integer.parseInt(attributes[4]));
                 double amountPurchased2 = Seller.getTotalPurchasePerCustomer(attributesTwo[2], attributesTwo[3],
-                        Integer.parseInt(attributesTwo[4]));
+                    Integer.parseInt(attributesTwo[4]));
                 if (amountPurchased1 < amountPurchased2) {
                     Collections.swap(lineList, i, j);
                 }
@@ -245,7 +246,7 @@ public class Store {
      */
     public String getCustomerInformationAndRevenue() {
         String sentence = "Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased |"
-                + " Revenue From Customer \n";
+            + " Revenue From Customer \n";
         try (BufferedReader reader = new BufferedReader(new FileReader("PurchaseHistoryDatabase.txt"))) {
             String line = reader.readLine();
             while (line != null) {
