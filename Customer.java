@@ -352,7 +352,7 @@ public abstract class Customer {
         ArrayList<String> productSales = new ArrayList<>();
         for (int i = 0; i < storeNames.size(); i++) {
             if (storeNames.get(i).equalsIgnoreCase(storeName)) {
-                productSales.add(productNames.get(i) + ": " + quantities.get(i));
+                productSales.add(usernames.get(i) + ", " + productNames.get(i) + ": " + quantities.get(i));
             }
         }
         if (sorted) {
