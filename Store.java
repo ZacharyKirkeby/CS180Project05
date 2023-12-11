@@ -175,7 +175,6 @@ public class Store {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(sentence);
         return sentence;
     }
 

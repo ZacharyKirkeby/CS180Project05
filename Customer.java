@@ -85,7 +85,6 @@ public abstract class Customer {
      */
     public static boolean addToCart(String email, String username, String store, String product, int quantity) {
         if (alreadyInCartOfUser(store, product, username)) {
-            System.out.println("This product is already in the Cart!");
             return false;
         } else {
             readFromShoppingCartDatabaseFile();
@@ -94,12 +93,10 @@ public abstract class Customer {
                     for (int j = 0; j < Seller.getStores().get(i).getProductList().size(); j++) {
                         if (Seller.getStores().get(i).getProductList().get(j).getName().equalsIgnoreCase(product)) {
                             if (Seller.getStores().get(i).getProductList().get(j).getStockQuantity() <= 0) {
-                                System.out.println("Error out of Stock");
                                 return false;
                             } else if (Seller.getStores().get(i).getProductList().get(j).getStockQuantity()
                                        < quantity) {
                                 quantity = Seller.getStores().get(i).getProductList().get(j).getStockQuantity();
-                                System.out.println("Quantity Exceeded Maximum in Stock, added as many as available");
                             }
                         }
                     }
@@ -393,7 +390,6 @@ public abstract class Customer {
         try (PrintWriter pw = new PrintWriter(new FileWriter(fileName), true)) {
             for (int i = 0; i < usernames.size(); i++) {
                 if (usernames.get(i).equals(username)) { // check if username and email match
-                    System.out.println("we found a match");
                     pw.println(String.format("%s;%s;%s;%s;%d", emails.get(i), usernames.get(i), storeNames.get(i),
                             productNames.get(i), quantities.get(i)));
                     success = true;
@@ -416,7 +412,6 @@ public abstract class Customer {
     public static boolean leaveReview(String storeName, String productName, String customerName, int rating,
                                       String description) {
         if (!(1 <= rating && rating <= 5)) {
-            System.out.println("Invalid Input");
             return false;
         }
         synchronized (reviewGateKeeper) {
