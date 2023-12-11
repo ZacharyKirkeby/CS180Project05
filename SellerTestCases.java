@@ -14,6 +14,15 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Project 04 -- Store.java
+ * creates Store class
+ * Handles routine store tasks
+ *
+ * @author Author
+ * @version November 10, 2023
+ */
+
 public class SellerTestCases {
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(SellerTestCases.class);
@@ -192,7 +201,10 @@ public class SellerTestCases {
         assertEquals("Ensure the buyProduct method works with valid input!", true,
                 Customer.buyProductsInShoppingCart("username2"));
 
-        assertEquals("Customer Email | Customer Username | Store Name | Product Name | Quantity Purchased | Revenue " + "From Customer \n" + "email2 | username2 | store name | product name | 5 | 8.00 | 40.0\n", Seller.salesByStore("store name", "sellerUsername"));
+        assertEquals("Customer Email | Customer Username | Store Name | Product Name " +
+                     "| Quantity Purchased | Revenue " + "From Customer \n" + "email2 | username2 " +
+                     "| store name | product name | 5 | 8.00 | 40.0\n",
+                Seller.salesByStore("store name", "sellerUsername"));
 
         // getProductSales is broken as of now
         // System.out.println(Seller.getProductSales("store name", "sellerUsername", false));

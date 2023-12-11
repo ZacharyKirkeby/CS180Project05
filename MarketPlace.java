@@ -67,7 +67,7 @@ public class MarketPlace {
 
         do {
             boolean logOrRegistration = false;
-            final String[] USERNAME = new String[1];
+            final String[] username = new String[1];
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
@@ -257,30 +257,30 @@ public class MarketPlace {
                             createProductQuantityField.getText().isEmpty() ||
                             createProductDescriptionField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
-                                "Create Product", JOptionPane.ERROR_MESSAGE);
+                                    "Create Product", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(createProductPriceField.getText()) <= 0) ||
-                            (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
+                                   (Integer.parseInt(createProductQuantityField.getText()) < 1)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                                "Create Product", JOptionPane.ERROR_MESSAGE);
+                                    "Create Product", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,createProduct," +
-                                createProductStoreNameField.getText() + "," + createProductNameField.getText() + ","
-                                + createProductDescriptionField.getText() + "," + createProductPriceField.getText()
-                                + "," + createProductQuantityField.getText() + "," + USERNAME[0]);
+                                           createProductStoreNameField.getText() + "," + createProductNameField.getText() + ","
+                                           + createProductDescriptionField.getText() + "," + createProductPriceField.getText()
+                                           + "," + createProductQuantityField.getText() + "," + username[0]);
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Product Created",
-                                    "Create Product", JOptionPane.INFORMATION_MESSAGE);
+                                        "Create Product", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Creation Failed",
-                                    "Create Product", JOptionPane.ERROR_MESSAGE);
+                                        "Create Product", JOptionPane.ERROR_MESSAGE);
                             }
                         }
 
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                            "Create Product", JOptionPane.ERROR_MESSAGE);
+                                "Create Product", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -319,12 +319,12 @@ public class MarketPlace {
                         editProductDescriptionProductName.getText().isEmpty() ||
                         editProductDescriptionField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                                "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("sellermodificationchoices,editProductDescription," +
-                            editProductDescriptionStoreName.getText() + "," +
-                            editProductDescriptionProductName.getText() +
-                            "," + editProductDescriptionField.getText() + "," + USERNAME[0]);
+                                       editProductDescriptionStoreName.getText() + "," +
+                                       editProductDescriptionProductName.getText() +
+                                       "," + editProductDescriptionField.getText() + "," + username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -334,10 +334,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Edited",
-                                "Edit Product Description", JOptionPane.INFORMATION_MESSAGE);
+                                    "Edit Product Description", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Edit Failed",
-                                "Edit Product Description", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Description", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -374,30 +374,30 @@ public class MarketPlace {
                     try {
                         if (Double.parseDouble(editProductPriceField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                                "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                         } else if (editProductPriceStoreName.getText().isEmpty() ||
-                            editProductPriceProductName.getText().isEmpty() ||
-                            editProductPriceField.getText().isEmpty()) {
+                                   editProductPriceProductName.getText().isEmpty() ||
+                                   editProductPriceField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
-                                "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,editProductPrice" + "," +
-                                editProductPriceStoreName.getText() + "," +
-                                editProductPriceProductName.getText() + "," +
-                                editProductPriceField.getText() + "," + USERNAME[0]);
+                                           editProductPriceStoreName.getText() + "," +
+                                           editProductPriceProductName.getText() + "," +
+                                           editProductPriceField.getText() + "," + username[0]);
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Product Edited",
-                                    "Edit Product Price", JOptionPane.INFORMATION_MESSAGE);
+                                        "Edit Product Price", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Edit Failed",
-                                    "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                                        "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                            "Edit Product Price", JOptionPane.ERROR_MESSAGE);
+                                "Edit Product Price", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -437,27 +437,27 @@ public class MarketPlace {
                             editProductQuantityProductName.getText().isEmpty() ||
                             editProductQuantityField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
-                                "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                         } else if (Integer.parseInt(editProductQuantityField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                                "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,editProductQuantity" + "," +
-                                editProductQuantityStoreName.getText() + "," +
-                                editProductQuantityProductName.getText() + "," +
-                                editProductQuantityField.getText() + "," + USERNAME[0]);
+                                           editProductQuantityStoreName.getText() + "," +
+                                           editProductQuantityProductName.getText() + "," +
+                                           editProductQuantityField.getText() + "," + username[0]);
                             writer.flush();
                         }
                         if (Boolean.parseBoolean(reader.readLine())) {
                             JOptionPane.showMessageDialog(null, "Product Edited",
-                                "Edit Product Quantity", JOptionPane.INFORMATION_MESSAGE);
+                                    "Edit Product Quantity", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Edit Failed",
-                                "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                                    "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                         }
                     } catch (NumberFormatException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                            "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
+                                "Edit Product Quantity", JOptionPane.ERROR_MESSAGE);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -491,11 +491,11 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (deleteProductStoreName.getText().isEmpty() || deleteProductNameField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Delete Product", JOptionPane.ERROR_MESSAGE);
+                                "Delete Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("sellermodificationchoices,deleteProduct," +
-                            deleteProductStoreName.getText() + "," +
-                            deleteProductNameField.getText() + "," + USERNAME[0]);
+                                       deleteProductStoreName.getText() + "," +
+                                       deleteProductNameField.getText() + "," + username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -505,10 +505,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Deleted",
-                                "Delete Product", JOptionPane.INFORMATION_MESSAGE);
+                                    "Delete Product", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Deletion Failed",
-                                "Delete Product", JOptionPane.ERROR_MESSAGE);
+                                    "Delete Product", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -541,10 +541,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (addProductCSVStoreName.getText().isEmpty() || addProductCSVPath.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
+                                "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("sellermodificationchoices,readProductsFromCSV," +
-                            addProductCSVStoreName.getText() + "," + addProductCSVPath.getText());
+                                       addProductCSVStoreName.getText() + "," + addProductCSVPath.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -555,10 +555,10 @@ public class MarketPlace {
 
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Products Added",
-                                "Add Products From CSV", JOptionPane.INFORMATION_MESSAGE);
+                                    "Add Products From CSV", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Addition Failed",
-                                "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
+                                    "Add Products From CSV", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -599,28 +599,28 @@ public class MarketPlace {
                         if (saleStoreName.getText().isEmpty() || saleProductName.getText().isEmpty() ||
                             salePriceField.getText().isEmpty() || saleCapField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
-                                "Start Sale", JOptionPane.ERROR_MESSAGE);
+                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else if ((Double.parseDouble(salePriceField.getText()) <= 0)
-                            || (Integer.parseInt(saleCapField.getText()) < 0)) {
+                                   || (Integer.parseInt(saleCapField.getText()) < 0)) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                                "Start Sale", JOptionPane.ERROR_MESSAGE);
+                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,triggerSale," + saleStoreName.getText()
-                                + "," + saleProductName.getText() +
-                                "," + salePriceField.getText() + "," + saleCapField.getText());
+                                           + "," + saleProductName.getText() +
+                                           "," + salePriceField.getText() + "," + saleCapField.getText());
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Sale Created",
-                                    "Start Sale", JOptionPane.INFORMATION_MESSAGE);
+                                        "Start Sale", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Sale Creation Failed",
-                                    "Start Sale", JOptionPane.ERROR_MESSAGE);
+                                        "Start Sale", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     } catch (NumberFormatException | IOException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                            "Start Sale", JOptionPane.ERROR_MESSAGE);
+                                "Start Sale", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -658,27 +658,27 @@ public class MarketPlace {
                             purchaseLimitProductName.getText().isEmpty() ||
                             purchaseLimitField.getText().isEmpty()) {
                             JOptionPane.showMessageDialog(null, "Enter All Fields",
-                                "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else if (Integer.parseInt(purchaseLimitField.getText()) < 0) {
                             JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                                "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                         } else {
                             writer.println("sellermodificationchoices,triggerOrderCap" + "," +
-                                purchaseLimitStoreName.getText() + "," +
-                                purchaseLimitProductName.getText() + "," + purchaseLimitField.getText());
+                                           purchaseLimitStoreName.getText() + "," +
+                                           purchaseLimitProductName.getText() + "," + purchaseLimitField.getText());
                             writer.flush();
                             boolean bool = Boolean.parseBoolean(reader.readLine());
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Limit Set",
-                                    "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
+                                        "Set Purchase Limit", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Limit Failed",
-                                    "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                                        "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                             }
                         }
                     } catch (NumberFormatException | IOException exception) {
                         JOptionPane.showMessageDialog(null, "Enter Valid Numbers",
-                            "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
+                                "Set Purchase Limit", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -1281,10 +1281,10 @@ public class MarketPlace {
                     if (loginUsernameOrEmailField.getText().isEmpty() ||
                         loginPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Marketplace", JOptionPane.ERROR_MESSAGE);
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("login," + loginUsernameOrEmailField.getText() + "," +
-                            loginPasswordField.getText());
+                                       loginPasswordField.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1296,7 +1296,7 @@ public class MarketPlace {
                             writer.println(loginUsernameOrEmailField.getText());
                             writer.flush();
                             try {
-                                USERNAME[0] = reader.readLine();
+                                username[0] = reader.readLine();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -1317,7 +1317,7 @@ public class MarketPlace {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Login Failed",
-                                "Marketplace", JOptionPane.ERROR_MESSAGE);
+                                    "Marketplace", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1328,11 +1328,11 @@ public class MarketPlace {
                     if (registerEmailField.getText().isEmpty() || registerUsernameField.getText().isEmpty()
                         || registerPasswordField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Marketplace", JOptionPane.ERROR_MESSAGE);
+                                "Marketplace", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("register," + registerEmailField.getText() + "," +
-                            registerUsernameField.getText() + "," + registerPasswordField.getText() + ","
-                            + registerRoleBox.getSelectedItem().toString());
+                                       registerUsernameField.getText() + "," + registerPasswordField.getText() + ","
+                                       + registerRoleBox.getSelectedItem().toString());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1341,7 +1341,7 @@ public class MarketPlace {
                             throw new RuntimeException(ex);
                         }
                         if (bool) {
-                            USERNAME[0] = registerUsernameField.getText();
+                            username[0] = registerUsernameField.getText();
                             loginRegisterFrame.setVisible(false);
                             registerFrame.setVisible(false);
                             loginFrame.setVisible(false);
@@ -1350,13 +1350,13 @@ public class MarketPlace {
                             registerPasswordField.setText("");
                             if (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Seller")) {
                                 sellerOptionsFrame.setVisible(true);
-                            } else if
-                            (registerRoleBox.getSelectedItem().toString().equalsIgnoreCase("Buyer")) {
+                            } else if (registerRoleBox.getSelectedItem().toString().
+                                    equalsIgnoreCase("Buyer")) {
                                 buyerOptionsFrame.setVisible(true);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Registration Failed",
-                                "Marketplace", JOptionPane.ERROR_MESSAGE);
+                                    "Marketplace", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1427,10 +1427,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (createStoreNameField.getText().isEmpty() || createStoreLocationField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Create Store", JOptionPane.ERROR_MESSAGE);
+                                "Create Store", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("createStore," + createStoreNameField.getText() + "," +
-                            createStoreLocationField.getText() + "," + USERNAME[0]);
+                                       createStoreLocationField.getText() + "," + username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1440,10 +1440,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Store Created",
-                                "Create Store", JOptionPane.INFORMATION_MESSAGE);
+                                    "Create Store", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Creation Failed",
-                                "Create Store", JOptionPane.ERROR_MESSAGE);
+                                    "Create Store", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1515,9 +1515,9 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (deleteStoreField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Delete Store", JOptionPane.ERROR_MESSAGE);
+                                "Delete Store", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("deleteStore," + deleteStoreField.getText() + "," + USERNAME[0]);
+                        writer.println("deleteStore," + deleteStoreField.getText() + "," + username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1527,10 +1527,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Store Deleted",
-                                "Delete Store", JOptionPane.INFORMATION_MESSAGE);
+                                    "Delete Store", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Deletion Failed",
-                                "Delete Store", JOptionPane.ERROR_MESSAGE);
+                                    "Delete Store", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1554,20 +1554,20 @@ public class MarketPlace {
                     if (customerPurchasesStoreName.getText().isEmpty()
                         || customerPurchasesUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
+                                "View Customer Purchases", JOptionPane.ERROR_MESSAGE);
                     } else if (customerPurchasesBox.getSelectedItem().toString().equals("Yes")) {
                         try {
                             sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
-                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
-                                customerPurchasesUsername.getText(), true);
+                                    sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                    customerPurchasesUsername.getText(), true);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
                     } else {
                         try {
                             sellerViewCustomerPurchases(true, sellerViewCustomerPurchasesPanel,
-                                sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
-                                customerPurchasesUsername.getText(), false);
+                                    sellerViewCustomerPurchasesFrame, customerPurchasesStoreName.getText(),
+                                    customerPurchasesUsername.getText(), false);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1585,10 +1585,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (productSalesStoreName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "View Product Sales", JOptionPane.ERROR_MESSAGE);
+                                "View Product Sales", JOptionPane.ERROR_MESSAGE);
                     } else if (productSalesBox.getSelectedItem().toString().equals("Yes")) {
                         writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
-                            USERNAME[0] + "," + true);
+                                       username[0] + "," + true);
                         writer.flush();
                         String output;
                         try {
@@ -1598,10 +1598,10 @@ public class MarketPlace {
                         }
                         output = output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
-                            "View Product Sales", JOptionPane.PLAIN_MESSAGE);
+                                "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     } else {
                         writer.println("sellerStatistics,getProductSales," + productSalesStoreName.getText() + "," +
-                            USERNAME[0] + "," + false);
+                                       username[0] + "," + false);
                         writer.flush();
                         String output;
                         try {
@@ -1611,7 +1611,7 @@ public class MarketPlace {
                         }
                         output = output.replaceAll(";", "\n");
                         JOptionPane.showMessageDialog(null, output,
-                            "View Product Sales", JOptionPane.PLAIN_MESSAGE);
+                                "View Product Sales", JOptionPane.PLAIN_MESSAGE);
                     }
                 }
             });
@@ -1626,7 +1626,7 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (cartProductsUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "View Products In Cart", JOptionPane.ERROR_MESSAGE);
+                                "View Products In Cart", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("shoppingCart,getShoppingCart," + cartProductsUsername.getText());
                         writer.flush();
@@ -1639,7 +1639,7 @@ public class MarketPlace {
                         stock = stock.replaceAll(",", "\n");
                         stock = stock.replaceAll(";", ": ");
                         JOptionPane.showMessageDialog(null, stock, "View Products In Cart",
-                            JOptionPane.PLAIN_MESSAGE);
+                                JOptionPane.PLAIN_MESSAGE);
                     }
                 }
             });
@@ -1654,10 +1654,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (getCSVStoreName.getText().isEmpty() || getCSVPath.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Get Product CSV", JOptionPane.ERROR_MESSAGE);
+                                "Get Product CSV", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("sellerStatistics,writeProductsToCSV," + getCSVStoreName.getText() + "," +
-                            getCSVPath.getText());
+                                       getCSVPath.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1667,10 +1667,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Successfully Written",
-                                "Get Product CSV", JOptionPane.INFORMATION_MESSAGE);
+                                    "Get Product CSV", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Write Failed",
-                                "Get Product CSV", JOptionPane.ERROR_MESSAGE);
+                                    "Get Product CSV", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1686,8 +1686,8 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        sellerDisplayReviews(true, customerReviewsName, USERNAME[0], sellerDisplayReviewsFrame,
-                            sellerDisplayReviewsPanel);
+                        sellerDisplayReviews(true, customerReviewsName, username[0], sellerDisplayReviewsFrame,
+                                sellerDisplayReviewsPanel);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -1711,10 +1711,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (sellerNewUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Username", JOptionPane.ERROR_MESSAGE);
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("manageAccount,changeUsername," + sellerNewUsername.getText() + "," +
-                            USERNAME[0]);
+                                       username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1725,11 +1725,11 @@ public class MarketPlace {
 
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Username Changed",
-                                "Change Username", JOptionPane.INFORMATION_MESSAGE);
-                            USERNAME[0] = sellerNewUsername.getText();
+                                    "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                            username[0] = sellerNewUsername.getText();
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                                    "Change Username", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1745,10 +1745,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (sellerChangeNewPassword.getText().isEmpty() || sellerChangeOldPassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Password", JOptionPane.ERROR_MESSAGE);
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,changePassword," + USERNAME[0] + "," +
-                            sellerChangeOldPassword.getText() + "," + sellerChangeNewPassword.getText());
+                        writer.println("manageAccount,changePassword," + username[0] + "," +
+                                       sellerChangeOldPassword.getText() + "," + sellerChangeNewPassword.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1758,10 +1758,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Password Changed",
-                                "Change Password", JOptionPane.INFORMATION_MESSAGE);
+                                    "Change Password", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                                    "Change Password", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1777,10 +1777,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (sellerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Role", JOptionPane.ERROR_MESSAGE);
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,changeRole," + USERNAME[0] + "," +
-                            sellerChangeRolePassword.getText() + ",Buyer");
+                        writer.println("manageAccount,changeRole," + username[0] + "," +
+                                       sellerChangeRolePassword.getText() + ",Buyer");
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1790,7 +1790,7 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Role Changed",
-                                "Change Role", JOptionPane.INFORMATION_MESSAGE);
+                                    "Change Role", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
                                     frame.setVisible(false);
@@ -1799,7 +1799,7 @@ public class MarketPlace {
                             loginRegisterFrame.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                                    "Change Role", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1815,10 +1815,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (sellerDeleteAccountField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Delete Account", JOptionPane.ERROR_MESSAGE);
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,deleteAccount," + USERNAME[0] + "," +
-                            sellerDeleteAccountField.getText());
+                        writer.println("manageAccount,deleteAccount," + username[0] + "," +
+                                       sellerDeleteAccountField.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -1828,7 +1828,7 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Account Deleted",
-                                "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
                                     frame.setVisible(false);
@@ -1837,7 +1837,7 @@ public class MarketPlace {
                             loginRegisterFrame.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Deletion Failed",
-                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                                    "Delete Account", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -1861,14 +1861,14 @@ public class MarketPlace {
                     boolean bool = false;
                     if (leaveReviewProductName.getText().isEmpty() || leaveReviewStoreName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Do not leave Store and Product" +
-                                " Fields Empty!",
-                            "Leave Review", JOptionPane.ERROR_MESSAGE);
+                                                            " Fields Empty!",
+                                "Leave Review", JOptionPane.ERROR_MESSAGE);
                         return;
                     } else {
                         writer.println("leaveReview," + leaveReviewStoreName.getText() + "," +
-                            leaveReviewProductName.getText() + "," + USERNAME[0] + "," +
-                            ((String) leaveReviewRating.getSelectedItem()) + "," +
-                            leaveReviewDescription.getText());
+                                       leaveReviewProductName.getText() + "," + username[0] + "," +
+                                       ((String) leaveReviewRating.getSelectedItem()) + "," +
+                                       leaveReviewDescription.getText());
                         writer.flush();
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
@@ -1879,10 +1879,10 @@ public class MarketPlace {
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Review Left Successfully!",
-                            "Leave Review", JOptionPane.INFORMATION_MESSAGE);
+                                "Leave Review", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Review failed, try again!",
-                            "Leave Review", JOptionPane.ERROR_MESSAGE);
+                                "Leave Review", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
@@ -1899,12 +1899,12 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (buyerViewReviewsProductName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Do not leave Product" +
-                                " Field Empty!",
-                            "View Review ", JOptionPane.ERROR_MESSAGE);
+                                                            " Field Empty!",
+                                "View Review ", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             buyerDisplayReviews(true, buyerViewReviewsStoreName, buyerViewReviewsProductName,
-                                buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
+                                    buyerDisplayReviewsFrame, buyerDisplayReviewsPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1916,14 +1916,15 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null,
-                        "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")) {
+                            "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null)
+                        || buyerSearchedStore.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Store", JOptionPane.ERROR_MESSAGE);
+                                "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy,
-                                buyerSearchByStoreFrame, buyerSearchByStorePanel);
+                                    buyerSearchByStoreFrame, buyerSearchByStorePanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1934,14 +1935,15 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedStore = JOptionPane.showInputDialog(null,
-                        "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
-                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null) || buyerSearchedStore.equals("")) {
+                            "Enter Store Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                    if (buyerSearchedStore == null || buyerSearchedStore.equals(null)
+                        || buyerSearchedStore.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Store", JOptionPane.ERROR_MESSAGE);
+                                "Search By Store", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByStore(true, buyerSearchedStore, searchForStoreButtonCopy,
-                                buyerSearchByStoreFrame, buyerSearchByStorePanel);
+                                    buyerSearchByStoreFrame, buyerSearchByStorePanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1952,18 +1954,18 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedDescription = JOptionPane.showInputDialog(null,
-                        "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
 
                     if (buyerSearchedDescription == null
                         || buyerSearchedDescription.equals(null)
                         || buyerSearchedDescription.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Description", JOptionPane.ERROR_MESSAGE);
+                                "Search By Description", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByDescription(true, buyerSearchedDescription,
-                                searchProductByDescriptionButtonCopy, buyerSearchByDescriptionFrame,
-                                buyerSearchByDescriptionPanel);
+                                    searchProductByDescriptionButtonCopy, buyerSearchByDescriptionFrame,
+                                    buyerSearchByDescriptionPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1974,18 +1976,18 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedDescription = JOptionPane.showInputDialog(null,
-                        "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Enter Description", "Marketplace", JOptionPane.QUESTION_MESSAGE);
 
                     if (buyerSearchedDescription == null
                         || buyerSearchedDescription.equals(null)
                         || buyerSearchedDescription.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Description", JOptionPane.ERROR_MESSAGE);
+                                "Search By Description", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByDescription(true, buyerSearchedDescription,
-                                searchProductByDescriptionButtonCopy, buyerSearchByDescriptionFrame,
-                                buyerSearchByDescriptionPanel);
+                                    searchProductByDescriptionButtonCopy, buyerSearchByDescriptionFrame,
+                                    buyerSearchByDescriptionPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -1997,18 +1999,18 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
-                        "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     if (buyerSearchedProduct == null
                         || buyerSearchedProduct.equals(null)
                         || buyerSearchedProduct.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Product", JOptionPane.ERROR_MESSAGE);
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
-                                buyerViewAllAddToShoppingCart,
-                                buyerSearchByProductFrame
-                                , buyerSearchByProductPanel);
+                                    buyerViewAllAddToShoppingCart,
+                                    buyerSearchByProductFrame
+                                    , buyerSearchByProductPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -2020,17 +2022,17 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
-                        "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     if (buyerSearchedProduct == null
                         || buyerSearchedProduct.equals(null)
                         || buyerSearchedProduct.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Product", JOptionPane.ERROR_MESSAGE);
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             searchByProduct(true, buyerSearchedProduct, searchForProductButtonCopy,
-                                buyerViewAllAddToShoppingCart,
-                                buyerSearchByProductFrame, buyerSearchByProductPanel);
+                                    buyerViewAllAddToShoppingCart,
+                                    buyerSearchByProductFrame, buyerSearchByProductPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -2042,22 +2044,22 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String buyerSearchedProduct = JOptionPane.showInputDialog(null,
-                        "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
+                            "Enter Product Name", "Marketplace", JOptionPane.QUESTION_MESSAGE);
                     if (buyerSearchedProduct == null
                         || buyerSearchedProduct.equals(null)
                         || buyerSearchedProduct.equals("")) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Search By Product", JOptionPane.ERROR_MESSAGE);
+                                "Search By Product", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             buyerViewAllProducts(false, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
-                                buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                                    buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
                         try {
                             searchByProduct(true, buyerSearchedProduct, buyerSearchForProductButton,
-                                buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
+                                    buyerViewAllAddToShoppingCart, buyerSearchByProductFrame, buyerSearchByProductPanel);
                         } catch (IOException ex) {
                             throw new RuntimeException(ex);
                         }
@@ -2108,7 +2110,7 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     try {
                         buyerViewAllProducts(true, buyerViewAllProductsPanel, buyerViewAllProductsFrame,
-                            buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
+                                buyerSearchForProductButton, buyerViewAllAddToShoppingCart);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -2121,33 +2123,33 @@ public class MarketPlace {
                     String[] options = {"Sort by Lowest Quantity", "Sort by Highest Quantity"};
                     String input = (String) JOptionPane.showInputDialog(null, "",
 
-                        "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE,
-                        null, options, options[0]);
+                            "The Choice of a Lifetime", JOptionPane.QUESTION_MESSAGE,
+                            null, options, options[0]);
 
                     if (input != null) {
                         if (input.equals("Sort by Lowest Quantity")) {
                             try {
                                 buyerSortByLowestQuantity(true, buyerSortByLowestQuantityPanel,
-                                    buyerSortByLowestQuantityFrame);
+                                        buyerSortByLowestQuantityFrame);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
                             try {
                                 buyerSortByHighestQuantity(false, buyerSortByHighestQuantityPanel,
-                                    buyerSortByHighestQuantityFrame);
+                                        buyerSortByHighestQuantityFrame);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
                         } else if (input.equals("Sort by Highest Quantity")) {
                             try {
                                 buyerSortByHighestQuantity(true, buyerSortByHighestQuantityPanel,
-                                    buyerSortByHighestQuantityFrame);
+                                        buyerSortByHighestQuantityFrame);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
                             try {
                                 buyerSortByLowestQuantity(false, buyerSortByLowestQuantityPanel,
-                                    buyerSortByLowestQuantityFrame);
+                                        buyerSortByLowestQuantityFrame);
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -2160,9 +2162,9 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String filename = JOptionPane.showInputDialog(null,
-                        "Enter Filename to be Exported to", "Marketplace",
-                        JOptionPane.QUESTION_MESSAGE);
-                    writer.println("getPurchaseHistory," + USERNAME[0] + "," + filename);
+                            "Enter Filename to be Exported to", "Marketplace",
+                            JOptionPane.QUESTION_MESSAGE);
+                    writer.println("getPurchaseHistory," + username[0] + "," + filename);
                     writer.flush();
                     boolean bool = false;
                     try {
@@ -2172,10 +2174,10 @@ public class MarketPlace {
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Exported " +
-                            "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
+                                                            "Successfully!", "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     } else if (!bool) {
                         JOptionPane.showMessageDialog(null, "Purchase History Export Failed!",
-                            "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
+                                "Purchase History File", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
             });
@@ -2194,10 +2196,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (buyerNewUsername.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Username", JOptionPane.ERROR_MESSAGE);
+                                "Change Username", JOptionPane.ERROR_MESSAGE);
                     } else {
                         writer.println("manageAccount,changeUsername," + buyerNewUsername.getText() + "," +
-                            USERNAME[0]);
+                                       username[0]);
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -2207,11 +2209,11 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Username Changed",
-                                "Change Username", JOptionPane.INFORMATION_MESSAGE);
-                            USERNAME[0] = buyerNewUsername.getText();
+                                    "Change Username", JOptionPane.INFORMATION_MESSAGE);
+                            username[0] = buyerNewUsername.getText();
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Username", JOptionPane.ERROR_MESSAGE);
+                                    "Change Username", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -2227,10 +2229,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (buyerChangeNewPassword.getText().isEmpty() || buyerChangeOldPassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Password", JOptionPane.ERROR_MESSAGE);
+                                "Change Password", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,changePassword," + USERNAME[0] + "," +
-                            buyerChangeOldPassword.getText() + "," + buyerChangeNewPassword.getText());
+                        writer.println("manageAccount,changePassword," + username[0] + "," +
+                                       buyerChangeOldPassword.getText() + "," + buyerChangeNewPassword.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -2240,10 +2242,10 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Password Changed",
-                                "Change Password", JOptionPane.INFORMATION_MESSAGE);
+                                    "Change Password", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Password", JOptionPane.ERROR_MESSAGE);
+                                    "Change Password", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -2259,10 +2261,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (buyerChangeRolePassword.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Change Role", JOptionPane.ERROR_MESSAGE);
+                                "Change Role", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,changeRole," + USERNAME[0] + "," +
-                            buyerChangeRolePassword.getText() + "," + "Seller");
+                        writer.println("manageAccount,changeRole," + username[0] + "," +
+                                       buyerChangeRolePassword.getText() + "," + "Seller");
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -2272,7 +2274,7 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Role Changed",
-                                "Change Role", JOptionPane.INFORMATION_MESSAGE);
+                                    "Change Role", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
                                     frame.setVisible(false);
@@ -2281,7 +2283,7 @@ public class MarketPlace {
                             loginRegisterFrame.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Change Failed",
-                                "Change Role", JOptionPane.ERROR_MESSAGE);
+                                    "Change Role", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -2297,10 +2299,10 @@ public class MarketPlace {
                 public void actionPerformed(ActionEvent e) {
                     if (buyerDeleteAccountField.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Enter All Fields",
-                            "Delete Account", JOptionPane.ERROR_MESSAGE);
+                                "Delete Account", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        writer.println("manageAccount,deleteAccount," + USERNAME[0] + "," +
-                            buyerDeleteAccountField.getText());
+                        writer.println("manageAccount,deleteAccount," + username[0] + "," +
+                                       buyerDeleteAccountField.getText());
                         writer.flush();
                         boolean bool = false;
                         try {
@@ -2310,7 +2312,7 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Account Deleted",
-                                "Delete Account", JOptionPane.INFORMATION_MESSAGE);
+                                    "Delete Account", JOptionPane.INFORMATION_MESSAGE);
                             for (Frame frame : Frame.getFrames()) {
                                 if (frame instanceof JFrame) {
                                     frame.setVisible(false);
@@ -2319,7 +2321,7 @@ public class MarketPlace {
                             loginRegisterFrame.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(null, "Deletion Failed",
-                                "Delete Account", JOptionPane.ERROR_MESSAGE);
+                                    "Delete Account", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -2354,13 +2356,13 @@ public class MarketPlace {
                         buyerShoppingCartProductName.getText().isEmpty() ||
                         buyerShoppingCartQuantity.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Invalid Input",
-                            "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                     } else {
                         try {
                             Boolean bool = false;
-                            writer.println("shoppingCart,addToCart," + USERNAME[0] + "," + USERNAME[0] + "," +
-                                buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
-                                "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
+                            writer.println("shoppingCart,addToCart," + username[0] + "," + username[0] + "," +
+                                           buyerShoppingCartStoreName.getText() + "," + buyerShoppingCartProductName.getText() +
+                                           "," + Integer.parseInt(buyerShoppingCartQuantity.getText()));
                             writer.flush();
                             try {
                                 bool = Boolean.parseBoolean(reader.readLine());
@@ -2369,14 +2371,14 @@ public class MarketPlace {
                             }
                             if (bool) {
                                 JOptionPane.showMessageDialog(null, "Product Added to Cart!",
-                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                                        "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                    "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                    "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                             }
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null, "Invalid Input",
-                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                    "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 }
@@ -2404,13 +2406,13 @@ public class MarketPlace {
                     if (buyerRemoveFromShoppingCartStoreName.getText().isEmpty() ||
                         buyerRemoveFromShoppingCartProductName.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Invalid Input",
-                            "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                     } else {
 
-                        writer.println("shoppingCart,removeFromCart," + USERNAME[0] + "," + USERNAME[0] + "," +
+                        writer.println("shoppingCart,removeFromCart," + username[0] + "," + username[0] + "," +
 
-                            buyerRemoveFromShoppingCartStoreName.getText() + "," +
-                            buyerRemoveFromShoppingCartProductName.getText());
+                                       buyerRemoveFromShoppingCartStoreName.getText() + "," +
+                                       buyerRemoveFromShoppingCartProductName.getText());
 
                         writer.flush();
                         try {
@@ -2421,10 +2423,10 @@ public class MarketPlace {
 
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Product Removed From Cart!",
-                                "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                         }
                     }
 
@@ -2467,9 +2469,9 @@ public class MarketPlace {
 
                     if (exists && bool2 && bool) {
                         writer.println("shoppingCart,changeCheckoutQuantity" +
-                            buyerChangeQtyInShoppingCartStoreName.getText() + "," +
-                            buyerChangeQtyInShoppingCartProductName.getText() + "," +
-                            Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
+                                       buyerChangeQtyInShoppingCartStoreName.getText() + "," +
+                                       buyerChangeQtyInShoppingCartProductName.getText() + "," +
+                                       Integer.parseInt(buyerChangeQtyInShoppingCart.getText()));
                         writer.flush();
                         try {
                             bool = Boolean.parseBoolean(reader.readLine());
@@ -2478,14 +2480,14 @@ public class MarketPlace {
                         }
                         if (bool) {
                             JOptionPane.showMessageDialog(null, "Added Product Quantity",
-                                "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                                    "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                         } else if (!bool) {
                             JOptionPane.showMessageDialog(null, "Something went wrong, " +
-                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                                                "try again!", "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Invalid Input",
-                            "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -2494,8 +2496,8 @@ public class MarketPlace {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        buyerViewShoppingCart(true, USERNAME[0], buyerViewShoppingCartFrame,
-                            buyerViewShoppingCartPanel);
+                        buyerViewShoppingCart(true, username[0], buyerViewShoppingCartFrame,
+                                buyerViewShoppingCartPanel);
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -2505,7 +2507,7 @@ public class MarketPlace {
             checkoutShoppingCart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    writer.println("shoppingCart,buyProducts," + USERNAME[0]);
+                    writer.println("shoppingCart,buyProducts," + username[0]);
                     writer.flush();
                     boolean bool = false;
                     try {
@@ -2520,7 +2522,7 @@ public class MarketPlace {
                         throw new RuntimeException(ex);
                     }
                     while (!check) {
-                        writer.println("shoppingCart,buyProducts," + USERNAME[0]);
+                        writer.println("shoppingCart,buyProducts," + username[0]);
                         writer.flush();
                         bool = false;
                         try {
@@ -2537,10 +2539,10 @@ public class MarketPlace {
                     }
                     if (bool) {
                         JOptionPane.showMessageDialog(null, "Purchased Successfully",
-                            "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
+                                "Shopping Cart", JOptionPane.INFORMATION_MESSAGE);
                     } else if (!bool) {
                         JOptionPane.showMessageDialog(null, "Something went wrong, try again!",
-                            "Shopping Cart", JOptionPane.ERROR_MESSAGE);
+                                "Shopping Cart", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             });
@@ -2565,7 +2567,7 @@ public class MarketPlace {
      */
     public static void searchByStore(boolean visible, String buyerSearchedStore, JButton searchForStoreButton,
                                      JFrame buyerSearchByStoreFrame, JPanel buyerSearchByStorePanel)
-        throws IOException {
+            throws IOException {
         /*
             BUYER SEARCH BY STORE FRAME
              */
@@ -2627,7 +2629,7 @@ public class MarketPlace {
         String[] coloumnSearchDescription = reader.readLine().split(",");
         String[][] temp = new String[coloumnSearchDescription.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
-            "Description"};
+                "Description"};
         JTable searchedDescriptionTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchDescription.length; i++) {
             String[] row = coloumnSearchDescription[i].split(";");
@@ -2657,7 +2659,7 @@ public class MarketPlace {
     public static void searchByProduct(boolean visible, String buyerSearchedProduct,
                                        JButton searchForProductButton, JButton buyerViewAllAddToShoppingCart,
                                        JFrame buyerSearchByProductFrame, JPanel buyerSearchByProductPanel)
-        throws IOException {
+            throws IOException {
         buyerSearchByProductPanel.removeAll();
         buyerSearchByProductPanel.repaint();
         buyerSearchByProductPanel.revalidate();
@@ -2671,7 +2673,7 @@ public class MarketPlace {
         String[] coloumnSearchProduct = reader.readLine().split(",");
         String[][] temp = new String[coloumnSearchProduct.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name", "Purchase Price", "Quantity in Stock",
-            "Description"};
+                "Description"};
         JTable searchedProductTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSearchProduct.length; i++) {
             String[] row = coloumnSearchProduct[i].split(";");
@@ -2700,7 +2702,7 @@ public class MarketPlace {
     public static void buyerDisplayReviews(boolean visible, JTextField buyerViewReviewsStoreName,
                                            JTextField buyerViewReviewsProductName,
                                            JFrame buyerDisplayReviewsFrame, JPanel buyerDisplayReviewsPanel)
-        throws IOException {
+            throws IOException {
         buyerDisplayReviewsPanel.removeAll();
         buyerDisplayReviewsPanel.repaint();
         buyerDisplayReviewsPanel.revalidate();
@@ -2709,13 +2711,13 @@ public class MarketPlace {
         BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter writer = new PrintWriter(socket.getOutputStream());
         writer.println("viewReviews," + buyerViewReviewsStoreName.getText() + "," +
-            buyerViewReviewsProductName.getText());
+                       buyerViewReviewsProductName.getText());
         writer.flush();
 
         String[] buyerViewReviewsColoumn = reader.readLine().split(",");
         String[][] temp = new String[buyerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name",
-            "Customer Username/Email", "Rating", "Review"};
+                "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < buyerViewReviewsColoumn.length; i++) {
             String[] row = buyerViewReviewsColoumn[i].split(";");
@@ -2742,7 +2744,7 @@ public class MarketPlace {
      */
     public static void sellerDisplayReviews(boolean visible, JTextField sellerViewReviewsProductName, String username,
                                             JFrame sellerDisplayReviewsFrame, JPanel sellerDisplayReviewsPanel)
-        throws IOException {
+            throws IOException {
         sellerDisplayReviewsPanel.removeAll();
         sellerDisplayReviewsPanel.repaint();
         sellerDisplayReviewsPanel.revalidate();
@@ -2756,7 +2758,7 @@ public class MarketPlace {
         String[] sellerViewReviewsColoumn = reader.readLine().split(",");
         String[][] temp = new String[sellerViewReviewsColoumn.length][5];
         String[] columnNames = new String[]{"Store Name", "Product Name",
-            "Customer Username/Email", "Rating", "Review"};
+                "Customer Username/Email", "Rating", "Review"};
         JTable buyerViewReviewsTable = new JTable(temp, columnNames);
         for (int i = 0; i < sellerViewReviewsColoumn.length; i++) {
             String[] row = sellerViewReviewsColoumn[i].split(";");
@@ -2821,7 +2823,7 @@ public class MarketPlace {
      * @return void
      */
     public static void buyerSortCheapest(boolean visible, JPanel buyerSortCheapestPanel, JFrame buyerSortCheapestFrame)
-        throws IOException {
+            throws IOException {
         buyerSortCheapestPanel.removeAll();
         buyerSortCheapestFrame.repaint();
         buyerSortCheapestPanel.revalidate();
@@ -3028,10 +3030,10 @@ public class MarketPlace {
         writer.flush();
 
         String[] coloumnSellerViewCustomerPurchases =
-            reader.readLine().split(",");
+                reader.readLine().split(",");
         String[][] temp = new String[coloumnSellerViewCustomerPurchases.length][6];
         String[] columnNames = new String[]{"Customer Email", "Customer Username", "Store", "Product Bought ",
-            "Quantity Bought", "Price"};
+                "Quantity Bought", "Price"};
         JTable sellerViewCustomerPurchasesTable = new JTable(temp, columnNames);
         for (int i = 0; i < coloumnSellerViewCustomerPurchases.length; i++) {
             String[] row = coloumnSellerViewCustomerPurchases[i].split(";");

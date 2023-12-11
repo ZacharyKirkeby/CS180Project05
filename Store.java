@@ -205,7 +205,6 @@ public class Store {
      */
     public String getSortedCustomersAndPurchases() {
         String result = "";
-        ;
         String sentence = getAllCustomersAndPurchases();
         if (sentence == null || sentence.isEmpty()) {
             return "No Purchase History Found!";

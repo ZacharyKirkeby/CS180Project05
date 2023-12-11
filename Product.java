@@ -274,18 +274,18 @@ public class Product {
      * sale cannot exceed stock available
      * price cannot be negative
      *
-     * @param salePrice
-     * @param saleCap
+     * @param price
+     * @param cap
      */
-    public boolean startSale(double salePrice, int saleCap) {
-        if (salePrice <= 0 || saleCap < 0) {
+    public boolean startSale(double price, int cap) {
+        if (price <= 0 || cap < 0) {
             return false;
         } else {
-            if (saleCap > this.stockQuantity) {
+            if (cap > this.stockQuantity) {
                 return false;
             } else {
-                this.saleCap = saleCap;
-                this.salePrice = salePrice;
+                this.saleCap = cap;
+                this.salePrice = price;
             }
         }
         Seller.writeToFile();
@@ -355,9 +355,8 @@ public class Product {
     public boolean getOnSale() {
         if (saleCap > 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**

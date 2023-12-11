@@ -61,7 +61,8 @@
 //
 //    // Each of the correct outputs
 //    private static final String WELCOME_PROMPT = "Welcome to the Fruit Market!";
-//    private static final String LOGIN_PROMPT = "Would you like to Login or Register an Account? (Login / Register / " +
+//    private static final String LOGIN_PROMPT = "Would you like to Login or Register an Account?
+//    (Login / Register / " +
 //            "Exit)";
 //    private static final String sellerChoices = " 1. Create Store \n" +
 //                                                " 2. Modify Store \n" +

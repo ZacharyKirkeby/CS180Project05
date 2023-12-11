@@ -17,7 +17,7 @@ import java.util.*;
  */
 public abstract class Seller {
 
-    private static final ArrayList<Store> stores = new ArrayList<Store>(); // store arraylist
+    private static ArrayList<Store> stores = new ArrayList<Store>(); // store arraylist
 
     public static Object storeGateKeeper = new Object();
 
