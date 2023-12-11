@@ -11,6 +11,12 @@ Once you have verified all files are present you can proceed to the actual code.
 Project Report: PDF File
 
 Submitted by: William Hyun
+
+***
+Project Presentation: Google Drive Link (.mp4)
+
+Submitted by: William Hyun
+
 ***
 
 Project File/Repo: Git copy of Current Repo
